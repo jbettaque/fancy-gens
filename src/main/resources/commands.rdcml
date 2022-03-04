@@ -1,0 +1,7 @@
+admin {
+    help Administrate FancyGens
+    givegens generator:generator player:player {
+    hook givegens
+        help Give <players> specified generator
+    }
+}

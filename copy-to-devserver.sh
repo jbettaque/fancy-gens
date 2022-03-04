@@ -1,0 +1,1 @@
+cp target/fancygens-1.0-SNAPSHOT.jar dev-server/plugins

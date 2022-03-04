@@ -1,0 +1,4 @@
+name: FancyGens
+version: '${project.version}'
+main: bet.bettaque.fancygens.FancyGens
+api-version: 1.18
