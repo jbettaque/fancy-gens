@@ -1,0 +1,44 @@
+gens:
+  '1':
+    id: 1
+    name: Wheat Generator
+    block: HAY_BLOCK
+    product: WHEAT
+    cost: 20.0
+  '2':
+    id: 2
+    name: Melon Generator
+    block: MELON
+    product: MELON_SLICE
+    cost: 100.0
+  '3':
+    id: 3
+    name: Pumpkin Generator
+    block: PUMPKIN
+    product: PUMPKIN
+    cost: 300.0
+  '4':
+    id: 4
+    name: Carved Pumpkin Generator
+    block: CARVED_PUMPKIN
+    product: CARVED_PUMPKIN
+    cost: 500.0
+  '5':
+    id: 5
+    name: Cobblestone Generator
+    block: COBBLESTONE
+    product: COBBLESTONE
+    cost: 1000.0
+  '6':
+    id: 6
+    name: Stone Generator
+    block: STONE
+    product: STONE
+    cost: 2000.0
+  '0':
+    id: 0
+    name: Generator
+    block: STONE
+    product: STONE
+    cost: 20.0
+

@@ -3,9 +3,11 @@ package bet.bettaque.fancygens.listeners;
 import bet.bettaque.fancygens.db.GeneratorPlayer;
 import bet.bettaque.fancygens.db.PlacedGenerator;
 import com.j256.ormlite.dao.Dao;
+import com.jeff_media.customblockdata.CustomBlockData;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.Block;
+import org.bukkit.block.TileState;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -42,7 +44,8 @@ public class PlaceGeneratorListener implements Listener {
         NamespacedKey key = new NamespacedKey(plugin, "generator");
         Block block = event.getBlock();
 
-        if (tagContainer.has(key)){
+
+        if (tagContainer.has(key, PersistentDataType.INTEGER)){
             try {
                 GeneratorPlayer generatorPlayer = generatorPlayerDao.queryForId(player.getUniqueId().toString());
                 if (generatorPlayer.getUsedGens() < generatorPlayer.getMaxGens()){
@@ -50,9 +53,11 @@ public class PlaceGeneratorListener implements Listener {
                     generatorPlayerDao.update(generatorPlayer);
                     player.sendMessage("You have placed a generator! Used slots: " + generatorPlayer.getUsedGens());
 
-
-                    PlacedGenerator placedGenerator = new PlacedGenerator(block.getLocation(), tagContainer.get(key, PersistentDataType.STRING));
+                    PlacedGenerator placedGenerator = new PlacedGenerator(block.getLocation(), tagContainer.get(key, PersistentDataType.INTEGER), player.getUniqueId());
                     placedGeneratorDao.create(placedGenerator);
+
+                    PersistentDataContainer blockContainer = new CustomBlockData(block, plugin);
+                    blockContainer.set(key, PersistentDataType.INTEGER, placedGenerator.getId());
 
 
                 } else {

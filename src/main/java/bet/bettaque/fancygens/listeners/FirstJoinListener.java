@@ -23,7 +23,7 @@ public class FirstJoinListener implements Listener {
             GeneratorPlayer generatorPlayer = generatorPlayerDao.queryForId(player.getUniqueId().toString());
             if (generatorPlayer == null){
                 player.sendMessage("New Player! Making new entry in Database!");
-                generatorPlayer = new GeneratorPlayer(player.getUniqueId().toString(), 10, 0);
+                generatorPlayer = new GeneratorPlayer(player.getUniqueId().toString(), 10000, 0);
                 this.generatorPlayerDao.create(generatorPlayer);
             }
             player.sendMessage(String.valueOf(generatorPlayer.getMaxGens()));

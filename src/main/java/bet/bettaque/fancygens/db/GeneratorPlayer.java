@@ -32,6 +32,10 @@ public class GeneratorPlayer {
         this.usedGens++;
     }
 
+    public void decrementUsedGens(){
+        this.usedGens--;
+    }
+
     public int getMaxGens() {
         return maxGens;
     }
