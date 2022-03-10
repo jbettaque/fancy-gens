@@ -3,11 +3,11 @@ package bet.bettaque.fancygens.listeners;
 import bet.bettaque.fancygens.config.GenConfig;
 import bet.bettaque.fancygens.config.GensConfig;
 import bet.bettaque.fancygens.db.PlacedGenerator;
+import bet.bettaque.fancygens.helpers.TextHelper;
 import com.j256.ormlite.dao.Dao;
 import com.jeff_media.customblockdata.CustomBlockData;
 import net.milkbowl.vault.economy.Economy;
-import org.bukkit.NamespacedKey;
-import org.bukkit.Sound;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -18,6 +18,7 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.Plugin;
+import redempt.redlib.commandmanager.Messages;
 
 import java.sql.SQLException;
 
@@ -47,21 +48,7 @@ public class UpgradeGeneratorListener implements Listener {
 
                 try {
                     PlacedGenerator placedGenerator = this.placedGeneratorDao.queryForId(genId);
-                    GenConfig genConfig = placedGenerator.upgradeGenerator();
-                    player.sendMessage(String.valueOf(placedGenerator.getGenerator().id));
-                    if (econ.getBalance(player) - GensConfig.gens.get(placedGenerator.getGenerator().id).cost >= 0){
-                        if (genConfig == null) {
-                            player.sendMessage("Max upgrade!");
-                            return;
-                        }
-                        placedGeneratorDao.update(placedGenerator);
-                        block.setType(genConfig.block);
-                        player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
-                        econ.withdrawPlayer(player, GensConfig.gens.get(placedGenerator.getGenerator().id).cost);
-                        player.sendMessage("upgrading generator! New balance: " + econ.getBalance(player));
-                    } else {
-                        player.sendMessage("not enough money!");
-                    }
+                    updateGenerator(placedGenerator);
 
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
@@ -69,5 +56,42 @@ public class UpgradeGeneratorListener implements Listener {
 
             }
         }
+    }
+
+    public double updateGenerator(PlacedGenerator placedGenerator){
+        Block block = placedGenerator.getLocation().getBlock();
+        Player player = Bukkit.getPlayer(placedGenerator.getOwner());
+
+        PersistentDataContainer container = new CustomBlockData(block, plugin);
+        NamespacedKey key = new NamespacedKey(plugin, "generator");
+
+        if (container.has(key, PersistentDataType.INTEGER)){
+            int genId = container.get(key, PersistentDataType.INTEGER);
+
+            try {
+                GenConfig genConfig = placedGenerator.upgradeGenerator();
+                if (econ.getBalance(player) - GensConfig.gens.get(placedGenerator.getGenerator().id).cost >= 0){
+                    if (genConfig == null) {
+                        player.sendMessage(Messages.msg("maxUpgrade"));
+                        return 0;
+                    }
+                    placedGeneratorDao.update(placedGenerator);
+                    block.setType(genConfig.block);
+                    player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
+                    player.spawnParticle(Particle.VILLAGER_HAPPY, block.getLocation(), 20, 0.5, 0.5, 0.5, 0.4);
+                    econ.withdrawPlayer(player, GensConfig.gens.get(placedGenerator.getGenerator().id).cost);
+                    return GensConfig.gens.get(placedGenerator.getGenerator().id).cost;
+                } else {
+                    player.sendMessage(Messages.msg("notEnoughMoney") + " " + TextHelper.formatCurrency(econ.getBalance(player), player) + " / " + TextHelper.formatCurrency(GensConfig.gens.get(placedGenerator.getGenerator().id).cost, player));
+                    return 0;
+                }
+
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+                return  0;
+            }
+
+        }
+        return 0;
     }
 }

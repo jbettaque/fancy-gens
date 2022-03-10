@@ -6,6 +6,8 @@ import com.j256.ormlite.dao.Dao;
 import com.jeff_media.customblockdata.CustomBlockData;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Particle;
+import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.block.TileState;
 import org.bukkit.entity.Player;
@@ -21,6 +23,7 @@ import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.Plugin;
 import redempt.redlib.blockdata.BlockDataManager;
 import redempt.redlib.blockdata.DataBlock;
+import redempt.redlib.commandmanager.Messages;
 
 import java.sql.SQLException;
 
@@ -51,7 +54,7 @@ public class PlaceGeneratorListener implements Listener {
                 if (generatorPlayer.getUsedGens() < generatorPlayer.getMaxGens()){
                     generatorPlayer.incrementUsedGens();
                     generatorPlayerDao.update(generatorPlayer);
-                    player.sendMessage("You have placed a generator! Used slots: " + generatorPlayer.getUsedGens());
+//                    player.sendMessage(Messages.msg("genPlaced"));
 
                     PlacedGenerator placedGenerator = new PlacedGenerator(block.getLocation(), tagContainer.get(key, PersistentDataType.INTEGER), player.getUniqueId());
                     placedGeneratorDao.create(placedGenerator);
@@ -59,9 +62,12 @@ public class PlaceGeneratorListener implements Listener {
                     PersistentDataContainer blockContainer = new CustomBlockData(block, plugin);
                     blockContainer.set(key, PersistentDataType.INTEGER, placedGenerator.getId());
 
+                    player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 2);
+                    player.spawnParticle(Particle.VILLAGER_HAPPY, block.getLocation(), 20, 0.5, 0.5, 0.5, 0.4);
+
 
                 } else {
-                    player.sendMessage("You too many gens! Used slots: " + generatorPlayer.getUsedGens() + " " + generatorPlayer.getMaxGens());
+                    player.sendMessage(Messages.msg("tooManyGens") + " " + Messages.msg("usedSlots") + generatorPlayer.getUsedGens() + " / " + generatorPlayer.getMaxGens());
                     event.setCancelled(true);
                 }
             } catch (SQLException throwables) {

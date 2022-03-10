@@ -1,7 +1,10 @@
 package bet.bettaque.fancygens.db;
 
+import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
+
+import java.util.ArrayList;
 
 @DatabaseTable(tableName = "players")
 public class GeneratorPlayer {
@@ -15,6 +18,24 @@ public class GeneratorPlayer {
     @DatabaseField
     private int usedGens;
 
+    @DatabaseField
+    private double score;
+
+    @DatabaseField
+    private int prestige;
+
+    @DatabaseField
+    private double multiplier;
+
+    @DatabaseField
+    private int timesPurchasedTokens;
+
+    @DatabaseField
+    private double gems;
+
+    @DatabaseField(dataType = DataType.SERIALIZABLE)
+    private ArrayList<Double> lastSells;
+
     public GeneratorPlayer() {
     }
 
@@ -22,6 +43,11 @@ public class GeneratorPlayer {
         this.uuid = uuid;
         this.maxGens = maxGens;
         this.usedGens = usedGens;
+        this.score = 0;
+        this.prestige = 0;
+        this.multiplier = 1;
+        this.timesPurchasedTokens = 0;
+        this.lastSells = new ArrayList<>();
     }
 
     public String getUuid() {
@@ -32,8 +58,68 @@ public class GeneratorPlayer {
         this.usedGens++;
     }
 
+    public void incrementScore(double amount){
+        this.score += amount;
+    }
+
+    public void addMaxGens(int amount){
+        this.maxGens += amount;
+    }
+
     public void decrementUsedGens(){
         this.usedGens--;
+    }
+
+    public void incrementPrestige(){
+        this.prestige++;
+    }
+
+    public void resetScore(){
+        this.score = 0;
+    }
+
+    public void addGems(double amount){
+        this.gems += amount;
+    }
+
+    public void incrementTimesPurchasedTokens(){
+        this.timesPurchasedTokens ++;
+    }
+
+    public void incrementMultiplier(double amount){
+        this.multiplier += amount;
+    }
+
+    public double getMultiplier() {
+        return this.multiplier;
+    }
+
+    public int getTimesPurchasedTokens() {
+        return this.timesPurchasedTokens;
+    }
+
+    public void depositGems(double amount){
+        this.gems += amount;
+    }
+
+    public void withdrawGems(double amount){
+        this.gems -= amount;
+    }
+
+    public double getGems() {
+        return this.gems;
+    }
+
+    public void setGems(double gems) {
+        this.gems = gems;
+    }
+
+    public double getScore() {
+        return score;
+    }
+
+    public int getPrestige() {
+        return prestige;
     }
 
     public int getMaxGens() {
@@ -50,5 +136,31 @@ public class GeneratorPlayer {
 
     public void setUsedGens(int usedGens) {
         this.usedGens = usedGens;
+    }
+
+    public void addSell(double price){
+        if (this.lastSells == null) this.lastSells = new ArrayList<>();
+        this.lastSells.add(0,price);
+        if (lastSells.size() > 20) {
+            lastSells.remove(lastSells.size() -1);
+        }
+    }
+
+    public double getLastSellsAvrg(){
+        double total = 0;
+        if (this.lastSells != null){
+            for (double sell: this.lastSells){
+                total += sell;
+            }
+        } else {
+            lastSells = new ArrayList<>();
+        }
+
+
+        return Math.round(total / lastSells.size());
+    }
+
+    public ArrayList<Double> getLastSells() {
+        return lastSells;
     }
 }

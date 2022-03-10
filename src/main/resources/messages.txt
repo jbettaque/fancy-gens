@@ -1,0 +1,17 @@
+genPlaced: &aYou have placed a generator!
+tooManyGens: &cYou can't place anymore generators!
+usedSlots: &eUsed slots:
+genUpgraded: &aYou have upgraded a generator!
+newBalance: &eNew balance:
+notEnoughMoney: &cYou don't have enough money!
+maxUpgrade: &cThis generator is already fully upgraded!
+brokeGen: &aGenerator has been broken!
+sellwandName: &e&lSellwand
+genPurchased: &aYou have purchased
+notEnoughMoney: &cYou don't have enough money for that!
+notEnoughGems: &cYou don't have enough gems for that!
+scoreNotHighEnough: &cYou don't have enough score for that!
+autosellChestName: &e&lAuto Sell Chest
+placedAutosellChest: &aYou have placed an &e&lAuto Sell Chest&a
+upgradeWandPurchased: &aYou have purchased a upgrade wand!
+autosellChestPurchased: &aYou have purchased a &e&lAuto Sell Chest!

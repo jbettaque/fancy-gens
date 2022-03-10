@@ -2,3 +2,9 @@ name: FancyGens
 version: '${project.version}'
 main: bet.bettaque.fancygens.FancyGens
 api-version: 1.18
+depend:
+  - UltraEconomy
+  - Vault
+  - PlaceholderAPI
+  - Oraxen
+  - Lands

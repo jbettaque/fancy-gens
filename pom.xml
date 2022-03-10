@@ -44,6 +44,10 @@
                                     <pattern>com.jeff_media.customblockdata.CustomBlockData</pattern>
                                     <shadedPattern>net.bettaque.fancygens.CustomBlockData</shadedPattern>
                                 </relocation>
+                                <relocation>
+                                    <pattern>de.themoep.minedown</pattern>
+                                    <shadedPattern>net.bettaque.fancygens.libraries.minedown</shadedPattern>
+                                </relocation>
                             </relocations>
                         </configuration>
                     </execution>
@@ -83,6 +87,18 @@
             <id>jitpack.io</id>
             <url>https://jitpack.io</url>
         </repository>
+        <repository>
+            <id>techscode</id>
+            <url>https://repo.techscode.com/repository/maven-releases/</url>
+        </repository>
+        <repository>
+            <id>placeholderapi</id>
+            <url>https://repo.extendedclip.com/content/repositories/placeholderapi/</url>
+        </repository>
+        <repository>
+            <id>minebench-repo</id>
+            <url>https://repo.minebench.de/</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -115,6 +131,39 @@
             <version>1.7</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>me.TechsCode</groupId>
+            <artifactId>UltraEconomyAPI</artifactId>
+            <version>1.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>me.clip</groupId>
+            <artifactId>placeholderapi</artifactId>
+            <version>2.11.1</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.oraxen</groupId>
+            <artifactId>oraxen</artifactId>
+            <version>-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>de.themoep</groupId>
+            <artifactId>minedown</artifactId>
+            <version>1.7.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.angeschossen</groupId>
+            <artifactId>LandsAPI</artifactId>
+            <version>5.27.2</version>
+            <scope>provided</scope>
+        </dependency>
+
+
+
     </dependencies>
 
 

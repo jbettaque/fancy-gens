@@ -1,7 +1,91 @@
 admin {
     help Administrate FancyGens
-    givegens generator:generator player:player {
-    hook givegens
+    givegens generator:generator player:player int:amount {
+        hook givegens
         help Give <players> specified generator
     }
+    givesellwand player:player int<1,10>:multiplier {
+        hook givesellwand
+    }
+
+    giveupgradewand player:player {
+            hook giveupgradewand
+        }
+
+    giveautosellchest player:player int<1,10>:multiplier {
+        hook giveautosellchest
+    }
+
+    setmaxgens player:player int:maxGens {
+        hook setmaxgens
+        help set player's maxgens
+    }
+
+
+
+    mines {
+        help Administrate mines
+        hook adminmines
+        user player
+        clear mine:mine {
+                help Deletes all Blocks in a mine
+                hook clearmine
+                user player
+            }
+
+        create string:name int:prestige string:customItemName?(mines_icon) {
+                help Creates a mine
+                hook createmine
+                user player
+            }
+        delete mine:mine {
+                help Deletes a mine
+                hook deletemine
+                user player
+            }
+    }
+
+
+}
+
+mines {
+    help Opens the mines menu
+    hook mines
+    user player
+}
+
+sellall {
+    help Sell all the sellable items in your inventory!
+    hook sellall
+    user player
+}
+
+genshop {
+    help Buy new Generators
+    hook genshop
+    user player
+}
+
+buyslots {
+    help Buys new Generator slots
+    hook buyslots
+    user player
+}
+
+gemshop {
+    help Spend your gems
+    hook gemshop
+    user player
+}
+
+prestige {
+    help Reset your points to gain rewards
+    hook prestige
+    user player
+}
+
+menu {
+    help Opens the Menu
+    hook menu
+    user player
 }
