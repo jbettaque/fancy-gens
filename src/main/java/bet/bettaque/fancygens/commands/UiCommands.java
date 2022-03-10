@@ -37,7 +37,7 @@ public class UiCommands {
     LandsIntegration landsIntegration;
     Economy econ;
 
-    public UiCommands(ShopCommands shopCommands, Dao<GeneratorPlayer, String> generatorPlayerDao, Economy econ, MineCommands mineCommands) {
+    public UiCommands(ShopCommands shopCommands, Dao<GeneratorPlayer, String> generatorPlayerDao, Economy econ, MineCommands mineCommands, LandsIntegration landsIntegration) {
         this.shopCommands = shopCommands;
         this.generatorPlayerDao = generatorPlayerDao;
         this.econ = econ;
@@ -46,7 +46,6 @@ public class UiCommands {
 
     @CommandHook("home")
     public void home(Player player){
-        LandsIntegration landsIntegration = new LandsIntegration(mineCommands.plugin);
         Land ownedLand = landsIntegration.getLandPlayer(player.getUniqueId()).getOwningLand();
         if (ownedLand != null) {
             player.teleport(ownedLand.getSpawn());

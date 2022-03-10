@@ -136,7 +136,7 @@ public final class FancyGens extends JavaPlugin {
         AdminCommands adminCommands = new AdminCommands(this, generatorPlayerDao);
         ShopCommands shopCommands = new ShopCommands(this, econ, generatorCommands, this.generatorPlayerDao, adminCommands);
         MineCommands mineCommands = new MineCommands(this, gensConfig, generatorPlayerDao);
-        UiCommands uiCommands = new UiCommands(shopCommands, generatorPlayerDao, econ, mineCommands);
+        UiCommands uiCommands = new UiCommands(shopCommands, generatorPlayerDao, econ, mineCommands, landsIntegration);
 
         new CommandParser(this.getResource("commands.rdcml")).setArgTypes(
                 generatorType,

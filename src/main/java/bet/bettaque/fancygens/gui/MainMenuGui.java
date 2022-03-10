@@ -30,7 +30,7 @@ public class MainMenuGui extends FancyGui {
         ItemStack gemShopIcon = OraxenItems.getItemById("gems_icon").build();
         ItemStack sellAllIcon = OraxenItems.getItemById("coins_icon").build();
         ItemStack minesIcon = OraxenItems.getItemById("mines_icon").build();
-        ItemStack homeIcon = OraxenItems.getItemById("home_icon").build();
+        ItemStack homeIcon = OraxenItems.getItemById("home").build();
 
 
         contents.add(minesIcon);
