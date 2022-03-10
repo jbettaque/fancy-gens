@@ -9,6 +9,8 @@ import bet.bettaque.fancygens.helpers.TextHelper;
 import com.j256.ormlite.dao.Dao;
 import de.themoep.minedown.MineDown;
 import io.th0rgal.oraxen.items.OraxenItems;
+import me.angeschossen.lands.api.integration.LandsIntegration;
+import me.angeschossen.lands.api.land.Land;
 import me.clip.placeholderapi.PlaceholderAPI;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.milkbowl.vault.economy.Economy;
@@ -32,6 +34,7 @@ public class UiCommands {
     ShopCommands shopCommands;
     MineCommands mineCommands;
     Dao<GeneratorPlayer, String> generatorPlayerDao;
+    LandsIntegration landsIntegration;
     Economy econ;
 
     public UiCommands(ShopCommands shopCommands, Dao<GeneratorPlayer, String> generatorPlayerDao, Economy econ, MineCommands mineCommands) {
@@ -43,7 +46,13 @@ public class UiCommands {
 
     @CommandHook("home")
     public void home(Player player){
-
+        LandsIntegration landsIntegration = new LandsIntegration(mineCommands.plugin);
+        Land ownedLand = landsIntegration.getLandPlayer(player.getUniqueId()).getOwningLand();
+        if (ownedLand != null) {
+            player.teleport(ownedLand.getSpawn());
+        } else {
+            player.spigot().sendMessage(TextHelper.parseFancyComponents("&red&You don't have a land you could teleport to!"));
+        }
     }
 
     @CommandHook("gemshop")

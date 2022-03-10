@@ -15,6 +15,7 @@ import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import me.TechsCode.UltraEconomy.UltraEconomy;
+import me.angeschossen.lands.api.integration.LandsIntegration;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -44,8 +45,8 @@ public final class FancyGens extends JavaPlugin {
     AutosellChestHandler autosellChestHandler;
     ScoreBoardHandler scoreBoardHandler;
     ConfigManager gensConfig;
-    ConfigManager minesConfig;
     Economy econ = null;
+    LandsIntegration landsIntegration;
 
     public GenConfig findGenerator(String generator){
 
@@ -100,6 +101,7 @@ public final class FancyGens extends JavaPlugin {
             return;
         }
 
+        this.landsIntegration = new LandsIntegration(this);
         gensConfig = ConfigManager.create(this).target(GensConfig.class).saveDefaults().load();
         gensConfig.save();
 //        GensConfig.gens.put(0, new GenConfig());
