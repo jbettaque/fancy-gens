@@ -1,6 +1,8 @@
 package bet.bettaque.fancygens;
 
 import bet.bettaque.fancygens.commands.*;
+import bet.bettaque.fancygens.commands.goblins.GoblinCommands;
+import bet.bettaque.fancygens.commands.goblins.GoblinTier;
 import bet.bettaque.fancygens.config.GenConfig;
 import bet.bettaque.fancygens.config.GensConfig;
 import bet.bettaque.fancygens.config.MineConfig;
@@ -9,22 +11,20 @@ import bet.bettaque.fancygens.db.PlacedAutosellChest;
 import bet.bettaque.fancygens.db.PlacedGenerator;
 import bet.bettaque.fancygens.helpers.PersistanceHelper;
 import bet.bettaque.fancygens.listeners.*;
+import bet.bettaque.fancygens.services.FancyEconomy;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
-import me.TechsCode.UltraEconomy.UltraEconomy;
 import me.angeschossen.lands.api.integration.LandsIntegration;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
-import redempt.redlib.RedLib;
 import redempt.redlib.commandmanager.ArgType;
 import redempt.redlib.commandmanager.CommandParser;
 import redempt.redlib.commandmanager.Messages;
@@ -32,7 +32,7 @@ import redempt.redlib.config.ConfigManager;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.EventListener;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.logging.Logger;
 
@@ -47,6 +47,7 @@ public final class FancyGens extends JavaPlugin {
     ConfigManager gensConfig;
     Economy econ = null;
     LandsIntegration landsIntegration;
+    FancyEconomy economy;
 
     public GenConfig findGenerator(String generator){
 
@@ -89,6 +90,10 @@ public final class FancyGens extends JavaPlugin {
         return rval;
     }
 
+    private Material getMaterial(String string){
+        return Material.getMaterial(string);
+    }
+
     @Override
     public void onEnable() {
         // Plugin startup logic
@@ -107,7 +112,7 @@ public final class FancyGens extends JavaPlugin {
 //        GensConfig.gens.put(0, new GenConfig());
 //        gensConfig.save();
 
-        GensConfig.shopItems.put(Material.WHEAT, 1.0);
+//        GensConfig.shopItems.put(Material.WHEAT, 1.0);
         gensConfig.save();
 
         String databaseUrl = "jdbc:sqlite:" + this.getDataFolder().toPath().resolve("users.db");
@@ -127,26 +132,39 @@ public final class FancyGens extends JavaPlugin {
             throwables.printStackTrace();
         }
 
+        this.economy = new FancyEconomy(generatorPlayerDao, this, econ);
+
 
 
         ArgType<GenConfig> generatorType = new ArgType<>("generator", this::findGenerator).tabStream(c -> generatorNames().stream());
         ArgType<MineConfig> mineType = new ArgType<>("mine", this::findMine).tabStream(c -> mineNames().stream());
+        ArgType<GoblinTier> scrollTier = new ArgType<>("stier", GoblinTier::get).tabStream(c -> Arrays.stream(GoblinTier.values()).map(GoblinTier::getItemId));
+        ArgType<FancyResource> resourceType = new ArgType<>("resource", FancyResource::get).tabStream(c -> Arrays.stream(FancyResource.values()).map(FancyResource::toString));
+        ArgType<Material> materialType = new ArgType<>("material", this::getMaterial).tabStream(c -> Arrays.stream(Material.values()).map(Material::toString));
+        ArgType<Material> blockType = new ArgType<>("block", this::getMaterial).tabStream(c -> Arrays.stream(Material.values()).filter(Material::isBlock).filter(Material::isSolid).filter(Material::isOccluding).map(Material::toString));
 
-        GeneratorCommands generatorCommands = new GeneratorCommands(this, generatorPlayerDao);
-        AdminCommands adminCommands = new AdminCommands(this, generatorPlayerDao);
+        GeneratorCommands generatorCommands = new GeneratorCommands(this, generatorPlayerDao, gensConfig);
+        AdminCommands adminCommands = new AdminCommands(this, generatorPlayerDao, economy);
         ShopCommands shopCommands = new ShopCommands(this, econ, generatorCommands, this.generatorPlayerDao, adminCommands);
         MineCommands mineCommands = new MineCommands(this, gensConfig, generatorPlayerDao);
         UiCommands uiCommands = new UiCommands(shopCommands, generatorPlayerDao, econ, mineCommands, landsIntegration);
+        GoblinCommands goblinCommands = new GoblinCommands();
 
         new CommandParser(this.getResource("commands.rdcml")).setArgTypes(
                 generatorType,
-                mineType
+                mineType,
+                scrollTier,
+                resourceType,
+                materialType,
+                blockType
         ).parse().register("fancygens",
                 generatorCommands,
                 shopCommands,
                 adminCommands,
                 uiCommands,
-                mineCommands
+                mineCommands,
+                goblinCommands
+
         );
 
         UpgradeGeneratorListener upgradeGeneratorListener = new UpgradeGeneratorListener(this, this.placedGeneratorDao, this.econ);
@@ -161,7 +179,8 @@ public final class FancyGens extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new BreakAutosellChestListener(this, adminCommands, placedAutosellChestDao), this);
         getServer().getPluginManager().registerEvents(new UpgradeWandListener(this, placedGeneratorDao, upgradeGeneratorListener), this);
         getServer().getPluginManager().registerEvents(new MainMenuListener(this, uiCommands), this);
-        getServer().getPluginManager().registerEvents(new MineListener(this, econ, generatorPlayerDao), this);
+        getServer().getPluginManager().registerEvents(new MineListener(this, econ, generatorPlayerDao, goblinCommands), this);
+        getServer().getPluginManager().registerEvents(new ScrollListener(this, economy), this);
 
 
         generatorHandler = new GeneratorHandler(placedGeneratorDao, this);

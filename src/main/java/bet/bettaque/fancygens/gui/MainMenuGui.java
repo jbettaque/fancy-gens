@@ -48,11 +48,13 @@ public class MainMenuGui extends FancyGui {
         contents.add(gemShopIcon);
         callbackMap.put(gemShopIcon, e -> uiCommands.gemShop(player));
 
+        contents.add(homeIcon);
+        callbackMap.put(homeIcon, e -> uiCommands.home(player));
+
         contents.add(sellAllIcon);
         callbackMap.put(sellAllIcon, e -> shopCommands.sellAll(player));
 
-        contents.add(homeIcon);
-        callbackMap.put(sellAllIcon, e -> uiCommands.home(player));
+
 
         super.populate();
     }

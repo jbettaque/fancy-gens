@@ -47,7 +47,7 @@ public class SellWandListener implements Listener {
         Action action = event.getAction();
         Block block = event.getClickedBlock();
         ItemStack sellwand = player.getInventory().getItemInMainHand();
-        if(sellwand.getType() == Material.GOLDEN_SHOVEL){
+        if(sellwand.getType() == Material.DIAMOND_SHOVEL){
             ItemMeta itemMeta = sellwand.getItemMeta();
             NamespacedKey key = new NamespacedKey(plugin, "sellwand");
             PersistentDataContainer container = itemMeta.getPersistentDataContainer();

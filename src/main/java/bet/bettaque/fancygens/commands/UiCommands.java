@@ -42,6 +42,7 @@ public class UiCommands {
         this.generatorPlayerDao = generatorPlayerDao;
         this.econ = econ;
         this.mineCommands = mineCommands;
+        this.landsIntegration = landsIntegration;
     }
 
     @CommandHook("home")
@@ -50,7 +51,8 @@ public class UiCommands {
         if (ownedLand != null) {
             player.teleport(ownedLand.getSpawn());
         } else {
-            player.spigot().sendMessage(TextHelper.parseFancyComponents("&red&You don't have a land you could teleport to!"));
+            player.spigot().sendMessage(TextHelper.parseFancyComponents("&red&You don't have a land you could teleport to! "));
+            player.spigot().sendMessage(TextHelper.parseFancyComponents("[Click HERE to create a land claim (Make sure you stand where you want your land to be!)](suggest_command=/lt claim color=yellow)"));
         }
     }
 

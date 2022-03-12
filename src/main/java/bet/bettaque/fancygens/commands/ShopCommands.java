@@ -20,6 +20,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.Plugin;
 import org.w3c.dom.Text;
@@ -64,24 +65,51 @@ public class ShopCommands {
 
             ArrayList<String> soldStrings = new ArrayList<>();
 
-            for (Map.Entry<Material, Double> item: GensConfig.shopItems.entrySet()){
-                NamespacedKey key = new NamespacedKey(plugin, "sellable");
-                ItemStack material = new ItemBuilder(item.getKey());
-                ItemUtils.addPersistentTag(material, key, PersistentDataType.INTEGER, 1);
-                double price = GensConfig.shopItems.get(material.getType());
-                ItemUtils.addLore(material,"Price: " + TextHelper.formatCurrency(price, player));
-                int count = ItemUtils.countAndRemove(inventory, material);
-                if (count > 0){
-                    double total = count * item.getValue() * multiplier;
-                    sumMoney += total;
-                    sumCount += count;
-                    generatorPlayer.incrementScore(total);
-                    this.econ.depositPlayer(player, total);
-                    player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 2);
-                    soldStrings.add(ChatColor.GREEN + "Sold " + ChatColor.YELLOW + count + ChatColor.GREEN + " of " + item.getKey() +
-                            " for " + TextHelper.formatCurrency(total, player) + ChatColor.LIGHT_PURPLE + " (x" + TextHelper.formatMultiplier(multiplier, false, player) +")");
+            NamespacedKey key = new NamespacedKey(plugin, "sellable");
+
+            for (ItemStack item : inventory) {
+                if (item != null && item.hasItemMeta()){
+                    PersistentDataContainer container = item.getItemMeta().getPersistentDataContainer();
+                    if (container.has(key, PersistentDataType.DOUBLE)){
+                        double price = container.get(key, PersistentDataType.DOUBLE);
+                        ItemStack searchItem = new ItemBuilder(item.getType());
+                        ItemUtils.addPersistentTag(searchItem, key, PersistentDataType.DOUBLE, price);
+                        ItemUtils.addLore(searchItem,"Price: " + TextHelper.formatCurrency(price, player));
+
+                        int count = ItemUtils.countAndRemove(inventory, searchItem);
+                        if (count > 0){
+                            double total = count * price * multiplier;
+                            sumMoney += total;
+                            sumCount += count;
+                            generatorPlayer.incrementScore(total);
+                            this.econ.depositPlayer(player, total);
+                            player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 2);
+                            soldStrings.add(ChatColor.GREEN + "Sold " + ChatColor.YELLOW + count + ChatColor.GREEN + " of " + item.getType() +
+                                    " for " + TextHelper.formatCurrency(total, player) + ChatColor.LIGHT_PURPLE + " (x" + TextHelper.formatMultiplier(multiplier, false, player) +")");
+                        }
+                    }
+
                 }
             }
+
+//            for (Map.Entry<Material, Double> item: GensConfig.shopItems.entrySet()){
+//                NamespacedKey key = new NamespacedKey(plugin, "sellable");
+//                ItemStack material = new ItemBuilder(item.getKey());
+//                ItemUtils.addPersistentTag(material, key, PersistentDataType.INTEGER, 1);
+//                double price = GensConfig.shopItems.get(material.getType());
+//                ItemUtils.addLore(material,"Price: " + TextHelper.formatCurrency(price, player));
+//                int count = ItemUtils.countAndRemove(inventory, material);
+//                if (count > 0){
+//                    double total = count * item.getValue() * multiplier;
+//                    sumMoney += total;
+//                    sumCount += count;
+//                    generatorPlayer.incrementScore(total);
+//                    this.econ.depositPlayer(player, total);
+//                    player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 2);
+//                    soldStrings.add(ChatColor.GREEN + "Sold " + ChatColor.YELLOW + count + ChatColor.GREEN + " of " + item.getKey() +
+//                            " for " + TextHelper.formatCurrency(total, player) + ChatColor.LIGHT_PURPLE + " (x" + TextHelper.formatMultiplier(multiplier, false, player) +")");
+//                }
+//            }
 
             if(sumCount > 0){
                 player.sendMessage(ChatColor.STRIKETHROUGH + "-------------------------------------------");
@@ -150,7 +178,7 @@ public class ShopCommands {
     public double calculateGenPrice(GenConfig genConfig){
         double price = 0;
         for (int i = 1; i <= genConfig.id; i++) {
-            price += GensConfig.gens.get(i).cost;
+            price += GensConfig.gens.get(i).getCost();
         }
         return price;
     }

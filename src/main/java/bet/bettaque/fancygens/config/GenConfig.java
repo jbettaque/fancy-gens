@@ -9,7 +9,14 @@ public class GenConfig {
     public String name = "Generator";
     public Material block = Material.STONE;
     public Material product = Material.STONE;
-    public double cost = 20;
+
+    public double getCost() {
+        return Math.pow(2, id + 1) * 100;
+    }
+
+    public double getProductPrice(){
+        return getCost() / 300;
+    }
 
     public GenConfig() {
     }

@@ -56,8 +56,9 @@ public class GeneratorHandler {
 
                 ItemStack item = new ItemBuilder(placedGenerator.getMaterial());
                 NamespacedKey key = new NamespacedKey(plugin, "sellable");
-                ItemUtils.addPersistentTag(item, key, PersistentDataType.INTEGER, 1);
-                double price = GensConfig.shopItems.get(item.getType());
+                double price = placedGenerator.getGenerator().getProductPrice();
+                ItemUtils.addPersistentTag(item, key, PersistentDataType.DOUBLE, price);
+
                 ItemUtils.addLore(item,"Price: " + TextHelper.formatCurrency(price, player));
                 world.dropItem(newLocation, item);
             }

@@ -25,8 +25,9 @@ public class GeneratorShopGui extends FancyGui{
 
     @Override
     public void populate() {
+        contents = new ArrayList<>();
         for (Map.Entry<Integer, GenConfig> genConfig: GensConfig.gens.entrySet()) {
-            ItemStack item = new ItemBuilder(genConfig.getValue().block).setName(TextHelper.parseFancyString("&#4DB6AC&" + genConfig.getValue().name));
+            ItemStack item = new ItemBuilder(genConfig.getValue().block).setName(TextHelper.parseFancyString("&#4DB6AC&" + genConfig.getValue().name)).addLore(TextHelper.parseFancyString("&gray&Tier: &yellow&" + genConfig.getKey()));
 
             contents.add(item);
             setCallback(item, e -> {

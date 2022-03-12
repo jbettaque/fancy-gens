@@ -6,7 +6,6 @@ import bet.bettaque.fancygens.db.GeneratorPlayer;
 import bet.bettaque.fancygens.helpers.PersistanceHelper;
 import bet.bettaque.fancygens.helpers.TextHelper;
 import com.j256.ormlite.dao.Dao;
-import com.sun.org.apache.xpath.internal.operations.Or;
 import io.th0rgal.oraxen.items.OraxenItems;
 import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.*;

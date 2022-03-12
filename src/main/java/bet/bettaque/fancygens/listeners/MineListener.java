@@ -1,5 +1,7 @@
 package bet.bettaque.fancygens.listeners;
 
+import bet.bettaque.fancygens.commands.goblins.GoblinCommands;
+import bet.bettaque.fancygens.commands.goblins.GoblinTier;
 import bet.bettaque.fancygens.config.GensConfig;
 import bet.bettaque.fancygens.db.GeneratorPlayer;
 import bet.bettaque.fancygens.db.ItemHelper;
@@ -23,13 +25,9 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.scheduler.BukkitRunnable;
-import redempt.redlib.itemutils.ItemUtils;
 
 import java.sql.SQLException;
 import java.util.Random;
@@ -38,11 +36,13 @@ public class MineListener implements Listener {
     Plugin plugin;
     Economy econ;
     Dao<GeneratorPlayer, String> generatorPlayerDao;
+    GoblinCommands goblinCommands;
 
-    public MineListener(Plugin plugin, Economy econ, Dao<GeneratorPlayer, String> generatorPlayerDao) {
+    public MineListener(Plugin plugin, Economy econ, Dao<GeneratorPlayer, String> generatorPlayerDao, GoblinCommands goblinCommands) {
         this.plugin = plugin;
         this.econ = econ;
         this.generatorPlayerDao = generatorPlayerDao;
+        this.goblinCommands = goblinCommands;
     }
 
     @EventHandler
@@ -85,6 +85,20 @@ public class MineListener implements Listener {
                             generatorPlayer.incrementMultiplier(specialPrice);
                             generatorPlayerDao.update(generatorPlayer);
                             BaseComponent[] extraMessage = new MineDown("&#EC407A-#E91E63&Special Price! " + TextHelper.formatMultiplier(specialPrice, true, player)).toComponent();
+                            player.spigot().sendMessage(extraMessage);
+                            player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 2, 1);
+                        }
+
+                        if (random.nextInt(5000) == 1){
+                            GoblinTier tier = GoblinTier.COMMON;
+                            int randInt = random.nextInt(10000);
+                            if (randInt < 5000) tier = GoblinTier.RARE;
+                            if (randInt < 2000) tier = GoblinTier.EPIC;
+                            if (randInt < 500) tier = GoblinTier.LEGENDARY;
+
+                            goblinCommands.giveSummoningScrollBackend(player, tier);
+
+                            BaseComponent[] extraMessage = new MineDown("&#EC407A-#E91E63&Special Price! " + tier.getDisplayName()).toComponent();
                             player.spigot().sendMessage(extraMessage);
                             player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 2, 1);
                         }

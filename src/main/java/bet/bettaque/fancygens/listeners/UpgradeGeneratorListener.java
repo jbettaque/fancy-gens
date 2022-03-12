@@ -70,7 +70,7 @@ public class UpgradeGeneratorListener implements Listener {
 
             try {
                 GenConfig genConfig = placedGenerator.upgradeGenerator();
-                if (econ.getBalance(player) - GensConfig.gens.get(placedGenerator.getGenerator().id).cost >= 0){
+                if (econ.getBalance(player) - GensConfig.gens.get(placedGenerator.getGenerator().id).getCost() >= 0){
                     if (genConfig == null) {
                         player.sendMessage(Messages.msg("maxUpgrade"));
                         return 0;
@@ -79,10 +79,10 @@ public class UpgradeGeneratorListener implements Listener {
                     block.setType(genConfig.block);
                     player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
                     player.spawnParticle(Particle.VILLAGER_HAPPY, block.getLocation(), 20, 0.5, 0.5, 0.5, 0.4);
-                    econ.withdrawPlayer(player, GensConfig.gens.get(placedGenerator.getGenerator().id).cost);
-                    return GensConfig.gens.get(placedGenerator.getGenerator().id).cost;
+                    econ.withdrawPlayer(player, GensConfig.gens.get(placedGenerator.getGenerator().id).getCost());
+                    return GensConfig.gens.get(placedGenerator.getGenerator().id).getCost();
                 } else {
-                    player.sendMessage(Messages.msg("notEnoughMoney") + " " + TextHelper.formatCurrency(econ.getBalance(player), player) + " / " + TextHelper.formatCurrency(GensConfig.gens.get(placedGenerator.getGenerator().id).cost, player));
+                    player.sendMessage(Messages.msg("notEnoughMoney") + " " + TextHelper.formatCurrency(econ.getBalance(player), player) + " / " + TextHelper.formatCurrency(GensConfig.gens.get(placedGenerator.getGenerator().id).getCost(), player));
                     return 0;
                 }
 

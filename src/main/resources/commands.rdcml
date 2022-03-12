@@ -21,6 +21,21 @@ admin {
         help set player's maxgens
     }
 
+    givescroll stier:tier player:player {
+        hook givescroll
+        help Give a summoning scroll to the player
+    }
+
+    setresource player:player resource:resource double:amount {
+        hook setresource
+        help Give resources to players
+    }
+
+    addgen block:block material:product string...:name {
+        hook addgen
+        help Adds a new type of generator
+    }
+
 
 
     mines {

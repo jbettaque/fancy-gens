@@ -118,6 +118,18 @@ public class GeneratorPlayer {
         return score;
     }
 
+    public void setScore(double score) {
+        this.score = score;
+    }
+
+    public void setPrestige(int prestige) {
+        this.prestige = prestige;
+    }
+
+    public void setMultiplier(double multiplier) {
+        this.multiplier = multiplier;
+    }
+
     public int getPrestige() {
         return prestige;
     }

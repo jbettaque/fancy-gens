@@ -27,6 +27,7 @@ public class FancyGui {
     Player player;
     int size;
     boolean center;
+    int page;
 
     public FancyGui(String title, int size, Player player, FancyGui previous) {
         this.title = title;
@@ -37,6 +38,7 @@ public class FancyGui {
         this.callbackMap = new HashMap<>();
         this.loreMap = new HashMap<>();
         this.contents = new ArrayList<>();
+        this.page = 0;
     }
 
     public FancyGui(String title, int size, Player player) {
@@ -80,6 +82,32 @@ public class FancyGui {
                     previous.populate();
                 });
         gui.addButton(exitButton, size - 5);
+
+        if (page > 0){
+            ItemStack prevPageIcon = OraxenItems.getItemById("arrow_previous_icon").build();
+            ItemButton prevPageButton = ItemButton.create(new ItemBuilder(prevPageIcon)
+                    , e -> {
+                        page -= 1;
+                        populate();
+                    });
+            gui.addButton(prevPageButton, size - 7);
+        }
+
+        System.out.println(contents.size());
+        System.out.println((page * 45) + 45);
+        if (contents.size() > (page * 45) + 45){
+            ItemStack nextPageIcon = OraxenItems.getItemById("arrow_next_icon").build();
+            ItemButton nextPageButton = ItemButton.create(new ItemBuilder(nextPageIcon)
+                    , e -> {
+                        page += 1;
+                        populate();
+                    });
+            gui.addButton(nextPageButton, size - 3);
+        } else {
+            gui.clearSlot(size - 3);
+        }
+
+
     }
 
     public Iterable<String> getLore(ItemStack item){
@@ -105,13 +133,18 @@ public class FancyGui {
     public void populate(){
         size = contents.size() + 9 - (contents.size() % 9);
         if (this.hasMenuBar()) size += 9;
+        if (size > 54) size = 54;
         this.gui = new InventoryGUI(Bukkit.createInventory(null, size, title));
+
         int c = 0;
         if (center){
             c = (getActualSize() - contents.size()) / 2;
         }
-
-        for (ItemStack item: contents) {
+        int pageOffset = page * 45;
+        int endOffset = 45 + pageOffset;
+        if (endOffset > contents.size()) endOffset = contents.size();
+        for (ItemStack item: contents.subList(pageOffset, endOffset)) {
+            if (c >= 45) break;
             ItemButton itemButton = ItemButton.create(new ItemBuilder(item)
                     .addLore(getLore(item))
                     , getListener(item));

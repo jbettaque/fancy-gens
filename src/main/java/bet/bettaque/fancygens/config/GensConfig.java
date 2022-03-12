@@ -11,7 +11,7 @@ import java.util.List;
 public class GensConfig {
 //    public static List<GenConfig> gens = new ArrayList<>();
     public static HashMap<Integer, GenConfig> gens = new HashMap<>();
-    public static HashMap<Material, Double> shopItems = new HashMap<>();
+//    public static HashMap<Material, Double> shopItems = new HashMap<>();
     public static List<MineConfig> mines = new ArrayList<>();
     public static HashMap<Material, Double> miningItems = new HashMap<>();
 }

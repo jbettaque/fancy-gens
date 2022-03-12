@@ -1,7 +1,9 @@
 package bet.bettaque.fancygens.commands;
 
 import bet.bettaque.fancygens.config.GenConfig;
+import bet.bettaque.fancygens.config.GensConfig;
 import bet.bettaque.fancygens.db.GeneratorPlayer;
+import bet.bettaque.fancygens.helpers.TextHelper;
 import com.j256.ormlite.dao.Dao;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -15,6 +17,7 @@ import org.bukkit.inventory.meta.tags.ItemTagType;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.Plugin;
 import redempt.redlib.commandmanager.CommandHook;
+import redempt.redlib.config.ConfigManager;
 import redempt.redlib.itemutils.ItemBuilder;
 import redempt.redlib.itemutils.ItemUtils;
 
@@ -23,10 +26,12 @@ import java.sql.SQLException;
 public class GeneratorCommands {
     Plugin plugin;
     Dao<GeneratorPlayer, String> generatorPlayerDao;
+    ConfigManager gensConfig;
 
-    public GeneratorCommands(Plugin plugin, Dao<GeneratorPlayer, String> generatorPlayerDao) {
+    public GeneratorCommands(Plugin plugin, Dao<GeneratorPlayer, String> generatorPlayerDao, ConfigManager gensConfig) {
         this.plugin = plugin;
         this.generatorPlayerDao = generatorPlayerDao;
+        this.gensConfig = gensConfig;
     }
 
     @CommandHook("givegens")
@@ -48,11 +53,27 @@ public class GeneratorCommands {
     public void giveGensBackend(GenConfig generator, Player player, int amount){
         NamespacedKey key = new NamespacedKey(plugin, "generator");
         ItemStack gen = new ItemBuilder(generator.block)
-                .setName(generator.name)
-                .setLore("Tier " + generator.id)
+                .setName(TextHelper.parseFancyString("&#4DB6AC&" + generator.name))
+                .addLore(TextHelper.parseFancyString("&gray&Tier: &yellow&" + generator.id))
                 .addPersistentTag(key, PersistentDataType.INTEGER, generator.id);
         ItemUtils.addEnchant(gen, Enchantment.DURABILITY, 1);
         ItemUtils.addItemFlags(gen, ItemFlag.HIDE_ENCHANTS);
         ItemUtils.give(player, gen, amount);
     }
+
+    @CommandHook("addgen")
+    public void addGen(CommandSender sender, Material block, Material product, String name){
+        int index = GensConfig.gens.size() + 1;
+        GenConfig newGen = new GenConfig();
+        newGen.id = index;
+        newGen.block = block;
+        newGen.product = product;
+        newGen.name = name;
+        GensConfig.gens.put(index, newGen);
+        gensConfig.save();
+        sender.spigot().sendMessage(TextHelper.parseFancyComponents(
+                "&green&You have added " + name + "(Block: " + block + ", Produces: " + product + ")"
+        ));
+    }
+
 }

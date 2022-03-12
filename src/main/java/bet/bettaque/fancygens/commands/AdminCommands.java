@@ -1,8 +1,10 @@
 package bet.bettaque.fancygens.commands;
 
+import bet.bettaque.fancygens.FancyResource;
 import bet.bettaque.fancygens.db.GeneratorPlayer;
 import bet.bettaque.fancygens.db.PlacedAutosellChest;
 import bet.bettaque.fancygens.helpers.TextHelper;
+import bet.bettaque.fancygens.services.FancyEconomy;
 import com.j256.ormlite.dao.Dao;
 import io.th0rgal.oraxen.items.OraxenItems;
 import me.clip.placeholderapi.PlaceholderAPI;
@@ -25,15 +27,23 @@ import java.sql.SQLException;
 public class AdminCommands {
     Plugin plugin;
     Dao<GeneratorPlayer, String> generatorPlayerDao;
+    FancyEconomy economy;
 
-    public AdminCommands(Plugin plugin, Dao<GeneratorPlayer, String> generatorPlayerDao) {
+    public AdminCommands(Plugin plugin, Dao<GeneratorPlayer, String> generatorPlayerDao, FancyEconomy economy) {
         this.plugin = plugin;
         this.generatorPlayerDao = generatorPlayerDao;
+        this.economy = economy;
     }
 
     @CommandHook("givesellwand")
     public void giveSellWand(CommandSender sender, Player player, int multiplier){
         giveSellWandBackend(player, multiplier);
+    }
+
+    @CommandHook("setresource")
+    public void setResource(CommandSender sender, Player player, FancyResource resource, double amount){
+        economy.set(player, resource, amount);
+        sender.spigot().sendMessage(TextHelper.parseFancyComponents("&green&Set " + resource.name() + " of " + player.getDisplayName() + " to " + resource.formatValue(amount, player)));
     }
 
     public void giveSellWandBackend(Player player, double multiplier) {

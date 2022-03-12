@@ -46,7 +46,7 @@ public class UpgradeWandListener implements Listener {
     public void onPlayerInteract(PlayerInteractEvent event){
         Player player = event.getPlayer();
         ItemStack sellwand = player.getInventory().getItemInMainHand();
-        if(sellwand.getType() == Material.GOLDEN_SHOVEL){
+        if(sellwand.getType() == Material.DIAMOND_SHOVEL && (event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)){
             ItemMeta itemMeta = sellwand.getItemMeta();
             NamespacedKey key = new NamespacedKey(plugin, "upgradewand");
             PersistentDataContainer container = itemMeta.getPersistentDataContainer();
