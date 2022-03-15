@@ -51,8 +51,9 @@ public class UiCommands {
         if (ownedLand != null) {
             player.teleport(ownedLand.getSpawn());
         } else {
-            player.spigot().sendMessage(TextHelper.parseFancyComponents("&red&You don't have a land you could teleport to! "));
-            player.spigot().sendMessage(TextHelper.parseFancyComponents("[Click HERE to create a land claim (Make sure you stand where you want your land to be!)](suggest_command=/lt claim color=yellow)"));
+            player.spigot().sendMessage(TextHelper.parseFancyComponents("&red&You don't have a land you could teleport to! Teleporting you to the spawn instead!"));
+            player.spigot().sendMessage(TextHelper.parseFancyComponents("[Click HERE to create a land claim (Make sure you stand where you want your land to be!)](suggest_command=/l claim color=yellow)"));
+            player.performCommand("spawn");
         }
     }
 
@@ -78,14 +79,14 @@ public class UiCommands {
                 this,
                 shopCommands
         );
-        PrestigeGui generatorShopGui = new PrestigeGui(
+        PrestigeGui prestigeGui = new PrestigeGui(
                 player,
                 mainMenuGui,
                 this,
                 shopCommands,
                 generatorPlayerDao
         );
-        generatorShopGui.populate();
+        prestigeGui.populate();
     }
 
     public void buyPrestige(GeneratorPlayer generatorPlayer, Player player){
@@ -96,12 +97,13 @@ public class UiCommands {
                 generatorPlayer.incrementPrestige();
                 econ.withdrawPlayer(player, cost);
                 generatorPlayer.addGems(2000);
-                generatorPlayer.incrementMultiplier(0.04 * generatorPlayer.getPrestige());
+                generatorPlayer.incrementMultiplier(0.04 * generatorPlayer.getPrestige() / 2);
                 generatorPlayer.resetScore();
                 try {
                     generatorPlayerDao.update(generatorPlayer);
                     player.sendMessage(ChatColor.GREEN + "Reset Points & Gained 1 Prestige for " + TextHelper.formatCurrency(cost, player));
                     player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
+
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
@@ -114,11 +116,12 @@ public class UiCommands {
     }
 
     public double calculatePrestigePrice(GeneratorPlayer generatorPlayer){
-        return Math.pow(12,generatorPlayer.getPrestige()) * 1000000;
+        return Math.pow(12,generatorPlayer.getPrestige()) * 1000000 * (generatorPlayer.getPrestige() + 1);
     }
 
     public double calculatePrestigeRequirement(GeneratorPlayer generatorPlayer){
-        return Math.pow(14,generatorPlayer.getPrestige()) * 2500000;
+        if (generatorPlayer.getPrestige() > 9) return Math.pow(14,generatorPlayer.getPrestige()) * 2500000 * ((generatorPlayer.getPrestige() * generatorPlayer.getPrestige()) +1);
+        return Math.pow(14,generatorPlayer.getPrestige()) * 2500000 * ((generatorPlayer.getPrestige()) +1);
     }
 
     @CommandHook("genshop")

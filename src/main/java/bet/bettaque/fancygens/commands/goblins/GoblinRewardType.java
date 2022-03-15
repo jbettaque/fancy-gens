@@ -10,7 +10,7 @@ import java.util.Random;
 public enum GoblinRewardType {
     COINS,
     GEMS,
-    SLOTS,
+//    SLOTS,
     MULTIPLIER,
 //    SELLWAND,
 //    GENERATORS,
@@ -21,7 +21,7 @@ public enum GoblinRewardType {
         switch (this){
             case COINS: return FancyResource.COINS;
             case GEMS: return FancyResource.GEMS;
-            case SLOTS: return FancyResource.SLOTS;
+//            case SLOTS: return FancyResource.SLOTS;
             case MULTIPLIER: return FancyResource.MULTIPLIER;
         }
         return FancyResource.NULL;
@@ -38,7 +38,7 @@ public enum GoblinRewardType {
 
         switch (resource){
             case COINS: {
-                double reward = economy.getBalance(player, resource) / 4 * tier.getMultiplier() * getRandomMultiplier(random);
+                double reward = economy.getBalance(player, FancyResource.POINTS) / 4 * tier.getMultiplier() * getRandomMultiplier(random);
                 economy.add(player, resource, reward);
                 player.sendMessage(TextHelper.parseFancyString("&#E91E63-#8E24AA&** " + tier.name() + " Golem Reward** " + resource.formatValue(reward, player)));
                 return;
@@ -50,7 +50,7 @@ public enum GoblinRewardType {
                 return;
             }
             case SLOTS: {
-                double reward = 10 * tier.getMultiplier() * getRandomMultiplier(random);
+                double reward = 3 * tier.getMultiplier() * getRandomMultiplier(random);
                 economy.add(player, resource, reward);
                 player.sendMessage(TextHelper.parseFancyString("&#E91E63-#8E24AA&** " + tier.name() + " Golem Reward** " + resource.formatValue(reward, player)));
                 return;

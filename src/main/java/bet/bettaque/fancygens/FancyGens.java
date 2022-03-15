@@ -10,6 +10,7 @@ import bet.bettaque.fancygens.db.GeneratorPlayer;
 import bet.bettaque.fancygens.db.PlacedAutosellChest;
 import bet.bettaque.fancygens.db.PlacedGenerator;
 import bet.bettaque.fancygens.helpers.PersistanceHelper;
+import bet.bettaque.fancygens.helpers.TextHelper;
 import bet.bettaque.fancygens.listeners.*;
 import bet.bettaque.fancygens.services.FancyEconomy;
 import com.j256.ormlite.dao.Dao;
@@ -17,9 +18,12 @@ import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
+import me.angeschossen.lands.api.flags.Flags;
 import me.angeschossen.lands.api.integration.LandsIntegration;
+import me.angeschossen.lands.api.land.Area;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
@@ -30,6 +34,7 @@ import redempt.redlib.commandmanager.CommandParser;
 import redempt.redlib.commandmanager.Messages;
 import redempt.redlib.config.ConfigManager;
 
+import java.math.BigInteger;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -133,8 +138,7 @@ public final class FancyGens extends JavaPlugin {
         }
 
         this.economy = new FancyEconomy(generatorPlayerDao, this, econ);
-
-
+        PersistanceHelper.init(generatorPlayerDao, economy);
 
         ArgType<GenConfig> generatorType = new ArgType<>("generator", this::findGenerator).tabStream(c -> generatorNames().stream());
         ArgType<MineConfig> mineType = new ArgType<>("mine", this::findMine).tabStream(c -> mineNames().stream());
@@ -143,8 +147,9 @@ public final class FancyGens extends JavaPlugin {
         ArgType<Material> materialType = new ArgType<>("material", this::getMaterial).tabStream(c -> Arrays.stream(Material.values()).map(Material::toString));
         ArgType<Material> blockType = new ArgType<>("block", this::getMaterial).tabStream(c -> Arrays.stream(Material.values()).filter(Material::isBlock).filter(Material::isSolid).filter(Material::isOccluding).map(Material::toString));
 
+        ToplistCommands toplistCommands = new ToplistCommands(economy, generatorPlayerDao);
         GeneratorCommands generatorCommands = new GeneratorCommands(this, generatorPlayerDao, gensConfig);
-        AdminCommands adminCommands = new AdminCommands(this, generatorPlayerDao, economy);
+        AdminCommands adminCommands = new AdminCommands(this, generatorPlayerDao, economy, placedGeneratorDao, landsIntegration);
         ShopCommands shopCommands = new ShopCommands(this, econ, generatorCommands, this.generatorPlayerDao, adminCommands);
         MineCommands mineCommands = new MineCommands(this, gensConfig, generatorPlayerDao);
         UiCommands uiCommands = new UiCommands(shopCommands, generatorPlayerDao, econ, mineCommands, landsIntegration);
@@ -163,24 +168,25 @@ public final class FancyGens extends JavaPlugin {
                 adminCommands,
                 uiCommands,
                 mineCommands,
-                goblinCommands
+                goblinCommands,
+                toplistCommands
 
         );
 
         UpgradeGeneratorListener upgradeGeneratorListener = new UpgradeGeneratorListener(this, this.placedGeneratorDao, this.econ);
         getServer().getPluginManager().registerEvents(new FirstJoinListener(generatorPlayerDao), this);
-        getServer().getPluginManager().registerEvents(new PlaceGeneratorListener(this, generatorPlayerDao, placedGeneratorDao), this);
-        getServer().getPluginManager().registerEvents(new BreakGeneratorListener(this, this.placedGeneratorDao, this.generatorPlayerDao), this);
+        getServer().getPluginManager().registerEvents(new PlaceGeneratorListener(this, generatorPlayerDao, placedGeneratorDao, landsIntegration), this);
+        getServer().getPluginManager().registerEvents(new BreakGeneratorListener(this, this.placedGeneratorDao, this.generatorPlayerDao, landsIntegration), this);
         getServer().getPluginManager().registerEvents(upgradeGeneratorListener, this);
         getServer().getPluginManager().registerEvents(new ScoreBoardListener(this.generatorPlayerDao, placedAutosellChestDao, this.econ), this);
-        getServer().getPluginManager().registerEvents(new SellWandListener(this, econ, shopCommands), this);
+        getServer().getPluginManager().registerEvents(new SellWandListener(this, econ, shopCommands, landsIntegration), this);
         getServer().getPluginManager().registerEvents(new PistonMoveListener(this), this);
         getServer().getPluginManager().registerEvents(new PlaceAutosellChestListener(this, placedAutosellChestDao), this);
         getServer().getPluginManager().registerEvents(new BreakAutosellChestListener(this, adminCommands, placedAutosellChestDao), this);
-        getServer().getPluginManager().registerEvents(new UpgradeWandListener(this, placedGeneratorDao, upgradeGeneratorListener), this);
+        getServer().getPluginManager().registerEvents(new UpgradeWandListener(this, placedGeneratorDao, upgradeGeneratorListener, economy), this);
         getServer().getPluginManager().registerEvents(new MainMenuListener(this, uiCommands), this);
-        getServer().getPluginManager().registerEvents(new MineListener(this, econ, generatorPlayerDao, goblinCommands), this);
-        getServer().getPluginManager().registerEvents(new ScrollListener(this, economy), this);
+        getServer().getPluginManager().registerEvents(new MineListener(this, econ, generatorPlayerDao, goblinCommands, economy), this);
+        getServer().getPluginManager().registerEvents(new ScrollListener(this, economy, landsIntegration), this);
 
 
         generatorHandler = new GeneratorHandler(placedGeneratorDao, this);
@@ -207,17 +213,25 @@ public final class FancyGens extends JavaPlugin {
             }
         }.runTaskTimer(this, 10L, 20L);
 
-        scoreBoardHandler = new ScoreBoardHandler(generatorPlayerDao, econ);
         new BukkitRunnable() {
             public void run() {
                 PersistanceHelper.cleanupMineGains();
-
             }
         }.runTaskTimer(this, 10L, 20L);
+
+
+        new BukkitRunnable() {
+            public void run() {
+                PersistanceHelper.updateOneGeneratorFromQueue(upgradeGeneratorListener);
+            }
+        }.runTaskTimer(this, 10L, 1);
+
 
         for(MineConfig mine : GensConfig.mines){
             mine.start(this);
         }
+
+
     }
 
 

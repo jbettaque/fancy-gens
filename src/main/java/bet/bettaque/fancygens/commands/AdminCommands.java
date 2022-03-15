@@ -3,18 +3,26 @@ package bet.bettaque.fancygens.commands;
 import bet.bettaque.fancygens.FancyResource;
 import bet.bettaque.fancygens.db.GeneratorPlayer;
 import bet.bettaque.fancygens.db.PlacedAutosellChest;
+import bet.bettaque.fancygens.db.PlacedGenerator;
 import bet.bettaque.fancygens.helpers.TextHelper;
 import bet.bettaque.fancygens.services.FancyEconomy;
 import com.j256.ormlite.dao.Dao;
+import com.jeff_media.customblockdata.CustomBlockData;
 import io.th0rgal.oraxen.items.OraxenItems;
+import me.angeschossen.lands.api.flags.Flags;
+import me.angeschossen.lands.api.integration.LandsIntegration;
+import me.angeschossen.lands.api.land.Area;
 import me.clip.placeholderapi.PlaceholderAPI;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.block.Block;
 import org.bukkit.command.CommandSender;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.Plugin;
 import redempt.redlib.commandmanager.CommandHook;
@@ -28,11 +36,15 @@ public class AdminCommands {
     Plugin plugin;
     Dao<GeneratorPlayer, String> generatorPlayerDao;
     FancyEconomy economy;
+    Dao<PlacedGenerator, Integer> placedGeneratorDao;
+    LandsIntegration landsIntegration;
 
-    public AdminCommands(Plugin plugin, Dao<GeneratorPlayer, String> generatorPlayerDao, FancyEconomy economy) {
+    public AdminCommands(Plugin plugin, Dao<GeneratorPlayer, String> generatorPlayerDao, FancyEconomy economy, Dao<PlacedGenerator, Integer> placedGeneratorDao, LandsIntegration landsIntegration) {
         this.plugin = plugin;
         this.generatorPlayerDao = generatorPlayerDao;
         this.economy = economy;
+        this.placedGeneratorDao = placedGeneratorDao;
+        this.landsIntegration = landsIntegration;
     }
 
     @CommandHook("givesellwand")
@@ -82,5 +94,32 @@ public class AdminCommands {
         ItemUtils.addEnchant(chestItem, Enchantment.DURABILITY, 1);
         ItemUtils.addItemFlags(chestItem, ItemFlag.HIDE_ENCHANTS);
         ItemUtils.give(player, chestItem);
+    }
+
+
+    @CommandHook("fixgens")
+    public void fixGens(CommandSender sender){
+        try {
+            for (PlacedGenerator gen : placedGeneratorDao.queryForAll()) {
+
+                NamespacedKey key = new NamespacedKey(plugin, "generator");
+                Block block = gen.getLocation().getBlock();
+                PersistentDataContainer blockContainer = new CustomBlockData(block, plugin);
+                blockContainer.set(key, PersistentDataType.INTEGER, gen.getId());
+                block.setType(gen.getMaterial());
+
+                Player player = Bukkit.getPlayer(gen.getOwner());
+                if (player == null) return;
+                Area area = landsIntegration.getArea(gen.getLocation());
+                if (area != null || !area.hasFlag(player.getUniqueId(), Flags.BLOCK_BREAK)) {
+                    placedGeneratorDao.delete(gen);
+                    GeneratorPlayer genPlayer = generatorPlayerDao.queryForId(gen.getOwner().toString());
+                    genPlayer.decrementUsedGens();
+                    generatorPlayerDao.update(genPlayer);
+                }
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 }

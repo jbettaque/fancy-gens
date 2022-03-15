@@ -11,6 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import redempt.redlib.inventorygui.InventoryGUI;
 import redempt.redlib.inventorygui.ItemButton;
 import redempt.redlib.itemutils.ItemBuilder;
+import redempt.redlib.itemutils.ItemUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -71,20 +72,29 @@ public class FancyGui {
         return size;
     }
 
+    public void fillSlots(int start, int end){
+        ItemStack fillIcon = OraxenItems.getItemById("filler").setDisplayName(ChatColor.RESET.toString()).build();
+        gui.fill(start, end, fillIcon);
+    }
+
     public boolean hasMenuBar(){
         return previous != null;
     }
 
     public void populateMenuBar(){
-        ItemStack exitIcon = OraxenItems.getItemById("exit_icon").build();
+        ItemStack exitIcon = OraxenItems.getItemById("back").build();
+        ItemUtils.setName(exitIcon, exitIcon.getItemMeta().getDisplayName() + " to main menu");
         ItemButton exitButton = ItemButton.create(new ItemBuilder(exitIcon)
                 , e -> {
                     previous.populate();
                 });
         gui.addButton(exitButton, size - 5);
+        fillSlots(size - 4, size);
+        fillSlots(size - 9, size - 5);
 
         if (page > 0){
-            ItemStack prevPageIcon = OraxenItems.getItemById("arrow_previous_icon").build();
+            gui.clearSlot(size - 7);
+            ItemStack prevPageIcon = OraxenItems.getItemById("arrow_left").build();
             ItemButton prevPageButton = ItemButton.create(new ItemBuilder(prevPageIcon)
                     , e -> {
                         page -= 1;
@@ -93,10 +103,10 @@ public class FancyGui {
             gui.addButton(prevPageButton, size - 7);
         }
 
-        System.out.println(contents.size());
-        System.out.println((page * 45) + 45);
+
         if (contents.size() > (page * 45) + 45){
-            ItemStack nextPageIcon = OraxenItems.getItemById("arrow_next_icon").build();
+            gui.clearSlot(size - 3);
+            ItemStack nextPageIcon = OraxenItems.getItemById("arrow_right").build();
             ItemButton nextPageButton = ItemButton.create(new ItemBuilder(nextPageIcon)
                     , e -> {
                         page += 1;
@@ -104,7 +114,7 @@ public class FancyGui {
                     });
             gui.addButton(nextPageButton, size - 3);
         } else {
-            gui.clearSlot(size - 3);
+            fillSlots(size - 3, size - 3);
         }
 
 
@@ -131,25 +141,56 @@ public class FancyGui {
     }
 
     public void populate(){
-        size = contents.size() + 9 - (contents.size() % 9);
+        size = contents.size() - (contents.size() % 9);
         if (this.hasMenuBar()) size += 9;
         if (size > 54) size = 54;
-        this.gui = new InventoryGUI(Bukkit.createInventory(null, size, title));
+
 
         int c = 0;
-        if (center){
-            c = (getActualSize() - contents.size()) / 2;
+        boolean singleRowTransformed = false;
+        if (size == 9 || (this.hasMenuBar() && size == 18)){
+            size = 45;
+            singleRowTransformed = true;
+
+            c = 12;
         }
+
+        this.gui = new InventoryGUI(Bukkit.createInventory(null, size, title));
+
+//        if (center){
+//            c = (getActualSize() - contents.size()) / 2;
+//        }
         int pageOffset = page * 45;
         int endOffset = 45 + pageOffset;
         if (endOffset > contents.size()) endOffset = contents.size();
         for (ItemStack item: contents.subList(pageOffset, endOffset)) {
             if (c >= 45) break;
+            if (contents.size() == 1){
+                c = 22;
+            }
             ItemButton itemButton = ItemButton.create(new ItemBuilder(item)
                     .addLore(getLore(item))
                     , getListener(item));
             gui.addButton(itemButton, c);
             c++;
+            if (singleRowTransformed){
+                if (c == 15) c = 21;
+                if (c == 24) c = 30;
+//                if (c == 33) c = 42;
+            }
+//            if (c +1 % 9 != c +1) c = c + 6;
+        }
+
+        if (singleRowTransformed){
+            if (contents.size() == 1){
+                fillSlots(0, 22);
+                fillSlots(23, 45);
+            } else {
+                fillSlots(0, 12);
+                fillSlots(15, 21);
+                fillSlots(24, 30);
+                fillSlots(33, 45);
+            }
         }
 
 

@@ -4,6 +4,9 @@ import bet.bettaque.fancygens.db.GeneratorPlayer;
 import bet.bettaque.fancygens.db.PlacedGenerator;
 import com.j256.ormlite.dao.Dao;
 import com.jeff_media.customblockdata.CustomBlockData;
+import me.angeschossen.lands.api.flags.Flags;
+import me.angeschossen.lands.api.integration.LandsIntegration;
+import me.angeschossen.lands.api.land.Area;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Particle;
@@ -31,11 +34,13 @@ public class PlaceGeneratorListener implements Listener {
     Plugin plugin;
     Dao<GeneratorPlayer, String> generatorPlayerDao;
     Dao<PlacedGenerator, Integer> placedGeneratorDao;
+    LandsIntegration landsIntegration;
 
-    public PlaceGeneratorListener(Plugin plugin, Dao<GeneratorPlayer, String> generatorPlayerDao, Dao<PlacedGenerator, Integer> placedGeneratorDao) {
+    public PlaceGeneratorListener(Plugin plugin, Dao<GeneratorPlayer, String> generatorPlayerDao, Dao<PlacedGenerator, Integer> placedGeneratorDao, LandsIntegration landsIntegration) {
         this.plugin = plugin;
         this.generatorPlayerDao = generatorPlayerDao;
         this.placedGeneratorDao = placedGeneratorDao;
+        this.landsIntegration = landsIntegration;
     }
 
     @EventHandler
@@ -50,26 +55,32 @@ public class PlaceGeneratorListener implements Listener {
 
         if (tagContainer.has(key, PersistentDataType.INTEGER)){
             try {
-                GeneratorPlayer generatorPlayer = generatorPlayerDao.queryForId(player.getUniqueId().toString());
-                if (generatorPlayer.getUsedGens() < generatorPlayer.getMaxGens()){
-                    generatorPlayer.incrementUsedGens();
-                    generatorPlayerDao.update(generatorPlayer);
+                Area area = landsIntegration.getArea(event.getBlockPlaced().getLocation());
+                if (area != null) {
+                    if (area.hasFlag(player.getUniqueId(), Flags.BLOCK_BREAK)) {
+                        GeneratorPlayer generatorPlayer = generatorPlayerDao.queryForId(player.getUniqueId().toString());
+                        if (generatorPlayer.getUsedGens() < generatorPlayer.getMaxGens()){
+                            generatorPlayer.incrementUsedGens();
+                            generatorPlayerDao.update(generatorPlayer);
 //                    player.sendMessage(Messages.msg("genPlaced"));
 
-                    PlacedGenerator placedGenerator = new PlacedGenerator(block.getLocation(), tagContainer.get(key, PersistentDataType.INTEGER), player.getUniqueId());
-                    placedGeneratorDao.create(placedGenerator);
+                            PlacedGenerator placedGenerator = new PlacedGenerator(block.getLocation(), tagContainer.get(key, PersistentDataType.INTEGER), player.getUniqueId());
+                            placedGeneratorDao.create(placedGenerator);
 
-                    PersistentDataContainer blockContainer = new CustomBlockData(block, plugin);
-                    blockContainer.set(key, PersistentDataType.INTEGER, placedGenerator.getId());
+                            PersistentDataContainer blockContainer = new CustomBlockData(block, plugin);
+                            blockContainer.set(key, PersistentDataType.INTEGER, placedGenerator.getId());
 
-                    player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 2);
-                    player.spawnParticle(Particle.VILLAGER_HAPPY, block.getLocation(), 20, 0.5, 0.5, 0.5, 0.4);
+                            player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 2);
+                            player.spawnParticle(Particle.VILLAGER_HAPPY, block.getLocation(), 20, 0.5, 0.5, 0.5, 0.4);
 
 
-                } else {
-                    player.sendMessage(Messages.msg("tooManyGens") + " " + Messages.msg("usedSlots") + generatorPlayer.getUsedGens() + " / " + generatorPlayer.getMaxGens());
-                    event.setCancelled(true);
+                        } else {
+                            player.sendMessage(Messages.msg("tooManyGens") + " " + Messages.msg("usedSlots") + generatorPlayer.getUsedGens() + " / " + generatorPlayer.getMaxGens());
+                            event.setCancelled(true);
+                        }
+                    }
                 }
+
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }

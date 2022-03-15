@@ -39,6 +39,13 @@ public class MainMenuListener implements Listener {
         if (inventoryCount <= 0){
             player.getInventory().setItem(8, mainMenuItem);
 //            ItemUtils.give(player, mainMenuItem, 1);
+        } else {
+            ItemStack slot8Item = player.getInventory().getItem(8);
+            if (slot8Item != mainMenuItem){
+                ItemUtils.remove(player.getInventory(), mainMenuItem, inventoryCount);
+                player.getInventory().setItem(8, mainMenuItem);
+                ItemUtils.give(player, slot8Item);
+            }
         }
     }
 

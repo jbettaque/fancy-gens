@@ -75,7 +75,7 @@ public class ScoreBoardListener implements Listener {
         scoreHelper.setSlot(5, ChatColor.AQUA + scoreIcon + " "  + TextHelper.formatScore(generatorPlayer.getScore()));
 
         String coinsIcon = PlaceholderAPI.setPlaceholders(player, "%oraxen_coins_scoreb%");
-        scoreHelper.setSlot(4, ChatColor.YELLOW + coinsIcon + " " + TextHelper.withSuffix((long) econ.getBalance(player)));
+        scoreHelper.setSlot(4, ChatColor.YELLOW + coinsIcon + " " + TextHelper.withSuffix(econ.getBalance(player)));
 
         String gemsIcon = PlaceholderAPI.setPlaceholders(player, "%oraxen_gems%");
         scoreHelper.setSlot(3, ChatColor.GREEN + gemsIcon + " "+ (int) generatorPlayer.getGems());

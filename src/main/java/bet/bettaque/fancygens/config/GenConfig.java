@@ -10,12 +10,17 @@ public class GenConfig {
     public Material block = Material.STONE;
     public Material product = Material.STONE;
 
+    public double rescale(double value, double inMin, double inMax, double outMin, double outMax){
+        return outMin + (value - inMin) * ((outMax - outMin) / (inMax - inMin));
+    }
+
     public double getCost() {
-        return Math.pow(2, id + 1) * 100;
+        if (id > 79) return Math.pow(2.5, id) * 150 * (1 + id);
+        return Math.pow(2, id) * 150 * (1 + id);
     }
 
     public double getProductPrice(){
-        return getCost() / 300;
+        return getCost() / (150 + id * 2);
     }
 
     public GenConfig() {

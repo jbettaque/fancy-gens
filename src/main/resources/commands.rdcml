@@ -1,5 +1,6 @@
 admin {
     help Administrate FancyGens
+    permission fancygens.admin
     givegens generator:generator player:player int:amount {
         hook givegens
         help Give <players> specified generator
@@ -36,6 +37,10 @@ admin {
         help Adds a new type of generator
     }
 
+    fixgens {
+        hook fixgens
+    }
+
 
 
     mines {
@@ -61,6 +66,12 @@ admin {
     }
 
 
+}
+
+leaderboard {
+    help Openes the leaderboad
+    hook leaderboard
+    user player
 }
 
 mines {

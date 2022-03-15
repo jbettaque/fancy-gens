@@ -1,9 +1,12 @@
 package bet.bettaque.fancygens.listeners;
 
+import bet.bettaque.fancygens.FancyResource;
 import bet.bettaque.fancygens.db.GeneratorPlayer;
 import bet.bettaque.fancygens.db.ItemHelper;
 import bet.bettaque.fancygens.db.PlacedGenerator;
+import bet.bettaque.fancygens.helpers.PersistanceHelper;
 import bet.bettaque.fancygens.helpers.TextHelper;
+import bet.bettaque.fancygens.services.FancyEconomy;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.stmt.query.In;
@@ -35,18 +38,20 @@ public class UpgradeWandListener implements Listener {
     Plugin plugin;
     Dao<PlacedGenerator, Integer> placedGeneratorDao;
     UpgradeGeneratorListener upgradeGeneratorListener;
+    FancyEconomy economy;
 
-    public UpgradeWandListener(Plugin plugin, Dao<PlacedGenerator, Integer> placedGeneratorDao, UpgradeGeneratorListener upgradeGeneratorListener) {
+    public UpgradeWandListener(Plugin plugin, Dao<PlacedGenerator, Integer> placedGeneratorDao, UpgradeGeneratorListener upgradeGeneratorListener, FancyEconomy economy) {
         this.plugin = plugin;
         this.placedGeneratorDao = placedGeneratorDao;
         this.upgradeGeneratorListener = upgradeGeneratorListener;
+        this.economy = economy;
     }
 
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event){
         Player player = event.getPlayer();
         ItemStack sellwand = player.getInventory().getItemInMainHand();
-        if(sellwand.getType() == Material.DIAMOND_SHOVEL && (event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)){
+        if(sellwand.getType() == Material.DIAMOND_SHOVEL && (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)){
             ItemMeta itemMeta = sellwand.getItemMeta();
             NamespacedKey key = new NamespacedKey(plugin, "upgradewand");
             PersistentDataContainer container = itemMeta.getPersistentDataContainer();
@@ -62,26 +67,26 @@ public class UpgradeWandListener implements Listener {
                         double total = 0;
                         int fixedId = 0;
                         for (PlacedGenerator pg: ownedGens) {
-                            double cost = upgradeGeneratorListener.updateGenerator(pg);
-                            if(player.isSneaking()){
-                                if (fixedId == 0){
-                                    fixedId = pg.getGeneratorId();
-                                } else {
-                                    if(fixedId != pg.getGeneratorId()){
-                                        break;
+                            double cost = pg.getGenerator().getCost();
+                            if (total + cost <= economy.getBalance(player, FancyResource.COINS)){
+
+
+                                if(player.isSneaking()){
+                                    if (fixedId == 0){
+                                        fixedId = pg.getGeneratorId();
+                                    } else {
+                                        if(fixedId != pg.getGeneratorId()){
+                                            continue;
+                                        }
                                     }
                                 }
-                            }
-                            if (cost == 0){
-                                break;
-                            } else {
-                                count++;
-                                total += cost;
-                                ItemHelper.damageAndCheckRemove(sellwand, 1, player);
+                                if (PersistanceHelper.updateGenerator(pg)){
+                                    count++;
+                                    total += cost;
+                                }
                             }
                         }
-
-                        player.sendMessage(ChatColor.GREEN + "Upgraded " + ChatColor.YELLOW + count + ChatColor.GREEN + " generators for a price of " + TextHelper.formatCurrency(total, player));
+                        player.sendMessage(ChatColor.GREEN + "Upgraded " + ChatColor.YELLOW + count + ChatColor.GREEN + " generators to for a price of " + TextHelper.formatCurrency(total, player));
                     } catch (SQLException throwables) {
                         throwables.printStackTrace();
                     }

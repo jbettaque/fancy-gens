@@ -39,6 +39,7 @@ public class UpgradeGeneratorListener implements Listener {
         Action action = event.getAction();
 
         if (action == Action.RIGHT_CLICK_BLOCK && player.isSneaking() && event.getHand() == EquipmentSlot.HAND){
+            if (event.getItem() != null) return;
             Block block = event.getClickedBlock();
             PersistentDataContainer container = new CustomBlockData(block, plugin);
             NamespacedKey key = new NamespacedKey(plugin, "generator");

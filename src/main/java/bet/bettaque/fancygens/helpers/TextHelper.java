@@ -12,7 +12,7 @@ import java.text.DecimalFormat;
 
 public class TextHelper {
     public static String formatScore(double score){
-        return withSuffix((long) score);
+        return withSuffix(score);
     }
 
     public static String formatMultiplier(double multiplier, boolean icon, Player player){
@@ -29,12 +29,12 @@ public class TextHelper {
 
     public static String formatCurrency(double number, Player player){
         String coinsIcon = PlaceholderAPI.setPlaceholders(player, "%oraxen_coins%");
-        return ChatColor.YELLOW + withSuffix((long) number) + " " + coinsIcon;
+        return ChatColor.YELLOW + withSuffix(number) + " " + coinsIcon;
     }
 
     public static String formatPoints(double number, Player player){
         String pointsIcon = PlaceholderAPI.setPlaceholders(player, "%oraxen_points%");
-        return ChatColor.AQUA + withSuffix((long) number) + " " + pointsIcon;
+        return ChatColor.AQUA + withSuffix(number) + " " + pointsIcon;
     }
 
     public static String formatPrestige(double number, Player player){
@@ -52,13 +52,35 @@ public class TextHelper {
         return ChatColor.GREEN.toString() + Math.round(number) + " " + gemsIcon;
     }
 
-    public static String withSuffix(long count) {
-        if (count < 1000) return "" + count;
-        int exp = (int) (Math.log(count) / Math.log(1000));
+    private static final String[] Q = new String[]{
+            "", "K", "m", "M", "b", "B", "t", "T" ,"q", "Q", "qq", "Qq", "s", "S", "ss", "Ss", "o", "O", "n", "N", "d",
+            "D", "u", "U", "dd", "Dd", "tt", "Tt", "qq", "Qq", "QQ", "qqq", "SS", "sss", "Sss", "SSs", "oo", "Oo", "nn",
+            "Nn", "v", "V", "Qqq", "QQq", "QQQ", "QQQq"
+    };
 
-        return String.format("%.1f %c",
-                count / Math.pow(1000, exp),
-                "KMBtqQsS".charAt(exp-1));
+    public static String getAsString(double bytes)
+    {
+        for (int i = 22; i > 0; i--)
+        {
+            double step = Math.pow(1000, i);
+            if (bytes > step) return String.format("%3.1f %s", bytes / step, Q[i]);
+        }
+        DecimalFormat df = new DecimalFormat("#.##");
+        df.setRoundingMode(RoundingMode.HALF_UP);
+        return df.format(bytes);
+    }
+
+
+
+    public static String withSuffix(double count) {
+//        if (count < 1000) return "" + count;
+//        int exp = (int) (Math.log(count) / Math.log(1000));
+//
+//        return String.format("%.1f %c",
+//                count / Math.pow(1000, exp),
+//                "KMBtqQsS".charAt(exp-1));
+
+        return TextHelper.getAsString(count);
     }
 
     public static String parseFancyString(String string){

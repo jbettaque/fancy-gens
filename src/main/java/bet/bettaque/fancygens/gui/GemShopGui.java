@@ -48,8 +48,8 @@ public class GemShopGui extends FancyGui {
         this.setCallback(autosellChest, e -> {
             shopCommands.buyAutosellChest(player, 1, 2000);
         });
-        this.setLore(autosellChest, Arrays.asList(TextHelper.parseFancyString("&gray&Price: " + TextHelper.formatGems(2000, player))));
-        this.setLore(autosellChest, Arrays.asList(TextHelper.parseFancyString("&gray&Multiplier: " + TextHelper.formatMultiplier(1, true, player))));
+        this.setLore(autosellChest, Arrays.asList(TextHelper.parseFancyString("&gray&Price: " + TextHelper.formatGems(2000, player)),
+                TextHelper.parseFancyString("&gray&Multiplier: " + TextHelper.formatMultiplier(1, true, player))));
 
 
         for (int i = 0; i < 7; i++) {

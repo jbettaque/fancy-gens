@@ -18,6 +18,8 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import redempt.redlib.commandmanager.CommandHook;
 import redempt.redlib.config.ConfigManager;
@@ -175,7 +177,9 @@ public class MineCommands {
             GeneratorPlayer generatorPlayer = generatorPlayerDao.queryForId(player.getUniqueId().toString());
             if (generatorPlayer.getPrestige() >= mine.getPrestigeRequirement()) {
                 player.teleport(mine.getTpLocation());
-                player.spigot().sendMessage(TextHelper.parseFancyComponents("&aYou have been send to: " + mineName));
+                player.spigot().sendMessage(TextHelper.parseFancyComponents("&aYou have been sent to: " + mineName));
+//                player.addPotionEffect(PotionEffectType.FAST_DIGGING.createEffect(10000, 5));
+//                player.addPotionEffect(PotionEffectType.NIGHT_VISION.createEffect(10000, 1));
             } else {
                 player.spigot().sendMessage(TextHelper.parseFancyComponents("&cYou need to gain more prestige in order to access: " + mineName));
             }

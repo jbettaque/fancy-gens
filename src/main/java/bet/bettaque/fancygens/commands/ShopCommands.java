@@ -225,7 +225,7 @@ public class ShopCommands {
     public void buyMiningPickaxe(Player player, int gems){
         try {
             GeneratorPlayer generatorPlayer = generatorPlayerDao.queryForId(player.getUniqueId().toString());
-            if (generatorPlayer.getScore() > gems){
+            if (generatorPlayer.getGems() > gems){
                 generatorPlayer.withdrawGems(gems);
                 generatorPlayerDao.update(generatorPlayer);
                 ItemStack pickaxe = OraxenItems.getItemById("obsidian_pickaxe").build();

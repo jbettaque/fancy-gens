@@ -34,7 +34,11 @@ public class SlotShopGui extends FancyGui {
 
             ItemStack slotsIcon = OraxenItems.getItemById("slots_icon").build();
             ItemUtils.setName(slotsIcon, TextHelper.parseFancyString("&#AB47BC-#42A5F5&Buy 10 generator slots"));
-            this.contents.add(slotsIcon);
+            if (this.contents.size() > 0){
+                this.contents.set(0, slotsIcon);
+            } else {
+                this.contents.add(0,slotsIcon);
+            }
             this.setLore(slotsIcon, Arrays.asList(TextHelper.parseFancyString("&gray&Price: " + TextHelper.formatCurrency(shopCommands.calculateSlotPrice(generatorPlayer), player))));
             this.setCallback(slotsIcon, e -> {
                 shopCommands.buySlots(generatorPlayer, player);

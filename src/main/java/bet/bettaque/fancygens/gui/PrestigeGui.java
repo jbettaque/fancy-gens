@@ -34,7 +34,11 @@ public class PrestigeGui extends FancyGui {
 
             ItemStack slotsIcon = OraxenItems.getItemById("prestige_icon").build();
             ItemUtils.setName(slotsIcon, TextHelper.parseFancyString("&#AB47BC-#42A5F5&Reset your points & gain prestige!"));
-            this.contents.add(slotsIcon);
+            if (this.contents.size() > 0){
+                this.contents.set(0, slotsIcon);
+            } else {
+                this.contents.add(0,slotsIcon);
+            }
             this.setLore(slotsIcon, Arrays.asList(
                     TextHelper.parseFancyString("&gray&Price: " + TextHelper.formatCurrency(uiCommands.calculatePrestigePrice(generatorPlayer), player)),
                     TextHelper.parseFancyString("&gray&Points Required: " + TextHelper.formatPoints(uiCommands.calculatePrestigeRequirement(generatorPlayer), player))

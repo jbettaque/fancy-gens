@@ -4,10 +4,11 @@ import bet.bettaque.fancygens.db.GeneratorPlayer;
 import bet.bettaque.fancygens.db.PlacedGenerator;
 import com.j256.ormlite.dao.Dao;
 import com.jeff_media.customblockdata.CustomBlockData;
-import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
-import org.bukkit.Particle;
-import org.bukkit.Sound;
+import me.angeschossen.lands.api.flags.Flags;
+import me.angeschossen.lands.api.flags.types.LandFlag;
+import me.angeschossen.lands.api.integration.LandsIntegration;
+import me.angeschossen.lands.api.land.Area;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.TileState;
@@ -31,46 +32,58 @@ public class BreakGeneratorListener implements Listener {
     Plugin plugin;
     Dao<PlacedGenerator, Integer> placedGeneratorDao;
     Dao<GeneratorPlayer, String> generatorPlayerDao;
+    LandsIntegration landsIntegration;
 
-    public BreakGeneratorListener(Plugin plugin, Dao<PlacedGenerator, Integer> placedGeneratorDao, Dao<GeneratorPlayer, String> generatorPlayerDao) {
+    public BreakGeneratorListener(Plugin plugin, Dao<PlacedGenerator, Integer> placedGeneratorDao, Dao<GeneratorPlayer, String> generatorPlayerDao, LandsIntegration landsIntegration) {
         this.plugin = plugin;
         this.placedGeneratorDao = placedGeneratorDao;
         this.generatorPlayerDao = generatorPlayerDao;
+        this.landsIntegration = landsIntegration;
     }
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event){
+
+        Location location = event.getBlock().getLocation();
         Player player = event.getPlayer();
         Block block = event.getBlock();
+
+
+
         PersistentDataContainer container = new CustomBlockData(block, plugin);
         NamespacedKey key = new NamespacedKey(plugin, "generator");
         if (container.has(key, PersistentDataType.INTEGER)){
             Integer genId = container.get(key, PersistentDataType.INTEGER);
-            System.out.println(genId);
             try {
-                PlacedGenerator brokenGen =  this.placedGeneratorDao.queryForId(genId);
-                if (brokenGen != null){
-                    placedGeneratorDao.delete(brokenGen);
-                    GeneratorPlayer genPlayer = generatorPlayerDao.queryForId(brokenGen.getOwner().toString());
-                    genPlayer.decrementUsedGens();
-                    generatorPlayerDao.update(genPlayer);
+                Area area = landsIntegration.getArea(location);
+                if (area != null){
+                    if(area.hasFlag(player.getUniqueId(), Flags.BLOCK_BREAK)){
+                        PlacedGenerator brokenGen =  this.placedGeneratorDao.queryForId(genId);
+                        if (brokenGen != null){
+                            placedGeneratorDao.delete(brokenGen);
+                            GeneratorPlayer genPlayer = generatorPlayerDao.queryForId(brokenGen.getOwner().toString());
+                            genPlayer.decrementUsedGens();
+                            generatorPlayerDao.update(genPlayer);
 
-                    event.setCancelled(true);
+                            event.setCancelled(true);
 
-                    block.setType(Material.AIR);
+                            block.setType(Material.AIR);
 
-                    ItemStack gen = new ItemBuilder(brokenGen.getGenerator().block)
-                            .setName(brokenGen.getGenerator().name)
-                            .setLore("Tier " + brokenGen.getGenerator().id)
-                            .addPersistentTag(key, PersistentDataType.INTEGER, brokenGen.getGenerator().id);
-                    ItemUtils.addEnchant(gen, Enchantment.DURABILITY, 1);
-                    ItemUtils.addItemFlags(gen, ItemFlag.HIDE_ENCHANTS);
-                    ItemUtils.give(player, gen);
+                            ItemStack gen = new ItemBuilder(brokenGen.getGenerator().block)
+                                    .setName(brokenGen.getGenerator().name)
+                                    .setLore("Tier " + brokenGen.getGenerator().id)
+                                    .addPersistentTag(key, PersistentDataType.INTEGER, brokenGen.getGenerator().id);
+                            ItemUtils.addEnchant(gen, Enchantment.DURABILITY, 1);
+                            ItemUtils.addItemFlags(gen, ItemFlag.HIDE_ENCHANTS);
+                            ItemUtils.give(player, gen);
 
-                    player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 3);
-                    player.spawnParticle(Particle.EXPLOSION_NORMAL, block.getLocation(), 7, 0, 0, 0, 0.25);
+                            player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 3);
+                            player.spawnParticle(Particle.EXPLOSION_NORMAL, block.getLocation(), 7, 0, 0, 0, 0.25);
+                        }
+                        container.remove(key);
+                    }
                 }
-                container.remove(key);
+
 
 //                player.sendMessage(Messages.msg("brokeGen"));
             } catch (SQLException throwables) {

@@ -11,6 +11,9 @@ import io.lumine.xikage.mythicmobs.api.bukkit.events.MythicMobDeathEvent;
 import io.lumine.xikage.mythicmobs.api.bukkit.events.MythicMobDespawnEvent;
 import io.lumine.xikage.mythicmobs.api.exceptions.InvalidMobTypeException;
 import io.th0rgal.oraxen.items.OraxenItems;
+import me.angeschossen.lands.api.flags.Flags;
+import me.angeschossen.lands.api.integration.LandsIntegration;
+import me.angeschossen.lands.api.land.Area;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
@@ -29,10 +32,12 @@ import java.util.Random;
 public class ScrollListener implements Listener {
     Plugin plugin;
     FancyEconomy economy;
+    LandsIntegration landsIntegration;
 
-    public ScrollListener(Plugin plugin, FancyEconomy economy) {
+    public ScrollListener(Plugin plugin, FancyEconomy economy, LandsIntegration landsIntegration) {
         this.plugin = plugin;
         this.economy = economy;
+        this.landsIntegration = landsIntegration;
     }
 
     @EventHandler
@@ -43,16 +48,20 @@ public class ScrollListener implements Listener {
         if (oraxenId != null && oraxenId.startsWith("summoning_scroll")){
             String tierString = oraxenId.substring(17);
             GoblinTier tier = GoblinTier.get(tierString);
-
-            BukkitAPIHelper mythicAPIHelper = MythicMobs.inst().getAPIHelper();
-            try {
-                Entity goblin = mythicAPIHelper.spawnMythicMob("event_goblin", event.getClickedBlock().getLocation());
-                goblin.setCustomName(TextHelper.parseFancyString("&#F44336-#E91E63&**Common Treasure Goblin** "));
-                goblin.setCustomNameVisible(true);
-                goblin.setMetadata("goblins", new FixedMetadataValue(plugin, tier));
-                ItemUtils.remove(event.getPlayer().getInventory(), usedItem, 1);
-            } catch (InvalidMobTypeException e) {
-                e.printStackTrace();
+            Area area = landsIntegration.getArea(event.getClickedBlock().getLocation());
+            if (area != null) {
+                if (area.hasFlag(event.getPlayer().getUniqueId(), Flags.BLOCK_BREAK)) {
+                    BukkitAPIHelper mythicAPIHelper = MythicMobs.inst().getAPIHelper();
+                    try {
+                        Entity goblin = mythicAPIHelper.spawnMythicMob("event_goblin", event.getClickedBlock().getLocation().add(0, 1, 0));
+                        goblin.setCustomName(TextHelper.parseFancyString("&#F44336-#E91E63&**Common Treasure Goblin** "));
+                        goblin.setCustomNameVisible(true);
+                        goblin.setMetadata("goblins", new FixedMetadataValue(plugin, tier));
+                        ItemUtils.remove(event.getPlayer().getInventory(), usedItem, 1);
+                    } catch (InvalidMobTypeException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         }
     }

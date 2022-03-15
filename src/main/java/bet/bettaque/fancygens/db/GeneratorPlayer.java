@@ -5,6 +5,7 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 @DatabaseTable(tableName = "players")
 public class GeneratorPlayer {
@@ -52,6 +53,10 @@ public class GeneratorPlayer {
 
     public String getUuid() {
         return uuid;
+    }
+
+    public UUID getUUID(){
+        return UUID.fromString(uuid);
     }
 
     public void incrementUsedGens(){
