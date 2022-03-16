@@ -222,7 +222,10 @@ public final class FancyGens extends JavaPlugin {
 
         new BukkitRunnable() {
             public void run() {
-                PersistanceHelper.updateOneGeneratorFromQueue(upgradeGeneratorListener);
+                for(Player player: Bukkit.getOnlinePlayers()){
+                    PersistanceHelper.updateOneGeneratorFromQueue(upgradeGeneratorListener, player.getUniqueId());
+                }
+
             }
         }.runTaskTimer(this, 10L, 1);
 

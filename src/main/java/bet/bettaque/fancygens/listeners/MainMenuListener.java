@@ -36,6 +36,8 @@ public class MainMenuListener implements Listener {
         ItemUtils.addPersistentTag(mainMenuItem, key, PersistentDataType.INTEGER, 1);
 
         int inventoryCount = ItemUtils.count(player.getInventory(), mainMenuItem);
+        if (inventoryCount == 1) return;
+
         if (inventoryCount <= 0){
             player.getInventory().setItem(8, mainMenuItem);
 //            ItemUtils.give(player, mainMenuItem, 1);
@@ -46,6 +48,10 @@ public class MainMenuListener implements Listener {
                 player.getInventory().setItem(8, mainMenuItem);
                 ItemUtils.give(player, slot8Item);
             }
+
+        }
+        if (inventoryCount > 1){
+            ItemUtils.remove(player.getInventory(), mainMenuItem, inventoryCount);
         }
     }
 

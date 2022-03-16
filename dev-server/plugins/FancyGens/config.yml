@@ -512,19 +512,28 @@ mines:
     type: COAL_ORE
   - ==: org.bukkit.inventory.ItemStack
     v: 2865
-    type: STONE
+    type: COAL_ORE
   - ==: org.bukkit.inventory.ItemStack
     v: 2865
     type: COAL_ORE
   - ==: org.bukkit.inventory.ItemStack
     v: 2865
-    type: STONE
+    type: COAL_ORE
   - ==: org.bukkit.inventory.ItemStack
     v: 2865
     type: COAL_ORE
   - ==: org.bukkit.inventory.ItemStack
     v: 2865
-    type: STONE
+    type: COAL_ORE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: COAL_ORE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: COAL_ORE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: COAL_ORE
   - ==: org.bukkit.inventory.ItemStack
     v: 2865
     type: DIAMOND_ORE
@@ -539,37 +548,28 @@ mines:
     type: STONE
   - ==: org.bukkit.inventory.ItemStack
     v: 2865
-    type: COAL_ORE
+    type: STONE
   - ==: org.bukkit.inventory.ItemStack
     v: 2865
     type: STONE
   - ==: org.bukkit.inventory.ItemStack
     v: 2865
-    type: COAL_ORE
+    type: STONE
   - ==: org.bukkit.inventory.ItemStack
     v: 2865
     type: STONE
   - ==: org.bukkit.inventory.ItemStack
     v: 2865
-    type: COAL_ORE
+    type: STONE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: STONE
   - ==: org.bukkit.inventory.ItemStack
     v: 2865
     type: STONE
   - ==: org.bukkit.inventory.ItemStack
     v: 2865
     type: GOLD_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: COAL_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: COAL_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: COAL_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: STONE
   name: Coal
   icon:
     ==: org.bukkit.inventory.ItemStack
@@ -603,54 +603,6 @@ mines:
   ores:
   - ==: org.bukkit.inventory.ItemStack
     v: 2865
-    type: STONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: STONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: STONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: LAPIS_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: STONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: STONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: IRON_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: STONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: IRON_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: IRON_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: STONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: IRON_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: IRON_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: COAL_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: GOLD_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: COAL_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
     type: IRON_ORE
   - ==: org.bukkit.inventory.ItemStack
     v: 2865
@@ -658,6 +610,9 @@ mines:
   - ==: org.bukkit.inventory.ItemStack
     v: 2865
     type: COAL_ORE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: IRON_ORE
   - ==: org.bukkit.inventory.ItemStack
     v: 2865
     type: DIAMOND_ORE
@@ -669,10 +624,55 @@ mines:
     type: IRON_ORE
   - ==: org.bukkit.inventory.ItemStack
     v: 2865
+    type: COAL_ORE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
     type: IRON_ORE
   - ==: org.bukkit.inventory.ItemStack
     v: 2865
     type: GOLD_ORE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: COAL_ORE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: STONE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: IRON_ORE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: IRON_ORE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: STONE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: STONE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: IRON_ORE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: STONE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: IRON_ORE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: STONE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: LAPIS_ORE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: GOLD_ORE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: STONE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: STONE
   name: Iron
   icon:
     ==: org.bukkit.inventory.ItemStack
@@ -706,57 +706,6 @@ mines:
   ores:
   - ==: org.bukkit.inventory.ItemStack
     v: 2865
-    type: STONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: STONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: STONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: STONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: COAL_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: COAL_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: REDSTONE_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: REDSTONE_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: REDSTONE_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: REDSTONE_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: REDSTONE_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: REDSTONE_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: REDSTONE_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: DIAMOND_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: IRON_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: IRON_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: GOLD_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
     type: LAPIS_ORE
   - ==: org.bukkit.inventory.ItemStack
     v: 2865
@@ -766,7 +715,58 @@ mines:
     type: GOLD_ORE
   - ==: org.bukkit.inventory.ItemStack
     v: 2865
+    type: STONE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: REDSTONE_ORE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: STONE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: REDSTONE_ORE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: COAL_ORE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: IRON_ORE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: REDSTONE_ORE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: REDSTONE_ORE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: REDSTONE_ORE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: REDSTONE_ORE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
     type: LAPIS_ORE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: REDSTONE_ORE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: STONE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: DIAMOND_ORE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: STONE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: IRON_ORE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: COAL_ORE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: GOLD_ORE
   name: Redstone
   icon:
     ==: org.bukkit.inventory.ItemStack
@@ -800,18 +800,6 @@ mines:
   ores:
   - ==: org.bukkit.inventory.ItemStack
     v: 2865
-    type: GOLD_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: LAPIS_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: COBBLESTONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: COBBLESTONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
     type: COBBLESTONE
   - ==: org.bukkit.inventory.ItemStack
     v: 2865
@@ -827,24 +815,6 @@ mines:
     type: DEEPSLATE
   - ==: org.bukkit.inventory.ItemStack
     v: 2865
-    type: DEEPSLATE_COAL_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: DEEPSLATE_COAL_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: DEEPSLATE_COAL_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: DEEPSLATE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: DEEPSLATE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: DEEPSLATE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
     type: DEEPSLATE
   - ==: org.bukkit.inventory.ItemStack
     v: 2865
@@ -852,30 +822,6 @@ mines:
   - ==: org.bukkit.inventory.ItemStack
     v: 2865
     type: MOSSY_COBBLESTONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: MOSSY_COBBLESTONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: MOSSY_COBBLESTONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: MOSSY_COBBLESTONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: COBBLESTONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: DEEPSLATE_GOLD_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: DEEPSLATE_GOLD_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: DEEPSLATE_COAL_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: DEEPSLATE_COAL_ORE
   - ==: org.bukkit.inventory.ItemStack
     v: 2865
     type: DEEPSLATE
@@ -890,46 +836,76 @@ mines:
     type: DIAMOND_ORE
   - ==: org.bukkit.inventory.ItemStack
     v: 2865
+    type: MOSSY_COBBLESTONE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: COBBLESTONE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: DEEPSLATE_GOLD_ORE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: DEEPSLATE_GOLD_ORE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: COBBLESTONE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: COBBLESTONE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: DEEPSLATE_COAL_ORE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: DEEPSLATE_COAL_ORE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: DEEPSLATE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: DEEPSLATE_COAL_ORE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: DEEPSLATE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: DEEPSLATE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: DEEPSLATE_COAL_ORE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: DEEPSLATE_COAL_ORE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: DEEPSLATE_COAL_ORE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: DEEPSLATE_COAL_ORE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: COBBLESTONE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: COBBLESTONE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: DEEPSLATE_IRON_ORE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: DEEPSLATE_IRON_ORE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
     type: DEEPSLATE_IRON_ORE
   - ==: org.bukkit.inventory.ItemStack
     v: 2865
     type: DEEPSLATE_GOLD_ORE
   - ==: org.bukkit.inventory.ItemStack
     v: 2865
-    type: DEEPSLATE_COAL_ORE
+    type: COBBLESTONE
   - ==: org.bukkit.inventory.ItemStack
     v: 2865
-    type: DEEPSLATE_COAL_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: MOSSY_COBBLESTONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: MOSSY_COBBLESTONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: DEEPSLATE_LAPIS_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: DEEPSLATE_EMERALD_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: DEEPSLATE_IRON_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: DEEPSLATE_IRON_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: DEEPSLATE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: DEEPSLATE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: MOSSY_COBBLESTONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: MOSSY_COBBLESTONE
+    type: COBBLESTONE
   - ==: org.bukkit.inventory.ItemStack
     v: 2865
     type: DEEPSLATE_COPPER_ORE
@@ -938,16 +914,40 @@ mines:
     type: DEEPSLATE_REDSTONE_ORE
   - ==: org.bukkit.inventory.ItemStack
     v: 2865
-    type: COBBLESTONE
+    type: DEEPSLATE_LAPIS_ORE
   - ==: org.bukkit.inventory.ItemStack
     v: 2865
-    type: COBBLESTONE
+    type: DEEPSLATE_EMERALD_ORE
   - ==: org.bukkit.inventory.ItemStack
     v: 2865
-    type: COBBLESTONE
+    type: MOSSY_COBBLESTONE
   - ==: org.bukkit.inventory.ItemStack
     v: 2865
-    type: COBBLESTONE
+    type: MOSSY_COBBLESTONE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: GOLD_ORE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: LAPIS_ORE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: MOSSY_COBBLESTONE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: MOSSY_COBBLESTONE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: DEEPSLATE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: DEEPSLATE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: MOSSY_COBBLESTONE
+  - ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: MOSSY_COBBLESTONE
   name: Mossy
   icon:
     ==: org.bukkit.inventory.ItemStack

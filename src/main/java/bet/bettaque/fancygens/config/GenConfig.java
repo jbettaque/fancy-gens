@@ -20,6 +20,7 @@ public class GenConfig {
     }
 
     public double getProductPrice(){
+        if (id > 79) return getCost() / (150 + id * 3);
         return getCost() / (150 + id * 2);
     }
 

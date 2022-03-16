@@ -18,6 +18,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
+import org.checkerframework.checker.units.qual.A;
 
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -25,6 +26,7 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class PersistanceHelper {
@@ -39,17 +41,30 @@ public class PersistanceHelper {
     private static HashMap<Player, MineGain> mineGains = new HashMap<>();
 
     private static ArrayList<PlacedGenerator> generatorUpgradeQueue = new ArrayList<>();
+    private static HashMap<UUID, ArrayList<PlacedGenerator>> generatorUpgradeQueueMap = new HashMap<>();
 
     public static boolean updateGenerator(PlacedGenerator generator){
-        if (generatorUpgradeQueue.contains(generator)) return false;
-        generatorUpgradeQueue.add(generator);
+        generatorUpgradeQueueMap.computeIfAbsent(generator.getOwner(), k -> new ArrayList<>());
+        if (generatorUpgradeQueueMap.get(generator.getOwner()).contains(generator)) return false;
+        generatorUpgradeQueueMap.get(generator.getOwner()).add(generator);
         return true;
+
+
+//        if (generatorUpgradeQueue.contains(generator)) return false;
+//        generatorUpgradeQueue.add(generator);
+//        return true;
     }
 
-    public static void updateOneGeneratorFromQueue(UpgradeGeneratorListener upgradeGeneratorListener){
-        if (generatorUpgradeQueue.size() > 0){
-            upgradeGeneratorListener.updateGenerator(generatorUpgradeQueue.remove(0));
+    public static void updateOneGeneratorFromQueue(UpgradeGeneratorListener upgradeGeneratorListener, UUID owner){
+        ArrayList<PlacedGenerator> list  = generatorUpgradeQueueMap.get(owner);
+        if (list == null) return;
+        if (generatorUpgradeQueueMap.get(owner).size() > 0){
+            upgradeGeneratorListener.updateGenerator(generatorUpgradeQueueMap.get(owner).remove(0));
         }
+
+//        if (generatorUpgradeQueue.size() > 0){
+//            upgradeGeneratorListener.updateGenerator(generatorUpgradeQueue.remove(0));
+//        }
     }
 
     public static Plugin getPlugin() {
@@ -101,6 +116,7 @@ public class PersistanceHelper {
         if (!mineGainsLocked2){
             mineGainsLocked = true;
             ArrayList<Map.Entry<Player, MineGain>> filtered = (ArrayList<Map.Entry<Player, MineGain>>) mineGains.entrySet().stream().filter(playerMineGainEntry -> playerMineGainEntry.getValue().timestamp.isBefore(Instant.now().minusSeconds(1))).collect(Collectors.toList());
+            ArrayList<Map.Entry<Player, MineGain>> filteredNotToClear = (ArrayList<Map.Entry<Player, MineGain>>) mineGains.entrySet().stream().filter(playerMineGainEntry -> playerMineGainEntry.getValue().timestamp.isAfter(Instant.now().minusSeconds(1))).collect(Collectors.toList());
 
             for (Map.Entry<Player, MineGain> set : filtered) {
                 GeneratorPlayer generatorPlayer = null;
@@ -119,22 +135,24 @@ public class PersistanceHelper {
                         throwables.printStackTrace();
                     }
                     mineGains.remove(set.getKey());
-                } else {
+                }
+            }
 
-                    try {
+            for (Map.Entry<Player, MineGain> set :
+                    filteredNotToClear) {
+                GeneratorPlayer generatorPlayer = null;
+                try {
+                    double reward = set.getValue().gain;
+                    generatorPlayer = generatorPlayerDao.queryForId(set.getKey().getUniqueId().toString());
+                    double pointsMulti = (generatorPlayer.getScore() / 100000) + 1;
+                    reward = reward * pointsMulti;
+                    reward = reward * generatorPlayer.getMultiplier();
 
-                        double reward = set.getValue().gain;
-                        generatorPlayer = generatorPlayerDao.queryForId(set.getKey().getUniqueId().toString());
-                        double pointsMulti = (generatorPlayer.getScore() / 100000) + 1;
-                        reward = reward * pointsMulti;
-                        reward = reward * generatorPlayer.getMultiplier();
+                    String message = ChatColor.YELLOW + " + " + TextHelper.formatCurrency(reward, set.getKey());
+                    set.getKey().spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(message));
 
-                        String message = ChatColor.YELLOW + " + " + TextHelper.formatCurrency(reward, set.getKey());
-                        set.getKey().spigot().sendMessage( ChatMessageType.ACTION_BAR, new TextComponent(message));
-
-                    } catch (SQLException throwables) {
-                        throwables.printStackTrace();
-                    }
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
                 }
             }
             mineGainsLocked = false;

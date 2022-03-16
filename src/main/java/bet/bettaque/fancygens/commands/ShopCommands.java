@@ -150,7 +150,7 @@ public class ShopCommands {
     public void buyUpgradeWand(Player player, double gems){
         try {
             GeneratorPlayer generatorPlayer = generatorPlayerDao.queryForId(player.getUniqueId().toString());
-            if (generatorPlayer.getGems() > gems ){
+            if (generatorPlayer.getGems() >= gems ){
                 generatorPlayer.withdrawGems(gems);
                 generatorPlayerDao.update(generatorPlayer);
                 this.adminCommands.giveUpgradeWandBackend(player);
@@ -164,7 +164,7 @@ public class ShopCommands {
     public void buyAutosellChest(Player player, int multiplier, double gems){
         try {
             GeneratorPlayer generatorPlayer = generatorPlayerDao.queryForId(player.getUniqueId().toString());
-            if (generatorPlayer.getGems() > gems ){
+            if (generatorPlayer.getGems() >= gems ){
                 generatorPlayer.withdrawGems(gems);
                 generatorPlayerDao.update(generatorPlayer);
                 this.adminCommands.giveAutosellChestBackend(player, multiplier);
@@ -225,7 +225,7 @@ public class ShopCommands {
     public void buyMiningPickaxe(Player player, int gems){
         try {
             GeneratorPlayer generatorPlayer = generatorPlayerDao.queryForId(player.getUniqueId().toString());
-            if (generatorPlayer.getGems() > gems){
+            if (generatorPlayer.getGems() >= gems){
                 generatorPlayer.withdrawGems(gems);
                 generatorPlayerDao.update(generatorPlayer);
                 ItemStack pickaxe = OraxenItems.getItemById("obsidian_pickaxe").build();

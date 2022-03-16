@@ -120,6 +120,7 @@ public class UiCommands {
     }
 
     public double calculatePrestigeRequirement(GeneratorPlayer generatorPlayer){
+        if (generatorPlayer.getPrestige() > 29) return Math.pow(18,generatorPlayer.getPrestige()) * 2500000 * ((generatorPlayer.getPrestige() * generatorPlayer.getPrestige()) +1);
         if (generatorPlayer.getPrestige() > 9) return Math.pow(14,generatorPlayer.getPrestige()) * 2500000 * ((generatorPlayer.getPrestige() * generatorPlayer.getPrestige()) +1);
         return Math.pow(14,generatorPlayer.getPrestige()) * 2500000 * ((generatorPlayer.getPrestige()) +1);
     }
