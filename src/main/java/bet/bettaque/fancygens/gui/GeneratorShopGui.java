@@ -26,15 +26,19 @@ public class GeneratorShopGui extends FancyGui{
     @Override
     public void populate() {
         contents = new ArrayList<>();
-        for (Map.Entry<Integer, GenConfig> genConfig: GensConfig.gens.entrySet()) {
-            ItemStack item = new ItemBuilder(genConfig.getValue().block).setName(TextHelper.parseFancyString("&#4DB6AC&" + genConfig.getValue().name)).addLore(TextHelper.parseFancyString("&gray&Tier: &yellow&" + genConfig.getKey()));
+        for (int i = 0; i < 1; i++) {
+            for (Map.Entry<Integer, GenConfig> genConfig: GensConfig.gens.entrySet()) {
+                ItemStack item = new ItemBuilder(genConfig.getValue().block).setName(TextHelper.parseFancyString("&#4DB6AC&" + genConfig.getValue().name)).addLore(TextHelper.parseFancyString("&gray&Tier: &yellow&" + genConfig.getKey()));
 
-            contents.add(item);
-            setCallback(item, e -> {
-                shopCommands.buyGenerator(genConfig.getValue(), player, 1);
-            });
-            setLore(item, Arrays.asList(TextHelper.parseFancyString("&gray&Price: " + TextHelper.formatCurrency(shopCommands.calculateGenPrice(genConfig.getValue()), player))));
+                contents.add(item);
+                int finalI = i;
+                setCallback(item, e -> {
+                    shopCommands.buyGenerator(genConfig.getValue(), player, 1, finalI);
+                });
+                setLore(item, Arrays.asList(TextHelper.parseFancyString("&gray&Price: " + TextHelper.formatCurrency(shopCommands.calculateGenPrice(genConfig.getValue(), 0), player))));
+            }
         }
+
 
 
         super.populate();

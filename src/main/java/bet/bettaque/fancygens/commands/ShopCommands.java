@@ -1,9 +1,11 @@
 package bet.bettaque.fancygens.commands;
 
+import bet.bettaque.fancygens.FancyResource;
 import bet.bettaque.fancygens.config.GenConfig;
 import bet.bettaque.fancygens.config.GensConfig;
 import bet.bettaque.fancygens.db.GeneratorPlayer;
 import bet.bettaque.fancygens.helpers.TextHelper;
+import bet.bettaque.fancygens.services.FancyEconomy;
 import com.j256.ormlite.dao.Dao;
 import de.themoep.minedown.MineDown;
 import io.th0rgal.oraxen.items.OraxenItems;
@@ -37,17 +39,17 @@ import java.util.Map;
 
 public class ShopCommands {
     Plugin plugin;
-    Economy econ;
     GeneratorCommands generatorCommands;
     Dao<GeneratorPlayer, String> generatorPlayerDao;
     AdminCommands adminCommands;
+    FancyEconomy economy;
 
-    public ShopCommands(Plugin plugin, Economy econ, GeneratorCommands generatorCommands, Dao<GeneratorPlayer, String> generatorPlayerDao, AdminCommands adminCommands) {
+    public ShopCommands(Plugin plugin, GeneratorCommands generatorCommands, Dao<GeneratorPlayer, String> generatorPlayerDao, AdminCommands adminCommands, FancyEconomy economy) {
         this.plugin = plugin;
-        this.econ = econ;
         this.generatorCommands = generatorCommands;
         this.generatorPlayerDao = generatorPlayerDao;
         this.adminCommands = adminCommands;
+        this.economy = economy;
     }
 
     @CommandHook("sellall")
@@ -81,8 +83,9 @@ public class ShopCommands {
                             double total = count * price * multiplier;
                             sumMoney += total;
                             sumCount += count;
-                            generatorPlayer.incrementScore(total);
-                            this.econ.depositPlayer(player, total);
+                            economy.add(player, FancyResource.COINS, total);
+
+//                            this.econ.depositPlayer(player, total);
                             player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 2);
                             soldStrings.add(ChatColor.GREEN + "Sold " + ChatColor.YELLOW + count + ChatColor.GREEN + " of " + item.getType() +
                                     " for " + TextHelper.formatCurrency(total, player) + ChatColor.LIGHT_PURPLE + " (x" + TextHelper.formatMultiplier(multiplier, false, player) +")");
@@ -119,7 +122,7 @@ public class ShopCommands {
                 player.sendMessage(ChatColor.STRIKETHROUGH + "-------------------------------------------");
                 player.sendMessage(ChatColor.GREEN + "Total Items sold: " + ChatColor.YELLOW + sumCount + ChatColor.GREEN + " for " + TextHelper.formatCurrency(sumMoney, player));
                 generatorPlayer.addSell(sumMoney);
-                this.generatorPlayerDao.update(generatorPlayer);
+//                this.generatorPlayerDao.update(generatorPlayer);
                 return sumMoney;
             }
         } catch (SQLException throwables) {
@@ -175,10 +178,10 @@ public class ShopCommands {
         }
     }
 
-    public double calculateGenPrice(GenConfig genConfig){
+    public double calculateGenPrice(GenConfig genConfig, int boost){
         double price = 0;
         for (int i = 1; i <= genConfig.id; i++) {
-            price += GensConfig.gens.get(i).getCost();
+            price += GensConfig.gens.get(i).getCost(boost);
         }
         return price;
     }
@@ -189,53 +192,50 @@ public class ShopCommands {
 
     public void buySlots(GeneratorPlayer generatorPlayer, Player player){
         double cost = this.calculateSlotPrice(generatorPlayer);
-                        if (econ.getBalance(player) - cost >= 0){
+                        if (economy.getBalance(player, FancyResource.COINS) - cost >= 0){
                             try {
                                 generatorPlayer.addMaxGens(10);
                                 generatorPlayer.incrementTimesPurchasedTokens();
                                 generatorPlayerDao.update(generatorPlayer);
-                                econ.withdrawPlayer(player, cost);
+                                economy.remove(player, FancyResource.COINS, cost);
+//                                econ.withdrawPlayer(player, cost);
                                 player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
                                 player.sendMessage(Messages.msg("genPurchased") + " 10 generator slots" + ChatColor.GREEN + " for " + TextHelper.formatCurrency(cost, player));
                             } catch (SQLException throwables) {
                                 throwables.printStackTrace();
                             }
                         } else {
-                            player.sendMessage(Messages.msg("notEnoughMoney") + " " + TextHelper.formatCurrency(econ.getBalance(player), player) + " / " + TextHelper.formatCurrency(this.calculateSlotPrice(generatorPlayer), player));
+                            player.sendMessage(Messages.msg("notEnoughMoney") + " " + TextHelper.formatCurrency(economy.getBalance(player, FancyResource.COINS), player) + " / " + TextHelper.formatCurrency(this.calculateSlotPrice(generatorPlayer), player));
                         }
     }
 
 
 
-    public void buyGenerator(GenConfig genConfig, Player player, int amount){
+    public void buyGenerator(GenConfig genConfig, Player player, int amount, int boost){
 
-        double total = calculateGenPrice(genConfig) * amount;
+        double total = calculateGenPrice(genConfig, boost) * amount;
+        double balance = economy.getBalance(player, FancyResource.COINS);
 
-        if (econ.getBalance(player) >= total){
-            econ.withdrawPlayer(player, total);
-            this.generatorCommands.giveGensBackend(genConfig, player, amount);
+        if (balance >= total){
+            economy.remove(player, FancyResource.COINS, total);
+            this.generatorCommands.giveGensBackend(genConfig, player, amount, boost);
             player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
             player.sendMessage(Messages.msg("genPurchased") + " " + genConfig.name + ChatColor.GREEN +" for " + TextHelper.formatCurrency(total, player));
         } else {
-            player.sendMessage(Messages.msg("notEnoughMoney") + " " + TextHelper.formatCurrency(econ.getBalance(player), player) + " / " + TextHelper.formatCurrency(total, player));
+            player.sendMessage(Messages.msg("notEnoughMoney") + " " + TextHelper.formatCurrency(balance, player) + " / " + TextHelper.formatCurrency(total, player));
         }
 
     }
 
     public void buyMiningPickaxe(Player player, int gems){
-        try {
-            GeneratorPlayer generatorPlayer = generatorPlayerDao.queryForId(player.getUniqueId().toString());
-            if (generatorPlayer.getGems() >= gems){
-                generatorPlayer.withdrawGems(gems);
-                generatorPlayerDao.update(generatorPlayer);
-                ItemStack pickaxe = OraxenItems.getItemById("obsidian_pickaxe").build();
-                ItemUtils.give(player, pickaxe);
-                player.sendMessage(Messages.msg("genPurchased") + " " + pickaxe.getItemMeta().getDisplayName());
-            } else {
-                player.sendMessage(Messages.msg("notEnoughGems") + " " + TextHelper.formatGems(generatorPlayer.getGems(), player) + " / " + TextHelper.formatGems(gems, player));
-            }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        double balance = economy.getBalance(player, FancyResource.COINS);
+        if (balance >= gems){
+            economy.remove(player, FancyResource.GEMS, gems);
+            ItemStack pickaxe = OraxenItems.getItemById("obsidian_pickaxe").build();
+            ItemUtils.give(player, pickaxe);
+            player.sendMessage(Messages.msg("genPurchased") + " " + pickaxe.getItemMeta().getDisplayName());
+        } else {
+            player.sendMessage(Messages.msg("notEnoughGems") + " " + TextHelper.formatGems(balance, player) + " / " + TextHelper.formatGems(gems, player));
         }
 
     }

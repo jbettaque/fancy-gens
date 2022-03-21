@@ -35,8 +35,8 @@ public class GeneratorCommands {
     }
 
     @CommandHook("givegens")
-    public void giveGens(CommandSender sender, GenConfig generator, Player player, int amount){
-        this.giveGensBackend(generator, player, amount);
+    public void giveGens(CommandSender sender, GenConfig generator, Player player, int amount, int boost){
+        this.giveGensBackend(generator, player, amount, boost);
     }
 
     @CommandHook("setmaxgens")
@@ -50,12 +50,14 @@ public class GeneratorCommands {
         }
     }
 
-    public void giveGensBackend(GenConfig generator, Player player, int amount){
+    public void giveGensBackend(GenConfig generator, Player player, int amount, int boost){
         NamespacedKey key = new NamespacedKey(plugin, "generator");
+        NamespacedKey boostKey = new NamespacedKey(plugin, "generator_boost");
         ItemStack gen = new ItemBuilder(generator.block)
                 .setName(TextHelper.parseFancyString("&#4DB6AC&" + generator.name))
                 .addLore(TextHelper.parseFancyString("&gray&Tier: &yellow&" + generator.id))
-                .addPersistentTag(key, PersistentDataType.INTEGER, generator.id);
+                .addPersistentTag(key, PersistentDataType.INTEGER, generator.id)
+                .addPersistentTag(boostKey, PersistentDataType.INTEGER, boost);
         ItemUtils.addEnchant(gen, Enchantment.DURABILITY, 1);
         ItemUtils.addItemFlags(gen, ItemFlag.HIDE_ENCHANTS);
         ItemUtils.give(player, gen, amount);

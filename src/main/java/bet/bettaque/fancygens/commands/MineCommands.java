@@ -46,7 +46,7 @@ public class MineCommands {
     }
 
     @CommandHook("createmine")
-    public void createMine(Player player, String name, int pointsRequirement, String customItemName){
+    public void createMine(Player player, String name, int pointsRequirement, Material ore, String customItemName){
         if (GensConfig.mines.stream().anyMatch(mineConfig -> mineConfig.getName().equals(name))) {
             player.spigot().sendMessage(TextHelper.parseFancyComponents("&cThis mine already exists!"));
             return;
@@ -71,7 +71,7 @@ public class MineCommands {
                 player.sendMessage(customItemName);
                 ItemStack mineIcon = OraxenItems.getItemById(customItemName).build();
 
-                MineConfig mine = new MineConfig(mineId, name, selection1, selectedLocation, pointsRequirement, mineIcon);
+                MineConfig mine = new MineConfig(mineId, name, selection1, selectedLocation, pointsRequirement, ore, mineIcon);
                 GensConfig.mines.add(mine);
                 gensConfig.save();
                 player.sendMessage(ChatColor.GREEN + "You have created a new mine!");
@@ -87,74 +87,75 @@ public class MineCommands {
 
     }
 
-    @CommandHook("adminmines")
-    public void admin(Player player){
-        InventoryGUI gui = new InventoryGUI(Bukkit.createInventory(null, 27, "Admin Mines"));
+//    @CommandHook("adminmines")
+//    public void admin(Player player){
+//        InventoryGUI gui = new InventoryGUI(Bukkit.createInventory(null, 27, "Admin Mines"));
+//
+//        for (MineConfig mine : GensConfig.mines) {
+//            ItemButton button = ItemButton.create(new ItemBuilder(mine.getIcon())
+//                            .setName(mine.getName())
+//                    , e -> {
+//                        mineAdmin(player, mine);
+//                    });
+//            gui.addButton(button, mine.getId());
+//        }
+//
+//        gui.open(player);
+//
+//    }
 
-        for (MineConfig mine : GensConfig.mines) {
-            ItemButton button = ItemButton.create(new ItemBuilder(mine.getIcon())
-                            .setName(mine.getName())
-                    , e -> {
-                        mineAdmin(player, mine);
-                    });
-            gui.addButton(button, mine.getId());
-        }
+//    public void mineAdmin(Player player, MineConfig mine){
+//        InventoryGUI gui = new InventoryGUI(Bukkit.createInventory(null, 54, "Admin Mines " + mine.getName()));
+//
+//        renderOres(mine, gui, player);
+//
+//        gui.open(player);
+//
+//        EventListener<InventoryClickEvent> clickEventEventListener = new EventListener<>(plugin, InventoryClickEvent.class, (listener, event) -> {
+//            if (gui.getInventory().firstEmpty() == -1) return;
+//            ItemStack item = event.getCurrentItem();
+//            Inventory inventory = event.getClickedInventory();
+//            if(item != null && item.getType().isBlock() && inventory.getType() == InventoryType.PLAYER) {
+//                item.setAmount(1);
+//                mine.getOres().add(item);
+//                gensConfig.save();
+//                event.setCancelled(true);
+//                player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
+//
+//                renderOres(mine, gui, player);
+//                gui.update();
+//            }
+//        });
+//        BukkitRunnable cleanup = new BukkitRunnable(){
+//            @Override
+//            public void run() {
+//                clickEventEventListener.unregister();
+//            }
+//        };
+//
+//        gui.setDestroyOnClose(true);
+//        gui.setOnDestroy(cleanup);
+//
+//    }
 
-        gui.open(player);
-
-    }
-
-    public void mineAdmin(Player player, MineConfig mine){
-        InventoryGUI gui = new InventoryGUI(Bukkit.createInventory(null, 54, "Admin Mines " + mine.getName()));
-
-        renderOres(mine, gui, player);
-
-        gui.open(player);
-
-        EventListener<InventoryClickEvent> clickEventEventListener = new EventListener<>(plugin, InventoryClickEvent.class, (listener, event) -> {
-            if (gui.getInventory().firstEmpty() == -1) return;
-            ItemStack item = event.getCurrentItem();
-            Inventory inventory = event.getClickedInventory();
-            if(item != null && item.getType().isBlock() && inventory.getType() == InventoryType.PLAYER) {
-                item.setAmount(1);
-                mine.getOres().add(item);
-                gensConfig.save();
-                event.setCancelled(true);
-                player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
-
-                renderOres(mine, gui, player);
-                gui.update();
-            }
-        });
-        BukkitRunnable cleanup = new BukkitRunnable(){
-            @Override
-            public void run() {
-                clickEventEventListener.unregister();
-            }
-        };
-
-        gui.setDestroyOnClose(true);
-        gui.setOnDestroy(cleanup);
-
-    }
-
-    private void renderOres(MineConfig mine, InventoryGUI gui, Player player) {
-        gui.clear();
-        int c = 0;
-        for (ItemStack ore : mine.getOres()) {
-            ItemButton button = ItemButton.create(new ItemBuilder(ore)
-                            .setName(mine.getName())
-                    , e -> {
-                        player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 6);
-                        mine.getOres().remove(ore);
-                        gensConfig.save();
-                        renderOres(mine, gui, player);
-                        gui.update();
-                    });
-            gui.addButton(button, c);
-            c++;
-        }
-    }
+//    private void renderOres(MineConfig mine, InventoryGUI gui, Player player) {
+//        gui.clear();
+//        int c = 0;
+//        for (ItemStack ore : mine.getOres()) {
+//            ItemButton button = ItemButton.create(new ItemBuilder(ore)
+//                            .setName(mine.getName())
+//                    , e -> {
+//                        player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 6);
+//                        mine.getOres().remove(ore);
+//                        gensConfig.save();
+//                        renderOres(mine, gui, player);
+//                        gui.update();
+//                    });
+//            gui.addButton(button, c);
+//            c++;
+//            if (c > 54) break;
+//        }
+//    }
 
     @CommandHook("clearmine")
     public void clearMine(Player player, MineConfig mine){

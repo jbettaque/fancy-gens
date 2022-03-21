@@ -50,10 +50,15 @@ public class PlaceGeneratorListener implements Listener {
         ItemMeta itemMeta = itemStack.getItemMeta();
         PersistentDataContainer tagContainer = itemMeta.getPersistentDataContainer();
         NamespacedKey key = new NamespacedKey(plugin, "generator");
+        NamespacedKey boostKey = new NamespacedKey(plugin, "generator_boost");
         Block block = event.getBlock();
 
 
         if (tagContainer.has(key, PersistentDataType.INTEGER)){
+            int boost = 0;
+            if (tagContainer.has(boostKey, PersistentDataType.INTEGER)) {
+                boost = tagContainer.get(boostKey, PersistentDataType.INTEGER);
+            }
             try {
                 Area area = landsIntegration.getArea(event.getBlockPlaced().getLocation());
                 if (area != null) {
@@ -64,7 +69,7 @@ public class PlaceGeneratorListener implements Listener {
                             generatorPlayerDao.update(generatorPlayer);
 //                    player.sendMessage(Messages.msg("genPlaced"));
 
-                            PlacedGenerator placedGenerator = new PlacedGenerator(block.getLocation(), tagContainer.get(key, PersistentDataType.INTEGER), player.getUniqueId());
+                            PlacedGenerator placedGenerator = new PlacedGenerator(block.getLocation(), tagContainer.get(key, PersistentDataType.INTEGER), player.getUniqueId(), boost);
                             placedGeneratorDao.create(placedGenerator);
 
                             PersistentDataContainer blockContainer = new CustomBlockData(block, plugin);

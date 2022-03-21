@@ -43,6 +43,15 @@ public class PersistanceHelper {
     private static ArrayList<PlacedGenerator> generatorUpgradeQueue = new ArrayList<>();
     private static HashMap<UUID, ArrayList<PlacedGenerator>> generatorUpgradeQueueMap = new HashMap<>();
 
+    public static boolean isPlayerUpgrading(Player player){
+        ArrayList<PlacedGenerator> playerQueue = generatorUpgradeQueueMap.get(player.getUniqueId());
+        if (playerQueue == null){
+            return false;
+        } else {
+            return playerQueue.size() > 0;
+        }
+    }
+
     public static boolean updateGenerator(PlacedGenerator generator){
         generatorUpgradeQueueMap.computeIfAbsent(generator.getOwner(), k -> new ArrayList<>());
         if (generatorUpgradeQueueMap.get(generator.getOwner()).contains(generator)) return false;
@@ -89,7 +98,7 @@ public class PersistanceHelper {
     private static boolean mineGainsLocked = false;
     private static boolean mineGainsLocked2 = false;
 
-    public static double addMineGain(Player player, double gain){
+    public static double addMineGain(Player player, double gain, MineConfig mine){
         if (!mineGainsLocked){
             mineGainsLocked2 = true;
             if (mineGains.containsKey(player)){
@@ -97,7 +106,7 @@ public class PersistanceHelper {
                 return mineGains.get(player).addGain(gain);
             }
 
-            MineGain mineGain = new MineGain();
+            MineGain mineGain = new MineGain(mine.getPointLimit());
             mineGains.put(player, mineGain);
             mineGainsLocked2 = false;
             return mineGain.addGain(gain);
@@ -127,8 +136,15 @@ public class PersistanceHelper {
                         double pointsMulti = (generatorPlayer.getScore() / 100000) + 1;
                         reward = reward * pointsMulti;
                         reward = reward * generatorPlayer.getMultiplier();
-                        economy.add(set.getKey(), FancyResource.POINTS, reward);
-                        economy.add(set.getKey(), FancyResource.COINS, reward);
+
+
+//                        if (reward > 10000000000000000000000000d * (generatorPlayer.getPrestige() * 5 + 1)){
+//                            reward = 10000000000000000000000000d * (generatorPlayer.getPrestige() * 5 + 1);
+//                            set.getKey().spigot().sendMessage(TextHelper.parseFancyComponents("&yellow&Capped mining gain at " + TextHelper.formatScore(reward)));
+//                        }
+
+                        economy.addCoinsPointCap(set.getKey(), reward, set.getValue().mineLimit);
+//                        economy.add(set.getKey(), FancyResource.COINS, reward);
                         String message = ChatColor.YELLOW + " + " + TextHelper.formatCurrency(reward, set.getKey());
                         set.getKey().spigot().sendMessage( ChatMessageType.ACTION_BAR, new TextComponent(message));
                     } catch (SQLException throwables) {
@@ -166,10 +182,12 @@ public class PersistanceHelper {
 class MineGain {
     Instant timestamp;
     double gain;
+    double mineLimit;
 
-    public MineGain() {
+    public MineGain(double mineLimit) {
         this.timestamp = Instant.now();
         this.gain = 0;
+        this.mineLimit = mineLimit;
     }
 
     public double addGain(double gain){

@@ -1,9 +1,11 @@
 package bet.bettaque.fancygens.listeners;
 
+import bet.bettaque.fancygens.FancyResource;
 import bet.bettaque.fancygens.config.GenConfig;
 import bet.bettaque.fancygens.config.GensConfig;
 import bet.bettaque.fancygens.db.PlacedGenerator;
 import bet.bettaque.fancygens.helpers.TextHelper;
+import bet.bettaque.fancygens.services.FancyEconomy;
 import com.j256.ormlite.dao.Dao;
 import com.jeff_media.customblockdata.CustomBlockData;
 import net.milkbowl.vault.economy.Economy;
@@ -25,12 +27,12 @@ import java.sql.SQLException;
 public class UpgradeGeneratorListener implements Listener {
     Plugin plugin;
     Dao<PlacedGenerator, Integer> placedGeneratorDao;
-    Economy econ;
+    FancyEconomy economy;
 
-    public UpgradeGeneratorListener(Plugin plugin, Dao<PlacedGenerator, Integer> placedGeneratorDao, Economy econ) {
+    public UpgradeGeneratorListener(Plugin plugin, Dao<PlacedGenerator, Integer> placedGeneratorDao, FancyEconomy economy) {
         this.plugin = plugin;
         this.placedGeneratorDao = placedGeneratorDao;
-        this.econ = econ;
+        this.economy = economy;
     }
 
     @EventHandler
@@ -66,24 +68,25 @@ public class UpgradeGeneratorListener implements Listener {
         PersistentDataContainer container = new CustomBlockData(block, plugin);
         NamespacedKey key = new NamespacedKey(plugin, "generator");
 
+
         if (container.has(key, PersistentDataType.INTEGER)){
-            int genId = container.get(key, PersistentDataType.INTEGER);
+//            int genId = container.get(key, PersistentDataType.INTEGER);
 
             try {
                 GenConfig genConfig = placedGenerator.upgradeGenerator();
-                if (econ.getBalance(player) - GensConfig.gens.get(placedGenerator.getGenerator().id).getCost() >= 0){
+                double balance = economy.getBalance(player, FancyResource.COINS);
+                double cost = placedGenerator.getUpgradeCost();
+                if (balance - cost >= 0){
                     if (genConfig == null) {
                         player.sendMessage(Messages.msg("maxUpgrade"));
                         return 0;
                     }
                     placedGeneratorDao.update(placedGenerator);
-                    block.setType(genConfig.block);
-                    player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
-                    player.spawnParticle(Particle.VILLAGER_HAPPY, block.getLocation(), 20, 0.5, 0.5, 0.5, 0.4);
-                    econ.withdrawPlayer(player, GensConfig.gens.get(placedGenerator.getGenerator().id).getCost());
-                    return GensConfig.gens.get(placedGenerator.getGenerator().id).getCost();
+//                    econ.withdrawPlayer(player, GensConfig.gens.get(placedGenerator.getGenerator().id).getCost());
+                    economy.remove(player, FancyResource.COINS, cost);
+                    return cost;
                 } else {
-                    player.sendMessage(Messages.msg("notEnoughMoney") + " " + TextHelper.formatCurrency(econ.getBalance(player), player) + " / " + TextHelper.formatCurrency(GensConfig.gens.get(placedGenerator.getGenerator().id).getCost(), player));
+                    player.sendMessage(Messages.msg("notEnoughMoney") + " " + TextHelper.formatCurrency(balance, player) + " / " + TextHelper.formatCurrency(cost, player));
                     return 0;
                 }
 

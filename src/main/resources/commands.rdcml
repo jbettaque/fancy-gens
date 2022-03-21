@@ -1,7 +1,7 @@
 admin {
     help Administrate FancyGens
     permission fancygens.admin
-    givegens generator:generator player:player int:amount {
+    givegens generator:generator player:player int:amount int:boost {
         hook givegens
         help Give <players> specified generator
     }
@@ -45,7 +45,6 @@ admin {
 
     mines {
         help Administrate mines
-        hook adminmines
         user player
         clear mine:mine {
                 help Deletes all Blocks in a mine
@@ -53,7 +52,7 @@ admin {
                 user player
             }
 
-        create string:name int:prestige string:customItemName?(mines_icon) {
+        create string:name int:prestige block:ore string:customItemName?(mines_icon) {
                 help Creates a mine
                 hook createmine
                 user player

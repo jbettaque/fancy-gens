@@ -1,6 +1,8 @@
 package bet.bettaque.fancygens.listeners;
 
 import bet.bettaque.fancygens.commands.UiCommands;
+import bet.bettaque.fancygens.db.GeneratorPlayer;
+import com.j256.ormlite.dao.Dao;
 import io.th0rgal.oraxen.items.OraxenItems;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
@@ -17,15 +19,18 @@ import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.Plugin;
 import redempt.redlib.itemutils.ItemUtils;
 
+import java.sql.SQLException;
 import java.util.Objects;
 
 public class MainMenuListener implements Listener {
     Plugin plugin;
     UiCommands uiCommands;
+    Dao<GeneratorPlayer, String> generatorPlayerDao;
 
-    public MainMenuListener(Plugin plugin, UiCommands uiCommands) {
+    public MainMenuListener(Plugin plugin, UiCommands uiCommands, Dao<GeneratorPlayer, String> generatorPlayerDao) {
         this.plugin = plugin;
         this.uiCommands = uiCommands;
+        this.generatorPlayerDao = generatorPlayerDao;
     }
 
     @EventHandler
@@ -53,6 +58,9 @@ public class MainMenuListener implements Listener {
         if (inventoryCount > 1){
             ItemUtils.remove(player.getInventory(), mainMenuItem, inventoryCount);
         }
+
+
+
     }
 
     @EventHandler

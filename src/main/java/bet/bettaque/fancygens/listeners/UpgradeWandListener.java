@@ -57,6 +57,7 @@ public class UpgradeWandListener implements Listener {
             PersistentDataContainer container = itemMeta.getPersistentDataContainer();
 
             if (container.has(key, PersistentDataType.INTEGER)){
+                if (PersistanceHelper.isPlayerUpgrading(player)) return;
                 if (event.getHand() == EquipmentSlot.HAND){
                     QueryBuilder<PlacedGenerator, Integer> queryBuilder = placedGeneratorDao.queryBuilder();
                     try {
@@ -67,7 +68,7 @@ public class UpgradeWandListener implements Listener {
                         double total = 0;
                         int fixedId = 0;
                         for (PlacedGenerator pg: ownedGens) {
-                            double cost = pg.getGenerator().getCost();
+                            double cost = pg.getUpgradeCost();
                             if (total + cost <= economy.getBalance(player, FancyResource.COINS)){
 
 
@@ -86,7 +87,11 @@ public class UpgradeWandListener implements Listener {
                                 }
                             }
                         }
-                        player.sendMessage(ChatColor.GREEN + "Upgraded " + ChatColor.YELLOW + count + ChatColor.GREEN + " generators to for a price of " + TextHelper.formatCurrency(total, player));
+                        if (count > 0) {
+                            player.sendMessage(ChatColor.GREEN + "Upgraded " + ChatColor.YELLOW + count + ChatColor.GREEN + " generators to for a price of " + TextHelper.formatCurrency(total, player));
+                        } else {
+                            player.spigot().sendMessage(TextHelper.parseFancyComponents("&red&You don't have enough money to upgrade any generators!"));
+                        }
                     } catch (SQLException throwables) {
                         throwables.printStackTrace();
                     }

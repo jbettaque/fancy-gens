@@ -142,6 +142,7 @@ public class FancyGui {
 
     public void populate(){
         size = contents.size() - (contents.size() % 9);
+        if (size > 9) size +=9;
         if (this.hasMenuBar()) size += 9;
         if (size > 54) size = 54;
 

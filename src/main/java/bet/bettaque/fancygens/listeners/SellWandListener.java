@@ -3,6 +3,7 @@ package bet.bettaque.fancygens.listeners;
 import bet.bettaque.fancygens.commands.ShopCommands;
 import bet.bettaque.fancygens.config.GensConfig;
 import bet.bettaque.fancygens.db.ItemHelper;
+import bet.bettaque.fancygens.services.FancyEconomy;
 import me.angeschossen.lands.api.flags.Flags;
 import me.angeschossen.lands.api.integration.LandsIntegration;
 import me.angeschossen.lands.api.land.Area;
@@ -35,13 +36,11 @@ import java.util.Map;
 
 public class SellWandListener implements Listener {
     Plugin plugin;
-    Economy econ;
     ShopCommands shopCommands;
     LandsIntegration landsIntegration;
 
-    public SellWandListener(Plugin plugin, Economy econ, ShopCommands shopCommands, LandsIntegration landsIntegration) {
+    public SellWandListener(Plugin plugin, ShopCommands shopCommands, LandsIntegration landsIntegration) {
         this.plugin = plugin;
-        this.econ = econ;
         this.shopCommands = shopCommands;
         this.landsIntegration = landsIntegration;
     }

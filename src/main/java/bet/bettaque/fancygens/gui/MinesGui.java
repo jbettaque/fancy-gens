@@ -12,7 +12,9 @@ import redempt.redlib.itemutils.ItemBuilder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class MinesGui extends FancyGui{
     MineCommands mineCommands;
@@ -24,7 +26,7 @@ public class MinesGui extends FancyGui{
 
     @Override
     public void populate() {
-        for (MineConfig mine: GensConfig.mines) {
+        for (MineConfig mine: GensConfig.mines.stream().sorted(Comparator.comparingInt(MineConfig::getPrestigeRequirement)).collect(Collectors.toList())) {
             ItemStack item = new ItemBuilder(mine.getIcon()).setName(TextHelper.parseFancyString("&#64B5F6-#80CBC4&" + mine.getName()));
             contents.add(item);
             setCallback(item, e -> {

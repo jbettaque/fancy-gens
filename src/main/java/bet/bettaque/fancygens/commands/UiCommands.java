@@ -1,11 +1,13 @@
 package bet.bettaque.fancygens.commands;
 
+import bet.bettaque.fancygens.FancyResource;
 import bet.bettaque.fancygens.config.GenConfig;
 import bet.bettaque.fancygens.config.GensConfig;
 import bet.bettaque.fancygens.config.MineConfig;
 import bet.bettaque.fancygens.db.GeneratorPlayer;
 import bet.bettaque.fancygens.gui.*;
 import bet.bettaque.fancygens.helpers.TextHelper;
+import bet.bettaque.fancygens.services.FancyEconomy;
 import com.j256.ormlite.dao.Dao;
 import de.themoep.minedown.MineDown;
 import io.th0rgal.oraxen.items.OraxenItems;
@@ -35,14 +37,14 @@ public class UiCommands {
     MineCommands mineCommands;
     Dao<GeneratorPlayer, String> generatorPlayerDao;
     LandsIntegration landsIntegration;
-    Economy econ;
+    FancyEconomy economy;
 
-    public UiCommands(ShopCommands shopCommands, Dao<GeneratorPlayer, String> generatorPlayerDao, Economy econ, MineCommands mineCommands, LandsIntegration landsIntegration) {
+    public UiCommands(ShopCommands shopCommands, MineCommands mineCommands, Dao<GeneratorPlayer, String> generatorPlayerDao, LandsIntegration landsIntegration, FancyEconomy economy) {
         this.shopCommands = shopCommands;
-        this.generatorPlayerDao = generatorPlayerDao;
-        this.econ = econ;
         this.mineCommands = mineCommands;
+        this.generatorPlayerDao = generatorPlayerDao;
         this.landsIntegration = landsIntegration;
+        this.economy = economy;
     }
 
     @CommandHook("home")
@@ -92,10 +94,10 @@ public class UiCommands {
     public void buyPrestige(GeneratorPlayer generatorPlayer, Player player){
         double cost = this.calculatePrestigePrice(generatorPlayer);
         double requirement  = this.calculatePrestigeRequirement(generatorPlayer);
-        if (econ.getBalance(player) - cost >= 0){
+        if (economy.getBalance(player, FancyResource.COINS) - cost >= 0){
             if (generatorPlayer.getScore() >= requirement){
                 generatorPlayer.incrementPrestige();
-                econ.withdrawPlayer(player, cost);
+                economy.remove(player, FancyResource.COINS, cost);
                 generatorPlayer.addGems(2000);
                 generatorPlayer.incrementMultiplier(0.04 * generatorPlayer.getPrestige() / 2);
                 generatorPlayer.resetScore();
@@ -111,18 +113,36 @@ public class UiCommands {
                 player.sendMessage(Messages.msg("scoreNotHighEnough") + " " + ChatColor.AQUA + TextHelper.formatScore(generatorPlayer.getScore()) + " / " + TextHelper.formatScore(requirement));
             }
         } else {
-            player.sendMessage(Messages.msg("notEnoughMoney") + " " + TextHelper.formatCurrency(econ.getBalance(player), player) + " / " + TextHelper.formatCurrency(this.calculatePrestigePrice(generatorPlayer), player));
+            player.sendMessage(Messages.msg("notEnoughMoney") + " " + TextHelper.formatCurrency(economy.getBalance(player, FancyResource.COINS), player) + " / " + TextHelper.formatCurrency(this.calculatePrestigePrice(generatorPlayer), player));
         }
     }
 
     public double calculatePrestigePrice(GeneratorPlayer generatorPlayer){
-        return Math.pow(12,generatorPlayer.getPrestige()) * 1000000 * (generatorPlayer.getPrestige() + 1);
+        return calculatePrestigePriceS(generatorPlayer);
+    }
+
+    public static double calculatePrestigePriceS(GeneratorPlayer generatorPlayer){
+        return Math.pow(13,generatorPlayer.getPrestige()) * 1000000 * (generatorPlayer.getPrestige() + 1);
     }
 
     public double calculatePrestigeRequirement(GeneratorPlayer generatorPlayer){
+        return calculatePrestigeRequirementS(generatorPlayer);
+    }
+
+    public static double calculatePrestigeRequirementS(GeneratorPlayer generatorPlayer){
+        if (generatorPlayer.getPrestige() > 200) return Math.pow(28,generatorPlayer.getPrestige()) * 2500000 * ((generatorPlayer.getPrestige() * generatorPlayer.getPrestige()) +1);
+        if (generatorPlayer.getPrestige() > 100) return Math.pow(24,generatorPlayer.getPrestige()) * 2500000 * ((generatorPlayer.getPrestige() * generatorPlayer.getPrestige()) +1);
         if (generatorPlayer.getPrestige() > 29) return Math.pow(18,generatorPlayer.getPrestige()) * 2500000 * ((generatorPlayer.getPrestige() * generatorPlayer.getPrestige()) +1);
         if (generatorPlayer.getPrestige() > 9) return Math.pow(14,generatorPlayer.getPrestige()) * 2500000 * ((generatorPlayer.getPrestige() * generatorPlayer.getPrestige()) +1);
         return Math.pow(14,generatorPlayer.getPrestige()) * 2500000 * ((generatorPlayer.getPrestige()) +1);
+    }
+
+    public static double calculatePrestigeRequirementS(int prestige){
+        if (prestige > 200) return Math.pow(28,prestige) * 2500000 * ((prestige * prestige) +1);
+        if (prestige > 100) return Math.pow(24,prestige) * 2500000 * ((prestige * prestige) +1);
+        if (prestige > 29) return Math.pow(18,prestige) * 2500000 * ((prestige * prestige) +1);
+        if (prestige > 9) return Math.pow(14,prestige) * 2500000 * ((prestige * prestige) +1);
+        return Math.pow(14,prestige) * 2500000 * ((prestige) +1);
     }
 
     @CommandHook("genshop")

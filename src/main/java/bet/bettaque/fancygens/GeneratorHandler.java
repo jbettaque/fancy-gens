@@ -4,6 +4,7 @@ import bet.bettaque.fancygens.config.GensConfig;
 import bet.bettaque.fancygens.db.PlacedGenerator;
 import bet.bettaque.fancygens.helpers.TextHelper;
 import com.j256.ormlite.dao.Dao;
+import net.md_5.bungee.api.ChatMessageType;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -56,14 +57,23 @@ public class GeneratorHandler {
 
                 ItemStack item = new ItemBuilder(placedGenerator.getMaterial());
                 NamespacedKey key = new NamespacedKey(plugin, "sellable");
-                double price = placedGenerator.getGenerator().getProductPrice();
+                double price = placedGenerator.getProductPrice();
                 ItemUtils.addPersistentTag(item, key, PersistentDataType.DOUBLE, price);
 
                 ItemUtils.addLore(item,"Price: " + TextHelper.formatCurrency(price, player));
-                world.dropItem(newLocation, item);
+                if (location.getChunk().getEntities().length < 1000){
+                    world.dropItem(newLocation, item);
+                } else {
+                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR,TextHelper.parseFancyComponents("&red&There are too many Items already in your Plot. Generators not generating!"));
+                }
             }
-        } catch (SQLException throwables) {
+        }catch (SQLException throwables) {
             throwables.printStackTrace();
+            try {
+                this.placedGeneratorDao.executeRaw("ALTER TABLE `placed_generators` ADD COLUMN boost INTEGER");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

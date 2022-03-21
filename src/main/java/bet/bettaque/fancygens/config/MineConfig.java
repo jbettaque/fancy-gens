@@ -1,5 +1,7 @@
 package bet.bettaque.fancygens.config;
 
+import bet.bettaque.fancygens.commands.UiCommands;
+import bet.bettaque.fancygens.gui.PrestigeGui;
 import bet.bettaque.fancygens.helpers.PersistanceHelper;
 import com.jeff_media.customblockdata.CustomBlockData;
 import org.bukkit.Location;
@@ -29,7 +31,7 @@ public class MineConfig {
     Location regionStart;
     Location regionEnd;
 
-    List<ItemStack> ores = new ArrayList<>();
+    Material ore;
     int prestigeRequirement;
 
     ItemStack icon;
@@ -37,14 +39,23 @@ public class MineConfig {
     public MineConfig() {
     }
 
-    public MineConfig(int id, String name, Location regionStart, Location regionEnd, int prestigeRequirement, ItemStack icon) {
+    public MineConfig(int id, String name, Location regionStart, Location regionEnd, int prestigeRequirement, Material ore, ItemStack icon) {
         this.id = id;
         this.name = name;
         this.regionStart = regionStart;
         this.regionEnd = regionEnd;
         this.start(PersistanceHelper.getPlugin());
         this.prestigeRequirement = prestigeRequirement;
+        this.ore = ore;
         this.icon = icon;
+    }
+
+    public double getOrePrice(){
+        return (prestigeRequirement + 1) * 2 * ((prestigeRequirement / 2) + 1);
+    }
+
+    public double getPointLimit(){
+        return UiCommands.calculatePrestigeRequirementS(this.prestigeRequirement + 1) * 0.75;
     }
 
     public CuboidRegion getRegion(){
@@ -102,12 +113,12 @@ public class MineConfig {
         this.regionEnd = regionEnd;
     }
 
-    public List<ItemStack> getOres() {
-        return ores;
+    public Material getOre() {
+        return ore;
     }
 
-    public void setOres(ArrayList<ItemStack> ores) {
-        this.ores = ores;
+    public void setOre(Material ore) {
+        this.ore = ore;
     }
 
     private int random(int max){
@@ -116,14 +127,10 @@ public class MineConfig {
         return random.nextInt(max);
     }
 
-    private ItemStack selectRandomOre(){
-        return this.ores.get(random(this.ores.size()));
-    }
-
     public void regenerate(Block block){
         PersistentDataContainer container = new CustomBlockData(block, PersistanceHelper.getPlugin());
         container.set(PersistanceHelper.oreKey, PersistentDataType.INTEGER, 1);
-        block.setType(this.selectRandomOre().getType());
+        block.setType(this.ore);
     }
 
     public void start(Plugin plugin){
@@ -132,13 +139,11 @@ public class MineConfig {
             @Override
             public void run() {
                 List<Block> blockList = region.stream().filter(block -> block.getType() == Material.AIR).collect(Collectors.toList());
-                if (ores.size() > 0){
-                    int batchSize = blockList.size() / 200;
-                    if (batchSize < 1) batchSize = 1;
-                    for (int i = 0; i < batchSize; i++) {
-                        if (blockList.size() > 0) {
-                            regenerate(blockList.remove(random(blockList.size() -1)));
-                        }
+                int batchSize = blockList.size() / 200;
+                if (batchSize < 1) batchSize = 1;
+                for (int i = 0; i < batchSize; i++) {
+                    if (blockList.size() > 0) {
+                        regenerate(blockList.remove(random(blockList.size() -1)));
                     }
                 }
             }

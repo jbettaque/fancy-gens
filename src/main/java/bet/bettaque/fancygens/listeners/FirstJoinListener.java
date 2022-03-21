@@ -46,6 +46,11 @@ public class FirstJoinListener implements Listener {
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+            try {
+                this.generatorPlayerDao.executeRaw("ALTER TABLE `players` ADD COLUMN coins VARCHAR");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
 
     }

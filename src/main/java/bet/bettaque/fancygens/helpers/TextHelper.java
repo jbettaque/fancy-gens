@@ -55,12 +55,13 @@ public class TextHelper {
     private static final String[] Q = new String[]{
             "", "K", "m", "M", "b", "B", "t", "T" ,"q", "Q", "qq", "Qq", "s", "S", "ss", "Ss", "o", "O", "n", "N", "d",
             "D", "u", "U", "dd", "Dd", "tt", "Tt", "qq", "Qq", "QQ", "qqq", "SS", "sss", "Sss", "SSs", "oo", "Oo", "nn",
-            "Nn", "v", "V", "Qqq", "QQq", "QQQ", "QQQq"
+            "Nn", "v", "V", "Qqq","TT", "QQq", "QQQ", "QQQq", "QQQQ", "uu", "qqqqq", "SSS", "ssss", "uU", "Qqqqq", "Ssss",
+            "QQqqq", "OO", "QQQqq", "NN", "QQQQq", "c", "QQQQQ", "DD", "qqqqqq", "ttt", "Qqqqqq", "QQqqqq", "QQQqqq", "QQQQqq"
     };
 
     public static String getAsString(double bytes)
     {
-        for (int i = 22; i > 0; i--)
+        for (int i = Q.length -1; i > 0; i--)
         {
             double step = Math.pow(1000, i);
             if (bytes > step) return String.format("%3.1f %s", bytes / step, Q[i]);

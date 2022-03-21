@@ -4,6 +4,7 @@ import bet.bettaque.fancygens.FancyResource;
 import bet.bettaque.fancygens.commands.goblins.GoblinCommands;
 import bet.bettaque.fancygens.commands.goblins.GoblinTier;
 import bet.bettaque.fancygens.config.GensConfig;
+import bet.bettaque.fancygens.config.MineConfig;
 import bet.bettaque.fancygens.db.GeneratorPlayer;
 import bet.bettaque.fancygens.db.ItemHelper;
 import bet.bettaque.fancygens.helpers.PersistanceHelper;
@@ -37,14 +38,12 @@ import java.util.Random;
 
 public class MineListener implements Listener {
     Plugin plugin;
-    Economy econ;
     Dao<GeneratorPlayer, String> generatorPlayerDao;
     GoblinCommands goblinCommands;
     FancyEconomy fancyEconomy;
 
-    public MineListener(Plugin plugin, Economy econ, Dao<GeneratorPlayer, String> generatorPlayerDao, GoblinCommands goblinCommands, FancyEconomy fancyEconomy) {
+    public MineListener(Plugin plugin, Dao<GeneratorPlayer, String> generatorPlayerDao, GoblinCommands goblinCommands, FancyEconomy fancyEconomy) {
         this.plugin = plugin;
-        this.econ = econ;
         this.generatorPlayerDao = generatorPlayerDao;
         this.goblinCommands = goblinCommands;
         this.fancyEconomy = fancyEconomy;
@@ -149,6 +148,10 @@ public class MineListener implements Listener {
                     if (block.getDrops(player.getInventory().getItemInMainHand()).isEmpty()){
                         return;
                     }
+
+                    MineConfig mine = GensConfig.mines.stream().filter(m -> m.getOre() == block.getType()).findAny().get();
+                    double reward = mine.getOrePrice();
+                    if (reward <= 0) return;
                     Random random = new Random();
 
                     if (random.nextInt(1000) == 1){
@@ -191,9 +194,9 @@ public class MineListener implements Listener {
                         player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 2, 1);
                     }
 
-                    double reward = GensConfig.miningItems.get(block.getType());
 
-                    double rewardOverTime = PersistanceHelper.addMineGain(player, reward);
+
+                    double rewardOverTime = PersistanceHelper.addMineGain(player, reward, mine);
                     container.remove(PersistanceHelper.oreKey);
                     block.setType(Material.AIR);
                     player.playSound(player.getLocation(), Sound.BLOCK_AMETHYST_BLOCK_STEP, 0.7f, 1);

@@ -1,9 +1,11 @@
 package bet.bettaque.fancygens.listeners;
 
+import bet.bettaque.fancygens.FancyResource;
 import bet.bettaque.fancygens.db.GeneratorPlayer;
 import bet.bettaque.fancygens.db.PlacedAutosellChest;
 import bet.bettaque.fancygens.helpers.ScoreHelper;
 import bet.bettaque.fancygens.helpers.TextHelper;
+import bet.bettaque.fancygens.services.FancyEconomy;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.PreparedQuery;
 import me.clip.placeholderapi.PlaceholderAPI;
@@ -23,12 +25,12 @@ import java.util.List;
 public class ScoreBoardListener implements Listener {
     Dao<GeneratorPlayer, String> generatorPlayerDao;
     static Dao<PlacedAutosellChest, Integer> placedAutosellChestDao;
-    Economy econ;
+    FancyEconomy economy;
 
-    public ScoreBoardListener(Dao<GeneratorPlayer, String> generatorPlayerDao, Dao<PlacedAutosellChest, Integer> placedAutosellChestDao, Economy econ) {
-        this.generatorPlayerDao = generatorPlayerDao;
+    public ScoreBoardListener(Dao<GeneratorPlayer, String> generatorPlayerDao, Dao<PlacedAutosellChest, Integer> placedAutosellChestDao, FancyEconomy economy) {
         ScoreBoardListener.placedAutosellChestDao = placedAutosellChestDao;
-        this.econ = econ;
+        this.generatorPlayerDao = generatorPlayerDao;
+        this.economy = economy;
     }
 
     @EventHandler
@@ -38,14 +40,14 @@ public class ScoreBoardListener implements Listener {
         try {
             GeneratorPlayer generatorPlayer = generatorPlayerDao.queryForId(player.getUniqueId().toString());
             scoreHelper.setTitle("&7&m---- &eFancy&aGens &7&m----");
-            setScoreboard(player, scoreHelper, generatorPlayer, econ);
+            setScoreboard(player, scoreHelper, generatorPlayer, economy);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
 
     }
 
-    public static void setScoreboard(Player player, ScoreHelper scoreHelper, GeneratorPlayer generatorPlayer, Economy econ) {
+    public static void setScoreboard(Player player, ScoreHelper scoreHelper, GeneratorPlayer generatorPlayer, FancyEconomy economy) {
 
 //        StringBuilder graph = new StringBuilder();
 //        ArrayList<Double> lastSells = generatorPlayer.getLastSells();
@@ -75,7 +77,7 @@ public class ScoreBoardListener implements Listener {
         scoreHelper.setSlot(5, ChatColor.AQUA + scoreIcon + " "  + TextHelper.formatScore(generatorPlayer.getScore()));
 
         String coinsIcon = PlaceholderAPI.setPlaceholders(player, "%oraxen_coins_scoreb%");
-        scoreHelper.setSlot(4, ChatColor.YELLOW + coinsIcon + " " + TextHelper.withSuffix(econ.getBalance(player)));
+        scoreHelper.setSlot(4, ChatColor.YELLOW + coinsIcon + " " + TextHelper.withSuffix(economy.getBalance(player, FancyResource.COINS)));
 
         String gemsIcon = PlaceholderAPI.setPlaceholders(player, "%oraxen_gems%");
         scoreHelper.setSlot(3, ChatColor.GREEN + gemsIcon + " "+ (int) generatorPlayer.getGems());

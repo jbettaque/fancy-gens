@@ -4,6 +4,8 @@ import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -34,6 +36,9 @@ public class GeneratorPlayer {
     @DatabaseField
     private double gems;
 
+    @DatabaseField
+    private BigDecimal coins;
+
     @DatabaseField(dataType = DataType.SERIALIZABLE)
     private ArrayList<Double> lastSells;
 
@@ -57,6 +62,22 @@ public class GeneratorPlayer {
 
     public UUID getUUID(){
         return UUID.fromString(uuid);
+    }
+
+    public BigDecimal getCoins() {
+        return coins;
+    }
+
+    public void addCoins(BigDecimal coins){
+        if (this.coins == null) {
+            this.coins = coins;
+        } else {
+            this.coins = this.coins.add(coins);
+        }
+    }
+
+    public void setCoins(BigDecimal coins) {
+        this.coins = coins;
     }
 
     public void incrementUsedGens(){

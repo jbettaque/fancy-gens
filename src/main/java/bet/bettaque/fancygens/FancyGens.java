@@ -25,7 +25,11 @@ import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -33,6 +37,7 @@ import redempt.redlib.commandmanager.ArgType;
 import redempt.redlib.commandmanager.CommandParser;
 import redempt.redlib.commandmanager.Messages;
 import redempt.redlib.config.ConfigManager;
+import redempt.redlib.misc.EventListener;
 
 import java.math.BigInteger;
 import java.sql.SQLException;
@@ -150,9 +155,9 @@ public final class FancyGens extends JavaPlugin {
         ToplistCommands toplistCommands = new ToplistCommands(economy, generatorPlayerDao);
         GeneratorCommands generatorCommands = new GeneratorCommands(this, generatorPlayerDao, gensConfig);
         AdminCommands adminCommands = new AdminCommands(this, generatorPlayerDao, economy, placedGeneratorDao, landsIntegration);
-        ShopCommands shopCommands = new ShopCommands(this, econ, generatorCommands, this.generatorPlayerDao, adminCommands);
+        ShopCommands shopCommands = new ShopCommands(this, generatorCommands, this.generatorPlayerDao, adminCommands, economy);
         MineCommands mineCommands = new MineCommands(this, gensConfig, generatorPlayerDao);
-        UiCommands uiCommands = new UiCommands(shopCommands, generatorPlayerDao, econ, mineCommands, landsIntegration);
+        UiCommands uiCommands = new UiCommands(shopCommands, mineCommands, generatorPlayerDao,  landsIntegration, economy);
         GoblinCommands goblinCommands = new GoblinCommands();
 
         new CommandParser(this.getResource("commands.rdcml")).setArgTypes(
@@ -173,19 +178,19 @@ public final class FancyGens extends JavaPlugin {
 
         );
 
-        UpgradeGeneratorListener upgradeGeneratorListener = new UpgradeGeneratorListener(this, this.placedGeneratorDao, this.econ);
+        UpgradeGeneratorListener upgradeGeneratorListener = new UpgradeGeneratorListener(this, this.placedGeneratorDao, this.economy);
         getServer().getPluginManager().registerEvents(new FirstJoinListener(generatorPlayerDao), this);
         getServer().getPluginManager().registerEvents(new PlaceGeneratorListener(this, generatorPlayerDao, placedGeneratorDao, landsIntegration), this);
         getServer().getPluginManager().registerEvents(new BreakGeneratorListener(this, this.placedGeneratorDao, this.generatorPlayerDao, landsIntegration), this);
         getServer().getPluginManager().registerEvents(upgradeGeneratorListener, this);
-        getServer().getPluginManager().registerEvents(new ScoreBoardListener(this.generatorPlayerDao, placedAutosellChestDao, this.econ), this);
-        getServer().getPluginManager().registerEvents(new SellWandListener(this, econ, shopCommands, landsIntegration), this);
+        getServer().getPluginManager().registerEvents(new ScoreBoardListener(this.generatorPlayerDao, placedAutosellChestDao, this.economy), this);
+        getServer().getPluginManager().registerEvents(new SellWandListener(this, shopCommands, landsIntegration), this);
         getServer().getPluginManager().registerEvents(new PistonMoveListener(this), this);
         getServer().getPluginManager().registerEvents(new PlaceAutosellChestListener(this, placedAutosellChestDao), this);
         getServer().getPluginManager().registerEvents(new BreakAutosellChestListener(this, adminCommands, placedAutosellChestDao), this);
         getServer().getPluginManager().registerEvents(new UpgradeWandListener(this, placedGeneratorDao, upgradeGeneratorListener, economy), this);
-        getServer().getPluginManager().registerEvents(new MainMenuListener(this, uiCommands), this);
-        getServer().getPluginManager().registerEvents(new MineListener(this, econ, generatorPlayerDao, goblinCommands, economy), this);
+        getServer().getPluginManager().registerEvents(new MainMenuListener(this, uiCommands, generatorPlayerDao), this);
+        getServer().getPluginManager().registerEvents(new MineListener(this, generatorPlayerDao, goblinCommands, economy), this);
         getServer().getPluginManager().registerEvents(new ScrollListener(this, economy, landsIntegration), this);
 
 
@@ -203,7 +208,7 @@ public final class FancyGens extends JavaPlugin {
             }
         }.runTaskTimer(this, 0L, 20L * 60);
 
-        scoreBoardHandler = new ScoreBoardHandler(generatorPlayerDao, econ);
+        scoreBoardHandler = new ScoreBoardHandler(generatorPlayerDao, economy);
         new BukkitRunnable() {
             public void run() {
                 for(Player player: Bukkit.getOnlinePlayers()){
@@ -227,11 +232,37 @@ public final class FancyGens extends JavaPlugin {
                 }
 
             }
-        }.runTaskTimer(this, 10L, 1);
-
+        }.runTaskTimer(this, 10L, 5);
 
         for(MineConfig mine : GensConfig.mines){
             mine.start(this);
+        }
+
+//        new EventListener<>(this, PlayerJoinEvent.class, e -> {
+//            try {
+//                GeneratorPlayer generatorPlayer = generatorPlayerDao.queryForId(e.getPlayer().getUniqueId().toString());
+//                if (UiCommands.calculatePrestigePriceS(generatorPlayer) * 1.5 <= generatorPlayer.getScore()){
+//                    generatorPlayer.setScore(UiCommands.calculatePrestigePriceS(generatorPlayer) * 1.5);
+//                }
+//            } catch (SQLException throwables) {
+//                throwables.printStackTrace();
+//            }
+//        });
+
+        try {
+            for (GeneratorPlayer generatorPlayer : generatorPlayerDao.queryForAll()) {
+                if (UiCommands.calculatePrestigeRequirementS(generatorPlayer) * 1.5 <= generatorPlayer.getScore()){
+                    generatorPlayer.setScore(UiCommands.calculatePrestigeRequirementS(generatorPlayer) * 1.5);
+                    generatorPlayerDao.update(generatorPlayer);
+                }
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        for (MineConfig mine :
+                GensConfig.mines) {
+            GensConfig.miningItems.put(mine.getOre(), mine.getOrePrice());
         }
 
 

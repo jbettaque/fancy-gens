@@ -346,137 +346,234 @@ gens:
     product: BLACK_WOOL
   '70':
     id: 70
-    name: a
-    block: ACACIA_LOG
-    product: ACACIA_BOAT
+    name: Red Glazed Terracotta Generator
+    block: RED_GLAZED_TERRACOTTA
+    product: RED_GLAZED_TERRACOTTA
   '71':
     id: 71
-    name: b
-    block: ACACIA_LOG
-    product: ACACIA_BOAT
+    name: Lime Glazed Terracotta Generator
+    block: LIME_GLAZED_TERRACOTTA
+    product: LIME_GLAZED_TERRACOTTA
   '72':
     id: 72
-    name: v
-    block: ACACIA_LOG
-    product: ACACIA_BOAT
+    name: Pink Glazed Terracotta Generator
+    block: PINK_GLAZED_TERRACOTTA
+    product: PINK_GLAZED_TERRACOTTA
   '73':
     id: 73
-    name: f
-    block: ACACIA_LOG
-    product: ACACIA_BOAT
+    name: Gray Glazed Terracotta Generator
+    block: GRAY_GLAZED_TERRACOTTA
+    product: GRAY_GLAZED_TERRACOTTA
   '74':
     id: 74
-    name: fsad
-    block: ACACIA_LOG
-    product: ACACIA_BOAT
+    name: Cyan Glazed Terracotta Generator
+    block: CYAN_GLAZED_TERRACOTTA
+    product: CYAN_GLAZED_TERRACOTTA
   '75':
     id: 75
-    name: fsadasd
-    block: ACACIA_LOG
-    product: ACACIA_BOAT
+    name: Blue Glazed Terracotta Generator
+    block: BLUE_GLAZED_TERRACOTTA
+    product: BLUE_GLAZED_TERRACOTTA
   '76':
     id: 76
-    name: fsadasd
-    block: ACACIA_LOG
-    product: ACACIA_BOAT
+    name: White Glazed Terracotta Generator
+    block: WHITE_GLAZED_TERRACOTTA
+    product: WHITE_GLAZED_TERRACOTTA
   '77':
     id: 77
-    name: fsadasd
-    block: ACACIA_LOG
-    product: ACACIA_BOAT
+    name: Brown Glazed Terracotta Generator
+    block: BROWN_GLAZED_TERRACOTTA
+    product: BROWN_GLAZED_TERRACOTTA
   '78':
     id: 78
-    name: fsadasd
-    block: ACACIA_LOG
-    product: ACACIA_BOAT
+    name: Green Glazed Terracotta Generator
+    block: GREEN_GLAZED_TERRACOTTA
+    product: GREEN_GLAZED_TERRACOTTA
   '79':
     id: 79
-    name: fsadasd
-    block: ACACIA_LOG
-    product: ACACIA_BOAT
+    name: Black Glazed Terracotta Generator
+    block: BLACK_GLAZED_TERRACOTTA
+    product: BLACK_GLAZED_TERRACOTTA
   '80':
     id: 80
-    name: fsadasd
-    block: ACACIA_LOG
-    product: ACACIA_BOAT
+    name: Purpur Block Generator
+    block: PURPUR_BLOCK
+    product: PURPUR_BLOCK
   '81':
     id: 81
-    name: fsadasd
-    block: ACACIA_LOG
-    product: ACACIA_BOAT
+    name: Purpur Pillar Generator
+    block: PURPUR_PILLAR
+    product: PURPUR_PILLAR
   '82':
     id: 82
-    name: fsadasd
-    block: ACACIA_LOG
-    product: ACACIA_BOAT
+    name: Nether Brick Generator
+    block: NETHER_BRICKS
+    product: NETHER_BRICK
   '83':
     id: 83
-    name: fsadasdt
-    block: ACACIA_LOG
-    product: ACACIA_BOAT
+    name: End Stone Generator
+    block: END_STONE
+    product: END_STONE
   '84':
     id: 84
-    name: fsadasdt
-    block: ACACIA_LOG
-    product: ACACIA_BOAT
+    name: End Stone Brick Generator
+    block: END_STONE_BRICKS
+    product: END_STONE_BRICKS
+  '85':
+    id: 85
+    name: Magma Generator
+    block: MAGMA_BLOCK
+    product: MAGMA_CREAM
+  '86':
+    id: 86
+    name: Nether Ward Generator
+    block: NETHER_WART_BLOCK
+    product: NETHER_WART
+  '87':
+    id: 87
+    name: Nether Bricks Generator
+    block: RED_NETHER_BRICKS
+    product: NETHER_BRICKS
+  '88':
+    id: 88
+    name: Bone Generator
+    block: BONE_BLOCK
+    product: BONE
+  '89':
+    id: 89
+    name: Jukebox Generator
+    block: JUKEBOX
+    product: JUKEBOX
+  '90':
+    id: 90
+    name: White Concrete Generator
+    block: WHITE_CONCRETE
+    product: WHITE_CONCRETE
+  '91':
+    id: 91
+    name: Orange Concrete Generator
+    block: ORANGE_CONCRETE
+    product: ORANGE_CONCRETE
+  '92':
+    id: 92
+    name: Magenta Concrete Generator
+    block: MAGENTA_CONCRETE
+    product: MAGENTA_CONCRETE
+  '93':
+    id: 93
+    name: Light Blue Concrete Generator
+    block: LIGHT_BLUE_CONCRETE
+    product: LIGHT_BLUE_CONCRETE
+  '94':
+    id: 94
+    name: Yellow Concrete Generator
+    block: YELLOW_CONCRETE
+    product: YELLOW_CONCRETE
+  '95':
+    id: 95
+    name: Lime Concrete Generator
+    block: LIME_CONCRETE
+    product: LIME_CONCRETE
+  '96':
+    id: 96
+    name: Pink Concrete Generator
+    block: PINK_CONCRETE
+    product: PINK_CONCRETE
+  '97':
+    id: 97
+    name: Gray Concrete Generator
+    block: GRAY_CONCRETE
+    product: GRAY_CONCRETE
+  '98':
+    id: 98
+    name: Light Gray Concrete Generator
+    block: LIGHT_GRAY_CONCRETE
+    product: LIGHT_GRAY_CONCRETE
+  '99':
+    id: 99
+    name: Cyan Concrete Generator
+    block: CYAN_CONCRETE
+    product: CYAN_CONCRETE
+  '100':
+    id: 100
+    name: Purple Concrete Generators
+    block: PURPLE_CONCRETE
+    product: PURPLE_CONCRETE
+  '101':
+    id: 101
+    name: Blue Concrete Generator
+    block: BLUE_CONCRETE
+    product: BLUE_CONCRETE
+  '102':
+    id: 102
+    name: Brown Concrete Generator
+    block: BROWN_CONCRETE
+    product: BROWN_CONCRETE
+  '103':
+    id: 103
+    name: Green Concrete Generator
+    block: GREEN_CONCRETE
+    product: GREEN_CONCRETE
+  '104':
+    id: 104
+    name: Red Concrete Generator
+    block: RED_CONCRETE
+    product: RED_CONCRETE
+  '105':
+    id: 105
+    name: Black Concrete Generator
+    block: BLACK_CONCRETE
+    product: BLACK_CONCRETE
+  '106':
+    id: 106
+    name: Ender Pearl Generator
+    block: BARREL
+    product: ENDER_PEARL
+  '107':
+    id: 107
+    name: Blaze Powder Generator
+    block: BARREL
+    product: BLAZE_POWDER
+  '108':
+    id: 108
+    name: Blaze Rod Generator
+    block: BARREL
+    product: BLAZE_ROD
+  '109':
+    id: 109
+    name: Potato Generator
+    block: BARREL
+    product: POTATO
+  '110':
+    id: 110
+    name: Copper Generator
+    block: COPPER_BLOCK
+    product: COPPER_INGOT
 miningItems:
-  STONE: 1.0
-  COAL_ORE: 2.0
+  STONE: 2.0
+  COAL_ORE: 4.0
   DEEPSLATE_COAL_ORE: 4.0
-  IRON_ORE: 3.5
+  IRON_ORE: 12.0
   DEEPSLATE_IRON_ORE: 16.0
-  COPPER_ORE: 4.0
+  COPPER_ORE: 16.0
   DEEPSLATE_COPPER_ORE: 32.0
-  GOLD_ORE: 5.0
+  GOLD_ORE: 30.0
   DEEPSLATE_GOLD_ORE: 64.0
-  REDSTONE_ORE: 8.0
-  DEEPSLATE_REDSTONE_ORE: 128.0
-  EMERALD_ORE: 10.0
-  DEEPSLATE_EMERALD_ORE: 256.0
-  LAPIS_ORE: 32.0
-  DEEPSLATE_LAPIS_ORE: 512.0
-  DIAMOND_ORE: 48.0
-  DEEPSLATE_DIAMOND_ORE: 1024.0
+  REDSTONE_ORE: 36.0
+  DEEPSLATE_REDSTONE_ORE: 60.0
+  EMERALD_ORE: 462.0
+  DEEPSLATE_EMERALD_ORE: 100.0
+  LAPIS_ORE: 132.0
+  DEEPSLATE_LAPIS_ORE: 200.0
+  DIAMOND_ORE: 256.0
+  DEEPSLATE_DIAMOND_ORE: 300.0
   MOSSY_COBBLESTONE: 4.0
   COBBLESTONE: 1.0
-  DEEPSLATE: 10.0
+  DEEPSLATE: 6.0
 mines:
-- prestigeRequirement: 0
-  ores:
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: STONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: STONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: STONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: STONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: STONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: STONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: STONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: COAL_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: COAL_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: COAL_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: COAL_ORE
-  name: Stone
+- prestigeRequirement: 160
+  ore: EMERALD_BLOCK
+  name: Emerald-Block
   icon:
     ==: org.bukkit.inventory.ItemStack
     v: 2865
@@ -485,92 +582,33 @@ mines:
       ==: ItemMeta
       meta-type: UNSPECIFIC
       display-name: '{"extra":[{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#673AB7","text":"M"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#524CAE","text":"i"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#3E5FA4","text":"n"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#29719B","text":"e"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#158491","text":"s"}],"text":""}'
+      lore:
+      - '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#6F737D","text":"»
+        "},{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#D5D6D8","text":"Do
+        some manual labour"}],"text":""}'
       custom-model-data: 25
       PublicBukkitValues:
         oraxen:id: mines_icon
   regionEnd:
     ==: org.bukkit.Location
     world: Mines
-    x: 55.0
-    y: 75.0
-    z: -195.0
+    x: 584.0
+    y: 66.0
+    z: -453.0
     pitch: 0.0
     yaw: 0.0
-  id: 0
+  id: 22
   regionStart:
     ==: org.bukkit.Location
     world: Mines
-    x: 7.0
-    y: 66.0
-    z: -147.0
+    x: 632.0
+    y: 75.0
+    z: -405.0
     pitch: 0.0
     yaw: 0.0
-- prestigeRequirement: 1
-  ores:
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: COAL_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: COAL_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: COAL_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: COAL_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: COAL_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: COAL_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: COAL_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: COAL_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: COAL_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: DIAMOND_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: LAPIS_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: STONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: STONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: STONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: STONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: STONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: STONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: STONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: STONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: STONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: GOLD_ORE
-  name: Coal
+- prestigeRequirement: 180
+  ore: PRISMARINE
+  name: Prismarine
   icon:
     ==: org.bukkit.inventory.ItemStack
     v: 2865
@@ -579,100 +617,32 @@ mines:
       ==: ItemMeta
       meta-type: UNSPECIFIC
       display-name: '{"extra":[{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#673AB7","text":"M"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#524CAE","text":"i"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#3E5FA4","text":"n"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#29719B","text":"e"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#158491","text":"s"}],"text":""}'
+      lore:
+      - '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#6F737D","text":"»
+        "},{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#D5D6D8","text":"Do
+        some manual labour"}],"text":""}'
       custom-model-data: 25
       PublicBukkitValues:
         oraxen:id: mines_icon
   regionEnd:
     ==: org.bukkit.Location
     world: Mines
-    x: 60.0
+    x: 465.0
     y: 66.0
-    z: -62.0
+    z: -450.0
     pitch: 0.0
     yaw: 0.0
-  id: 1
+  id: 23
   regionStart:
     ==: org.bukkit.Location
     world: Mines
-    x: 12.0
+    x: 513.0
     y: 75.0
-    z: -14.0
+    z: -402.0
     pitch: 0.0
     yaw: 0.0
 - prestigeRequirement: 2
-  ores:
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: IRON_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: COAL_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: COAL_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: IRON_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: DIAMOND_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: COAL_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: IRON_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: COAL_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: IRON_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: GOLD_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: COAL_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: STONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: IRON_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: IRON_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: STONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: STONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: IRON_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: STONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: IRON_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: STONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: LAPIS_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: GOLD_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: STONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: STONE
+  ore: IRON_ORE
   name: Iron
   icon:
     ==: org.bukkit.inventory.ItemStack
@@ -682,91 +652,102 @@ mines:
       ==: ItemMeta
       meta-type: UNSPECIFIC
       display-name: '{"extra":[{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#673AB7","text":"M"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#524CAE","text":"i"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#3E5FA4","text":"n"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#29719B","text":"e"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#158491","text":"s"}],"text":""}'
+      lore:
+      - '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#6F737D","text":"»
+        "},{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#D5D6D8","text":"Do
+        some manual labour"}],"text":""}'
       custom-model-data: 25
       PublicBukkitValues:
         oraxen:id: mines_icon
   regionEnd:
     ==: org.bukkit.Location
     world: Mines
-    x: 63.0
+    x: 289.0
     y: 66.0
-    z: -333.0
+    z: -14.0
     pitch: 0.0
     yaw: 0.0
   id: 2
   regionStart:
     ==: org.bukkit.Location
     world: Mines
-    x: 15.0
+    x: 241.0
     y: 75.0
-    z: -285.0
+    z: -62.0
     pitch: 0.0
     yaw: 0.0
 - prestigeRequirement: 3
-  ores:
-  - ==: org.bukkit.inventory.ItemStack
+  ore: COPPER_ORE
+  name: Copper
+  icon:
+    ==: org.bukkit.inventory.ItemStack
     v: 2865
-    type: LAPIS_ORE
-  - ==: org.bukkit.inventory.ItemStack
+    type: PAPER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: '{"extra":[{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#673AB7","text":"M"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#524CAE","text":"i"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#3E5FA4","text":"n"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#29719B","text":"e"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#158491","text":"s"}],"text":""}'
+      lore:
+      - '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#6F737D","text":"»
+        "},{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#D5D6D8","text":"Do
+        some manual labour"}],"text":""}'
+      custom-model-data: 25
+      PublicBukkitValues:
+        oraxen:id: mines_icon
+  regionEnd:
+    ==: org.bukkit.Location
+    world: Mines
+    x: 402.0
+    y: 74.0
+    z: -19.0
+    pitch: 0.0
+    yaw: 0.0
+  id: 3
+  regionStart:
+    ==: org.bukkit.Location
+    world: Mines
+    x: 354.0
+    y: 66.0
+    z: -67.0
+    pitch: 0.0
+    yaw: 0.0
+- prestigeRequirement: 4
+  ore: GOLD_ORE
+  name: Gold
+  icon:
+    ==: org.bukkit.inventory.ItemStack
     v: 2865
-    type: DIAMOND_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: GOLD_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: STONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: REDSTONE_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: STONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: REDSTONE_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: COAL_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: IRON_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: REDSTONE_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: REDSTONE_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: REDSTONE_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: REDSTONE_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: LAPIS_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: REDSTONE_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: STONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: DIAMOND_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: STONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: IRON_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: COAL_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: GOLD_ORE
+    type: PAPER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: '{"extra":[{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#673AB7","text":"M"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#524CAE","text":"i"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#3E5FA4","text":"n"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#29719B","text":"e"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#158491","text":"s"}],"text":""}'
+      lore:
+      - '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#6F737D","text":"»
+        "},{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#D5D6D8","text":"Do
+        some manual labour"}],"text":""}'
+      custom-model-data: 25
+      PublicBukkitValues:
+        oraxen:id: mines_icon
+  regionEnd:
+    ==: org.bukkit.Location
+    world: Mines
+    x: 515.0
+    y: 75.0
+    z: -20.0
+    pitch: 0.0
+    yaw: 0.0
+  id: 4
+  regionStart:
+    ==: org.bukkit.Location
+    world: Mines
+    x: 467.0
+    y: 66.0
+    z: -68.0
+    pitch: 0.0
+    yaw: 0.0
+- prestigeRequirement: 5
+  ore: REDSTONE_ORE
   name: Redstone
   icon:
     ==: org.bukkit.inventory.ItemStack
@@ -776,179 +757,33 @@ mines:
       ==: ItemMeta
       meta-type: UNSPECIFIC
       display-name: '{"extra":[{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#673AB7","text":"M"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#524CAE","text":"i"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#3E5FA4","text":"n"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#29719B","text":"e"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#158491","text":"s"}],"text":""}'
+      lore:
+      - '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#6F737D","text":"»
+        "},{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#D5D6D8","text":"Do
+        some manual labour"}],"text":""}'
       custom-model-data: 25
       PublicBukkitValues:
         oraxen:id: mines_icon
   regionEnd:
     ==: org.bukkit.Location
     world: Mines
-    x: 69.0
-    y: 66.0
-    z: -399.0
+    x: 635.0
+    y: 75.0
+    z: -69.0
     pitch: 0.0
     yaw: 0.0
-  id: 3
+  id: 5
   regionStart:
     ==: org.bukkit.Location
     world: Mines
-    x: 21.0
-    y: 75.0
-    z: -447.0
+    x: 587.0
+    y: 66.0
+    z: -21.0
     pitch: 0.0
     yaw: 0.0
-- prestigeRequirement: 4
-  ores:
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: COBBLESTONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: COBBLESTONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: DEEPSLATE_COAL_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: DEEPSLATE_COAL_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: DEEPSLATE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: DEEPSLATE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: MOSSY_COBBLESTONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: MOSSY_COBBLESTONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: DEEPSLATE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: DEEPSLATE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: DEEPSLATE_DIAMOND_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: DIAMOND_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: MOSSY_COBBLESTONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: COBBLESTONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: DEEPSLATE_GOLD_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: DEEPSLATE_GOLD_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: COBBLESTONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: COBBLESTONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: DEEPSLATE_COAL_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: DEEPSLATE_COAL_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: DEEPSLATE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: DEEPSLATE_COAL_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: DEEPSLATE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: DEEPSLATE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: DEEPSLATE_COAL_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: DEEPSLATE_COAL_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: DEEPSLATE_COAL_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: DEEPSLATE_COAL_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: COBBLESTONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: COBBLESTONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: DEEPSLATE_IRON_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: DEEPSLATE_IRON_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: DEEPSLATE_IRON_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: DEEPSLATE_GOLD_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: COBBLESTONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: COBBLESTONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: DEEPSLATE_COPPER_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: DEEPSLATE_REDSTONE_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: DEEPSLATE_LAPIS_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: DEEPSLATE_EMERALD_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: MOSSY_COBBLESTONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: MOSSY_COBBLESTONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: GOLD_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: LAPIS_ORE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: MOSSY_COBBLESTONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: MOSSY_COBBLESTONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: DEEPSLATE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: DEEPSLATE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: MOSSY_COBBLESTONE
-  - ==: org.bukkit.inventory.ItemStack
-    v: 2865
-    type: MOSSY_COBBLESTONE
-  name: Mossy
+- prestigeRequirement: 10
+  ore: LAPIS_ORE
+  name: Lapis
   icon:
     ==: org.bukkit.inventory.ItemStack
     v: 2865
@@ -957,23 +792,692 @@ mines:
       ==: ItemMeta
       meta-type: UNSPECIFIC
       display-name: '{"extra":[{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#673AB7","text":"M"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#524CAE","text":"i"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#3E5FA4","text":"n"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#29719B","text":"e"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#158491","text":"s"}],"text":""}'
+      lore:
+      - '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#6F737D","text":"»
+        "},{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#D5D6D8","text":"Do
+        some manual labour"}],"text":""}'
       custom-model-data: 25
       PublicBukkitValues:
         oraxen:id: mines_icon
   regionEnd:
     ==: org.bukkit.Location
     world: Mines
-    x: 176.0
-    y: 66.0
-    z: -451.0
+    x: 751.0
+    y: 75.0
+    z: -22.0
     pitch: 0.0
     yaw: 0.0
-  id: 4
+  id: 6
   regionStart:
     ==: org.bukkit.Location
     world: Mines
-    x: 128.0
+    x: 703.0
+    y: 66.0
+    z: -70.0
+    pitch: 0.0
+    yaw: 0.0
+- prestigeRequirement: 15
+  ore: DIAMOND_ORE
+  name: Diamond
+  icon:
+    ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: PAPER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: '{"extra":[{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#673AB7","text":"M"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#524CAE","text":"i"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#3E5FA4","text":"n"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#29719B","text":"e"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#158491","text":"s"}],"text":""}'
+      lore:
+      - '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#6F737D","text":"»
+        "},{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#D5D6D8","text":"Do
+        some manual labour"}],"text":""}'
+      custom-model-data: 25
+      PublicBukkitValues:
+        oraxen:id: mines_icon
+  regionEnd:
+    ==: org.bukkit.Location
+    world: Mines
+    x: 751.0
+    y: 66.0
+    z: -203.0
+    pitch: 0.0
+    yaw: 0.0
+  id: 7
+  regionStart:
+    ==: org.bukkit.Location
+    world: Mines
+    x: 703.0
     y: 75.0
-    z: -403.0
+    z: -155.0
+    pitch: 0.0
+    yaw: 0.0
+- prestigeRequirement: 50
+  ore: DEEPSLATE_DIAMOND_ORE
+  name: Deepslate-Diamond
+  icon:
+    ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: PAPER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: '{"extra":[{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#673AB7","text":"M"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#524CAE","text":"i"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#3E5FA4","text":"n"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#29719B","text":"e"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#158491","text":"s"}],"text":""}'
+      lore:
+      - '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#6F737D","text":"»
+        "},{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#D5D6D8","text":"Do
+        some manual labour"}],"text":""}'
+      custom-model-data: 25
+      PublicBukkitValues:
+        oraxen:id: mines_icon
+  regionEnd:
+    ==: org.bukkit.Location
+    world: Mines
+    x: 15.0
+    y: 66.0
+    z: -285.0
+    pitch: 0.0
+    yaw: 0.0
+  id: 14
+  regionStart:
+    ==: org.bukkit.Location
+    world: Mines
+    x: 63.0
+    y: 75.0
+    z: -333.0
+    pitch: 0.0
+    yaw: 0.0
+- prestigeRequirement: 60
+  ore: DEEPSLATE_EMERALD_ORE
+  name: Deepslate-Emerald
+  icon:
+    ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: PAPER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: '{"extra":[{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#673AB7","text":"M"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#524CAE","text":"i"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#3E5FA4","text":"n"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#29719B","text":"e"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#158491","text":"s"}],"text":""}'
+      lore:
+      - '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#6F737D","text":"»
+        "},{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#D5D6D8","text":"Do
+        some manual labour"}],"text":""}'
+      custom-model-data: 25
+      PublicBukkitValues:
+        oraxen:id: mines_icon
+  regionEnd:
+    ==: org.bukkit.Location
+    world: Mines
+    x: 180.0
+    y: 66.0
+    z: -268.0
+    pitch: 0.0
+    yaw: 0.0
+  id: 15
+  regionStart:
+    ==: org.bukkit.Location
+    world: Mines
+    x: 132.0
+    y: 75.0
+    z: -316.0
+    pitch: 0.0
+    yaw: 0.0
+- prestigeRequirement: 30
+  ore: DEEPSLATE_IRON_ORE
+  name: Deepslate-Iron
+  icon:
+    ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: PAPER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: '{"extra":[{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#673AB7","text":"M"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#524CAE","text":"i"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#3E5FA4","text":"n"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#29719B","text":"e"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#158491","text":"s"}],"text":""}'
+      lore:
+      - '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#6F737D","text":"»
+        "},{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#D5D6D8","text":"Do
+        some manual labour"}],"text":""}'
+      custom-model-data: 25
+      PublicBukkitValues:
+        oraxen:id: mines_icon
+  regionEnd:
+    ==: org.bukkit.Location
+    world: Mines
+    x: 355.0
+    y: 66.0
+    z: -196.0
+    pitch: 0.0
+    yaw: 0.0
+  id: 10
+  regionStart:
+    ==: org.bukkit.Location
+    world: Mines
+    x: 402.0
+    y: 75.0
+    z: -148.0
+    pitch: 0.0
+    yaw: 0.0
+- prestigeRequirement: 35
+  ore: DEEPSLATE_GOLD_ORE
+  name: Deepslate-Gold
+  icon:
+    ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: PAPER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: '{"extra":[{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#673AB7","text":"M"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#524CAE","text":"i"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#3E5FA4","text":"n"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#29719B","text":"e"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#158491","text":"s"}],"text":""}'
+      lore:
+      - '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#6F737D","text":"»
+        "},{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#D5D6D8","text":"Do
+        some manual labour"}],"text":""}'
+      custom-model-data: 25
+      PublicBukkitValues:
+        oraxen:id: mines_icon
+  regionEnd:
+    ==: org.bukkit.Location
+    world: Mines
+    x: 242.0
+    y: 66.0
+    z: -194.0
+    pitch: 0.0
+    yaw: 0.0
+  id: 11
+  regionStart:
+    ==: org.bukkit.Location
+    world: Mines
+    x: 290.0
+    y: 75.0
+    z: -146.0
+    pitch: 0.0
+    yaw: 0.0
+- prestigeRequirement: 40
+  ore: DEEPSLATE_REDSTONE_ORE
+  name: Deepslate-Redstone
+  icon:
+    ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: PAPER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: '{"extra":[{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#673AB7","text":"M"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#524CAE","text":"i"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#3E5FA4","text":"n"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#29719B","text":"e"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#158491","text":"s"}],"text":""}'
+      lore:
+      - '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#6F737D","text":"»
+        "},{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#D5D6D8","text":"Do
+        some manual labour"}],"text":""}'
+      custom-model-data: 25
+      PublicBukkitValues:
+        oraxen:id: mines_icon
+  regionEnd:
+    ==: org.bukkit.Location
+    world: Mines
+    x: 131.0
+    y: 66.0
+    z: -193.0
+    pitch: 0.0
+    yaw: 0.0
+  id: 12
+  regionStart:
+    ==: org.bukkit.Location
+    world: Mines
+    x: 179.0
+    y: 75.0
+    z: -145.0
+    pitch: 0.0
+    yaw: 0.0
+- prestigeRequirement: 45
+  ore: DEEPSLATE_LAPIS_ORE
+  name: Deepslate-Lapis
+  icon:
+    ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: PAPER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: '{"extra":[{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#673AB7","text":"M"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#524CAE","text":"i"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#3E5FA4","text":"n"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#29719B","text":"e"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#158491","text":"s"}],"text":""}'
+      lore:
+      - '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#6F737D","text":"»
+        "},{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#D5D6D8","text":"Do
+        some manual labour"}],"text":""}'
+      custom-model-data: 25
+      PublicBukkitValues:
+        oraxen:id: mines_icon
+  regionEnd:
+    ==: org.bukkit.Location
+    world: Mines
+    x: 7.0
+    y: 66.0
+    z: -195.0
+    pitch: 0.0
+    yaw: 0.0
+  id: 13
+  regionStart:
+    ==: org.bukkit.Location
+    world: Mines
+    x: 55.0
+    y: 75.0
+    z: -147.0
+    pitch: 0.0
+    yaw: 0.0
+- prestigeRequirement: 0
+  ore: STONE
+  name: Stone
+  icon:
+    ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: PAPER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: '{"extra":[{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#673AB7","text":"M"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#524CAE","text":"i"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#3E5FA4","text":"n"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#29719B","text":"e"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#158491","text":"s"}],"text":""}'
+      lore:
+      - '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#6F737D","text":"»
+        "},{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#D5D6D8","text":"Do
+        some manual labour"}],"text":""}'
+      custom-model-data: 25
+      PublicBukkitValues:
+        oraxen:id: mines_icon
+  regionEnd:
+    ==: org.bukkit.Location
+    world: Mines
+    x: 60.0
+    y: 66.0
+    z: -14.0
+    pitch: 0.0
+    yaw: 0.0
+  id: 0
+  regionStart:
+    ==: org.bukkit.Location
+    world: Mines
+    x: 12.0
+    y: 75.0
+    z: -62.0
+    pitch: 0.0
+    yaw: 0.0
+- prestigeRequirement: 1
+  ore: COAL_ORE
+  name: Coal
+  icon:
+    ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: PAPER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: '{"extra":[{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#673AB7","text":"M"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#524CAE","text":"i"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#3E5FA4","text":"n"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#29719B","text":"e"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#158491","text":"s"}],"text":""}'
+      lore:
+      - '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#6F737D","text":"»
+        "},{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#D5D6D8","text":"Do
+        some manual labour"}],"text":""}'
+      custom-model-data: 25
+      PublicBukkitValues:
+        oraxen:id: mines_icon
+  regionEnd:
+    ==: org.bukkit.Location
+    world: Mines
+    x: 178.0
+    y: 66.0
+    z: -17.0
+    pitch: 0.0
+    yaw: 0.0
+  id: 1
+  regionStart:
+    ==: org.bukkit.Location
+    world: Mines
+    x: 130.0
+    y: 75.0
+    z: -65.0
+    pitch: 0.0
+    yaw: 0.0
+- prestigeRequirement: 70
+  ore: COAL_BLOCK
+  name: Coal-Block
+  icon:
+    ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: PAPER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: '{"extra":[{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#673AB7","text":"M"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#524CAE","text":"i"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#3E5FA4","text":"n"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#29719B","text":"e"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#158491","text":"s"}],"text":""}'
+      lore:
+      - '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#6F737D","text":"»
+        "},{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#D5D6D8","text":"Do
+        some manual labour"}],"text":""}'
+      custom-model-data: 25
+      PublicBukkitValues:
+        oraxen:id: mines_icon
+  regionEnd:
+    ==: org.bukkit.Location
+    world: Mines
+    x: 287.0
+    y: 75.0
+    z: -274.0
+    pitch: 0.0
+    yaw: 0.0
+  id: 16
+  regionStart:
+    ==: org.bukkit.Location
+    world: Mines
+    x: 239.0
+    y: 66.0
+    z: -322.0
+    pitch: 0.0
+    yaw: 0.0
+- prestigeRequirement: 80
+  ore: IRON_BLOCK
+  name: Iron-Block
+  icon:
+    ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: PAPER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: '{"extra":[{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#673AB7","text":"M"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#524CAE","text":"i"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#3E5FA4","text":"n"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#29719B","text":"e"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#158491","text":"s"}],"text":""}'
+      lore:
+      - '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#6F737D","text":"»
+        "},{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#D5D6D8","text":"Do
+        some manual labour"}],"text":""}'
+      custom-model-data: 25
+      PublicBukkitValues:
+        oraxen:id: mines_icon
+  regionEnd:
+    ==: org.bukkit.Location
+    world: Mines
+    x: 402.0
+    y: 66.0
+    z: -317.0
+    pitch: 0.0
+    yaw: 0.0
+  id: 17
+  regionStart:
+    ==: org.bukkit.Location
+    world: Mines
+    x: 354.0
+    y: 75.0
+    z: -269.0
+    pitch: 0.0
+    yaw: 0.0
+- prestigeRequirement: 90
+  ore: GOLD_BLOCK
+  name: Gold-Block
+  icon:
+    ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: PAPER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: '{"extra":[{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#673AB7","text":"M"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#524CAE","text":"i"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#3E5FA4","text":"n"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#29719B","text":"e"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#158491","text":"s"}],"text":""}'
+      lore:
+      - '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#6F737D","text":"»
+        "},{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#D5D6D8","text":"Do
+        some manual labour"}],"text":""}'
+      custom-model-data: 25
+      PublicBukkitValues:
+        oraxen:id: mines_icon
+  regionEnd:
+    ==: org.bukkit.Location
+    world: Mines
+    x: 512.0
+    y: 66.0
+    z: -329.0
+    pitch: 0.0
+    yaw: 0.0
+  id: 18
+  regionStart:
+    ==: org.bukkit.Location
+    world: Mines
+    x: 464.0
+    y: 75.0
+    z: -281.0
+    pitch: 0.0
+    yaw: 0.0
+- prestigeRequirement: 100
+  ore: REDSTONE_BLOCK
+  name: Redstone-Block
+  icon:
+    ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: PAPER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: '{"extra":[{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#673AB7","text":"M"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#524CAE","text":"i"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#3E5FA4","text":"n"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#29719B","text":"e"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#158491","text":"s"}],"text":""}'
+      lore:
+      - '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#6F737D","text":"»
+        "},{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#D5D6D8","text":"Do
+        some manual labour"}],"text":""}'
+      custom-model-data: 25
+      PublicBukkitValues:
+        oraxen:id: mines_icon
+  regionEnd:
+    ==: org.bukkit.Location
+    world: Mines
+    x: 631.0
+    y: 66.0
+    z: -280.0
+    pitch: 0.0
+    yaw: 0.0
+  id: 19
+  regionStart:
+    ==: org.bukkit.Location
+    world: Mines
+    x: 583.0
+    y: 75.0
+    z: -328.0
+    pitch: 0.0
+    yaw: 0.0
+- prestigeRequirement: 120
+  ore: LAPIS_BLOCK
+  name: Lapis-Block
+  icon:
+    ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: PAPER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: '{"extra":[{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#673AB7","text":"M"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#524CAE","text":"i"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#3E5FA4","text":"n"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#29719B","text":"e"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#158491","text":"s"}],"text":""}'
+      lore:
+      - '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#6F737D","text":"»
+        "},{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#D5D6D8","text":"Do
+        some manual labour"}],"text":""}'
+      custom-model-data: 25
+      PublicBukkitValues:
+        oraxen:id: mines_icon
+  regionEnd:
+    ==: org.bukkit.Location
+    world: Mines
+    x: 755.0
+    y: 66.0
+    z: -279.0
+    pitch: 0.0
+    yaw: 0.0
+  id: 20
+  regionStart:
+    ==: org.bukkit.Location
+    world: Mines
+    x: 707.0
+    y: 75.0
+    z: -327.0
+    pitch: 0.0
+    yaw: 0.0
+- prestigeRequirement: 140
+  ore: DIAMOND_BLOCK
+  name: Diamond-Block
+  icon:
+    ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: PAPER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: '{"extra":[{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#673AB7","text":"M"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#524CAE","text":"i"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#3E5FA4","text":"n"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#29719B","text":"e"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#158491","text":"s"}],"text":""}'
+      lore:
+      - '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#6F737D","text":"»
+        "},{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#D5D6D8","text":"Do
+        some manual labour"}],"text":""}'
+      custom-model-data: 25
+      PublicBukkitValues:
+        oraxen:id: mines_icon
+  regionEnd:
+    ==: org.bukkit.Location
+    world: Mines
+    x: 759.0
+    y: 66.0
+    z: -453.0
+    pitch: 0.0
+    yaw: 0.0
+  id: 21
+  regionStart:
+    ==: org.bukkit.Location
+    world: Mines
+    x: 711.0
+    y: 75.0
+    z: -405.0
+    pitch: 0.0
+    yaw: 0.0
+- prestigeRequirement: 20
+  ore: EMERALD_ORE
+  name: Emerald
+  icon:
+    ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: PAPER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: '{"extra":[{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#673AB7","text":"M"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#524CAE","text":"i"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#3E5FA4","text":"n"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#29719B","text":"e"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#158491","text":"s"}],"text":""}'
+      lore:
+      - '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#6F737D","text":"»
+        "},{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#D5D6D8","text":"Do
+        some manual labour"}],"text":""}'
+      custom-model-data: 25
+      PublicBukkitValues:
+        oraxen:id: mines_icon
+  regionEnd:
+    ==: org.bukkit.Location
+    world: Mines
+    x: 586.0
+    y: 66.0
+    z: -202.0
+    pitch: 0.0
+    yaw: 0.0
+  id: 8
+  regionStart:
+    ==: org.bukkit.Location
+    world: Mines
+    x: 634.0
+    y: 75.0
+    z: -154.0
+    pitch: 0.0
+    yaw: 0.0
+- prestigeRequirement: 25
+  ore: DEEPSLATE_COAL_ORE
+  name: Deepslate-Coal
+  icon:
+    ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: PAPER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: '{"extra":[{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#673AB7","text":"M"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#524CAE","text":"i"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#3E5FA4","text":"n"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#29719B","text":"e"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#158491","text":"s"}],"text":""}'
+      lore:
+      - '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#6F737D","text":"»
+        "},{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#D5D6D8","text":"Do
+        some manual labour"}],"text":""}'
+      custom-model-data: 25
+      PublicBukkitValues:
+        oraxen:id: mines_icon
+  regionEnd:
+    ==: org.bukkit.Location
+    world: Mines
+    x: 467.0
+    y: 66.0
+    z: -152.0
+    pitch: 0.0
+    yaw: 0.0
+  id: 9
+  regionStart:
+    ==: org.bukkit.Location
+    world: Mines
+    x: 515.0
+    y: 75.0
+    z: -200.0
+    pitch: 0.0
+    yaw: 0.0
+- prestigeRequirement: 200
+  ore: PRISMARINE_BRICKS
+  name: Prismarine-Bricks
+  icon:
+    ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: PAPER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: '{"extra":[{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#673AB7","text":"M"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#524CAE","text":"i"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#3E5FA4","text":"n"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#29719B","text":"e"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#158491","text":"s"}],"text":""}'
+      lore:
+      - '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#6F737D","text":"»
+        "},{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#D5D6D8","text":"Do
+        some manual labour"}],"text":""}'
+      custom-model-data: 25
+      PublicBukkitValues:
+        oraxen:id: mines_icon
+  regionEnd:
+    ==: org.bukkit.Location
+    world: Mines
+    x: 353.0
+    y: 66.0
+    z: -401.0
+    pitch: 0.0
+    yaw: 0.0
+  id: 24
+  regionStart:
+    ==: org.bukkit.Location
+    world: Mines
+    x: 401.0
+    y: 75.0
+    z: -449.0
+    pitch: 0.0
+    yaw: 0.0
+- prestigeRequirement: 220
+  ore: DARK_PRISMARINE
+  name: Dark-Prismarine
+  icon:
+    ==: org.bukkit.inventory.ItemStack
+    v: 2865
+    type: PAPER
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: '{"extra":[{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#673AB7","text":"M"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#524CAE","text":"i"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#3E5FA4","text":"n"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#29719B","text":"e"},{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#158491","text":"s"}],"text":""}'
+      lore:
+      - '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#6F737D","text":"»
+        "},{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"#D5D6D8","text":"Do
+        some manual labour"}],"text":""}'
+      custom-model-data: 25
+      PublicBukkitValues:
+        oraxen:id: mines_icon
+  regionEnd:
+    ==: org.bukkit.Location
+    world: Mines
+    x: 238.0
+    y: 66.0
+    z: -450.0
+    pitch: 0.0
+    yaw: 0.0
+  id: 25
+  regionStart:
+    ==: org.bukkit.Location
+    world: Mines
+    x: 286.0
+    y: 75.0
+    z: -402.0
     pitch: 0.0
     yaw: 0.0
