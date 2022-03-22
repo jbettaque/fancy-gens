@@ -186,6 +186,7 @@ public final class FancyGens extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new ScoreBoardListener(this.generatorPlayerDao, placedAutosellChestDao, this.economy), this);
         getServer().getPluginManager().registerEvents(new SellWandListener(this, shopCommands, landsIntegration), this);
         getServer().getPluginManager().registerEvents(new PistonMoveListener(this), this);
+        getServer().getPluginManager().registerEvents(new SpongeSoakListener(this), this);
         getServer().getPluginManager().registerEvents(new PlaceAutosellChestListener(this, placedAutosellChestDao), this);
         getServer().getPluginManager().registerEvents(new BreakAutosellChestListener(this, adminCommands, placedAutosellChestDao), this);
         getServer().getPluginManager().registerEvents(new UpgradeWandListener(this, placedGeneratorDao, upgradeGeneratorListener, economy), this);

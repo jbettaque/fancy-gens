@@ -78,6 +78,14 @@ public class AdminCommands {
         ItemUtils.addPersistentTag(upgradeWand, key, PersistentDataType.INTEGER, 50);
         ItemUtils.give(player, upgradeWand);
     }
+    @CommandHook("giveflightcharges")
+    public void giveFlightCharges(CommandSender sender, Player player){
+        giveFilghtChargeBackend(player);
+    }
+
+    public void giveFilghtChargeBackend(Player player){
+
+    }
 
     @CommandHook("giveautosellchest")
     public void giveAutosellChest(CommandSender sender, Player player, int multiplier){
