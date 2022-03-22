@@ -178,6 +178,15 @@ public class ShopCommands {
         }
     }
 
+    public void buyUpgradableChest(Player player, int level, double gemsAmount){
+        if (economy.getBalance(player,FancyResource.GEMS) >= gemsAmount ){
+            economy.remove(player,FancyResource.GEMS,gemsAmount);
+            this.adminCommands.giveUpgradableChestBackend(player,level);
+            player.sendMessage(TextHelper.parseFancyString("&green&Purchased a &#2196F3-#FFEB3B&Upgradable Chest"));
+        }
+
+    }
+
     public double calculateGenPrice(GenConfig genConfig, int boost){
         double price = 0;
         for (int i = 1; i <= genConfig.id; i++) {

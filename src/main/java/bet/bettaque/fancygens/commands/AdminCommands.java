@@ -91,6 +91,10 @@ public class AdminCommands {
     public void giveAutosellChest(CommandSender sender, Player player, int multiplier){
         giveAutosellChestBackend(player, multiplier);
     }
+    @CommandHook("giveupgradablechest")
+    public void giveUpgradableChest(CommandSender sender, Player player, int level){
+        giveUpgradableChestBackend(player, level);
+    }
 
     public void giveAutosellChestBackend(Player player, int multiplier){
         NamespacedKey key = new NamespacedKey(plugin, "autosellchest");
@@ -98,6 +102,18 @@ public class AdminCommands {
                 .setName(Messages.msg("autosellChestName"))
                 .setLore("Multiplier x" + multiplier)
                 .addPersistentTag(key, PersistentDataType.INTEGER, multiplier);
+
+        ItemUtils.addEnchant(chestItem, Enchantment.DURABILITY, 1);
+        ItemUtils.addItemFlags(chestItem, ItemFlag.HIDE_ENCHANTS);
+        ItemUtils.give(player, chestItem);
+    }
+
+    public void giveUpgradableChestBackend(Player player, int level){
+        NamespacedKey key = new NamespacedKey(plugin, "upgradableChest");
+        ItemStack chestItem = new ItemBuilder(Material.CHEST)
+                .setName(TextHelper.parseFancyString("[Upgradable Chest](#2196F3-#FFEB3B)"))
+                .setLore("Level x" + level)
+                .addPersistentTag(key, PersistentDataType.INTEGER, level);
 
         ItemUtils.addEnchant(chestItem, Enchantment.DURABILITY, 1);
         ItemUtils.addItemFlags(chestItem, ItemFlag.HIDE_ENCHANTS);

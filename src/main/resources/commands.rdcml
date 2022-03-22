@@ -17,6 +17,10 @@ admin {
         hook giveautosellchest
     }
 
+    giveupgradablechest player:player int<1,10>:level {
+        hook giveupgradablechest
+    }
+
     setmaxgens player:player int:maxGens {
         hook setmaxgens
         help set player's maxgens
@@ -41,6 +45,9 @@ admin {
         hook fixgens
     }
 
+    giveflightcharges player:player {
+        hook giveflightcharges
+    }
 
 
     mines {

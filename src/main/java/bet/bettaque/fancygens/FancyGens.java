@@ -9,6 +9,7 @@ import bet.bettaque.fancygens.config.MineConfig;
 import bet.bettaque.fancygens.db.GeneratorPlayer;
 import bet.bettaque.fancygens.db.PlacedAutosellChest;
 import bet.bettaque.fancygens.db.PlacedGenerator;
+import bet.bettaque.fancygens.db.PlacedUpgradableChest;
 import bet.bettaque.fancygens.helpers.PersistanceHelper;
 import bet.bettaque.fancygens.helpers.TextHelper;
 import bet.bettaque.fancygens.listeners.*;
@@ -51,6 +52,7 @@ public final class FancyGens extends JavaPlugin {
     Dao<GeneratorPlayer, String> generatorPlayerDao;
     Dao<PlacedGenerator, Integer> placedGeneratorDao;
     Dao<PlacedAutosellChest, Integer> placedAutosellChestDao;
+    Dao<PlacedUpgradableChest, Integer> placedUpgradableChestDao;
     GeneratorHandler generatorHandler;
     AutosellChestHandler autosellChestHandler;
     ScoreBoardHandler scoreBoardHandler;
@@ -137,6 +139,9 @@ public final class FancyGens extends JavaPlugin {
 
             placedAutosellChestDao = DaoManager.createDao(connectionSource, PlacedAutosellChest.class);
             TableUtils.createTableIfNotExists(connectionSource, PlacedAutosellChest.class);
+
+            placedUpgradableChestDao = DaoManager.createDao(connectionSource, PlacedUpgradableChest.class);
+            TableUtils.createTableIfNotExists(connectionSource, PlacedUpgradableChest.class);
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
