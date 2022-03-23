@@ -1,6 +1,5 @@
 package bet.bettaque.fancygens.listeners;
 
-import bet.bettaque.fancygens.FancyResource;
 import bet.bettaque.fancygens.commands.goblins.GoblinTier;
 import bet.bettaque.fancygens.commands.goblins.GoblinRewardType;
 import bet.bettaque.fancygens.helpers.TextHelper;

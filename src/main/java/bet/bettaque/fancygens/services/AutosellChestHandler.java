@@ -1,4 +1,4 @@
-package bet.bettaque.fancygens;
+package bet.bettaque.fancygens.services;
 
 import bet.bettaque.fancygens.commands.ShopCommands;
 import bet.bettaque.fancygens.db.PlacedAutosellChest;

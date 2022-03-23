@@ -1,15 +1,13 @@
 package bet.bettaque.fancygens.listeners;
 
-import bet.bettaque.fancygens.FancyResource;
+import bet.bettaque.fancygens.services.FancyResource;
 import bet.bettaque.fancygens.db.GeneratorPlayer;
 import bet.bettaque.fancygens.db.PlacedAutosellChest;
 import bet.bettaque.fancygens.helpers.ScoreHelper;
 import bet.bettaque.fancygens.helpers.TextHelper;
 import bet.bettaque.fancygens.services.FancyEconomy;
 import com.j256.ormlite.dao.Dao;
-import com.j256.ormlite.stmt.PreparedQuery;
 import me.clip.placeholderapi.PlaceholderAPI;
-import net.milkbowl.vault.economy.Economy;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -18,9 +16,6 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 public class ScoreBoardListener implements Listener {
     Dao<GeneratorPlayer, String> generatorPlayerDao;

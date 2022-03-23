@@ -29,7 +29,7 @@ public class FancyGui {
     int size;
     boolean center;
     int page;
-
+    boolean isInputGui = false;
     public FancyGui(String title, int size, Player player, FancyGui previous) {
         this.title = title;
         this.size = size;
@@ -43,7 +43,7 @@ public class FancyGui {
     }
 
     public FancyGui(String title, int size, Player player) {
-        this(title, size, player ,null);
+        this(title, size, player, null);
     }
 
     public List<ItemStack> getContents() {
@@ -68,31 +68,36 @@ public class FancyGui {
     }
 
     public int getActualSize() {
-        if (hasMenuBar()) return size -9;
+        if (hasMenuBar()) return size - 9;
         return size;
     }
 
-    public void fillSlots(int start, int end){
+    public void fillSlots(int start, int end) {
         ItemStack fillIcon = OraxenItems.getItemById("filler").setDisplayName(ChatColor.RESET.toString()).build();
         gui.fill(start, end, fillIcon);
     }
 
-    public boolean hasMenuBar(){
+    public boolean hasMenuBar() {
         return previous != null;
     }
 
-    public void populateMenuBar(){
-        ItemStack exitIcon = OraxenItems.getItemById("back").build();
-        ItemUtils.setName(exitIcon, exitIcon.getItemMeta().getDisplayName() + " to main menu");
-        ItemButton exitButton = ItemButton.create(new ItemBuilder(exitIcon)
-                , e -> {
-                    previous.populate();
-                });
-        gui.addButton(exitButton, size - 5);
+    public void populateMenuBar() {
+        if (!isInputGui) {
+            ItemStack exitIcon = OraxenItems.getItemById("back").build();
+            ItemUtils.setName(exitIcon, exitIcon.getItemMeta().getDisplayName() + " to main menu");
+            ItemButton exitButton = ItemButton.create(new ItemBuilder(exitIcon)
+                    , e -> {
+                        previous.populate();
+                    });
+            gui.addButton(exitButton, size - 5);
+        }   else {
+            gui.openSlot(size - 5);
+            gui.setOnClickOpenSlot(this::handleItemInput);
+        }
         fillSlots(size - 4, size);
         fillSlots(size - 9, size - 5);
 
-        if (page > 0){
+        if (page > 0) {
             gui.clearSlot(size - 7);
             ItemStack prevPageIcon = OraxenItems.getItemById("arrow_left").build();
             ItemButton prevPageButton = ItemButton.create(new ItemBuilder(prevPageIcon)
@@ -104,7 +109,7 @@ public class FancyGui {
         }
 
 
-        if (contents.size() > (page * 45) + 45){
+        if (contents.size() > (page * 45) + 45) {
             gui.clearSlot(size - 3);
             ItemStack nextPageIcon = OraxenItems.getItemById("arrow_right").build();
             ItemButton nextPageButton = ItemButton.create(new ItemBuilder(nextPageIcon)
@@ -119,37 +124,42 @@ public class FancyGui {
 
 
     }
+    public void handleItemInput(InventoryClickEvent e){
 
-    public Iterable<String> getLore(ItemStack item){
+    }
+
+    public Iterable<String> getLore(ItemStack item) {
         Iterable<String> strings = this.loreMap.get(item);
         if (strings == null) return new ArrayList<>();
         return this.loreMap.get(item);
     }
 
-    public Consumer<InventoryClickEvent> getListener(ItemStack item){
+    public Consumer<InventoryClickEvent> getListener(ItemStack item) {
         Consumer<InventoryClickEvent> listener = this.callbackMap.get(item);
-        if (listener == null) return e -> {};
+        if (listener == null) return e -> {
+        };
         return this.callbackMap.get(item);
     }
 
-    public void setCallback(ItemStack item, Consumer<InventoryClickEvent> listener){
+    public void setCallback(ItemStack item, Consumer<InventoryClickEvent> listener) {
         callbackMap.put(item, listener);
     }
 
-    public void setLore(ItemStack item, Iterable<String> lore){
+    public void setLore(ItemStack item, Iterable<String> lore) {
         loreMap.put(item, lore);
     }
 
-    public void populate(){
+    public void populate() {
         size = contents.size() - (contents.size() % 9);
-        if (size > 9) size +=9;
+        if (size == 0) size = 9;
+        if (size > 9) size += 9;
         if (this.hasMenuBar()) size += 9;
         if (size > 54) size = 54;
 
 
         int c = 0;
         boolean singleRowTransformed = false;
-        if (size == 9 || (this.hasMenuBar() && size == 18)){
+        if (size == 9 || (this.hasMenuBar() && size == 18)) {
             size = 45;
             singleRowTransformed = true;
 
@@ -164,17 +174,17 @@ public class FancyGui {
         int pageOffset = page * 45;
         int endOffset = 45 + pageOffset;
         if (endOffset > contents.size()) endOffset = contents.size();
-        for (ItemStack item: contents.subList(pageOffset, endOffset)) {
+        for (ItemStack item : contents.subList(pageOffset, endOffset)) {
             if (c >= 45) break;
-            if (contents.size() == 1){
+            if (contents.size() == 1) {
                 c = 22;
             }
             ItemButton itemButton = ItemButton.create(new ItemBuilder(item)
-                    .addLore(getLore(item))
+                            .addLore(getLore(item))
                     , getListener(item));
             gui.addButton(itemButton, c);
             c++;
-            if (singleRowTransformed){
+            if (singleRowTransformed) {
                 if (c == 15) c = 21;
                 if (c == 24) c = 30;
 //                if (c == 33) c = 42;
@@ -182,15 +192,17 @@ public class FancyGui {
 //            if (c +1 % 9 != c +1) c = c + 6;
         }
 
-        if (singleRowTransformed){
-            if (contents.size() == 1){
+        if (singleRowTransformed) {
+            if (contents.size() <= 1) {
                 fillSlots(0, 22);
-                fillSlots(23, 45);
+                fillSlots(23, 40);
+                fillSlots(42, 45);
             } else {
                 fillSlots(0, 12);
                 fillSlots(15, 21);
                 fillSlots(24, 30);
-                fillSlots(33, 45);
+                fillSlots(33, 40);
+                fillSlots(42, 45);
             }
         }
 
@@ -199,7 +211,7 @@ public class FancyGui {
         open();
     }
 
-    private void open(){
+    private void open() {
         this.gui.open(player);
     }
 }

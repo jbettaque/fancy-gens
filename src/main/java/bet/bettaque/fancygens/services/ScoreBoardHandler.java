@@ -1,4 +1,4 @@
-package bet.bettaque.fancygens;
+package bet.bettaque.fancygens.services;
 
 import bet.bettaque.fancygens.db.GeneratorPlayer;
 import bet.bettaque.fancygens.helpers.ScoreHelper;

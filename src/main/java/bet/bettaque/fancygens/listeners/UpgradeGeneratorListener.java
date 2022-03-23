@@ -1,14 +1,12 @@
 package bet.bettaque.fancygens.listeners;
 
-import bet.bettaque.fancygens.FancyResource;
+import bet.bettaque.fancygens.services.FancyResource;
 import bet.bettaque.fancygens.config.GenConfig;
-import bet.bettaque.fancygens.config.GensConfig;
 import bet.bettaque.fancygens.db.PlacedGenerator;
 import bet.bettaque.fancygens.helpers.TextHelper;
 import bet.bettaque.fancygens.services.FancyEconomy;
 import com.j256.ormlite.dao.Dao;
 import com.jeff_media.customblockdata.CustomBlockData;
-import net.milkbowl.vault.economy.Economy;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;

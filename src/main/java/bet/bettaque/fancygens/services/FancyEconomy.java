@@ -1,6 +1,5 @@
 package bet.bettaque.fancygens.services;
 
-import bet.bettaque.fancygens.FancyResource;
 import bet.bettaque.fancygens.commands.UiCommands;
 import bet.bettaque.fancygens.db.GeneratorPlayer;
 import bet.bettaque.fancygens.helpers.TextHelper;
@@ -11,7 +10,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.sql.SQLException;
 
 public class FancyEconomy {

@@ -1,8 +1,7 @@
 package bet.bettaque.fancygens.commands;
 
-import bet.bettaque.fancygens.FancyResource;
+import bet.bettaque.fancygens.services.FancyResource;
 import bet.bettaque.fancygens.db.GeneratorPlayer;
-import bet.bettaque.fancygens.db.PlacedAutosellChest;
 import bet.bettaque.fancygens.db.PlacedGenerator;
 import bet.bettaque.fancygens.helpers.TextHelper;
 import bet.bettaque.fancygens.services.FancyEconomy;
@@ -12,7 +11,6 @@ import io.th0rgal.oraxen.items.OraxenItems;
 import me.angeschossen.lands.api.flags.Flags;
 import me.angeschossen.lands.api.integration.LandsIntegration;
 import me.angeschossen.lands.api.land.Area;
-import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;

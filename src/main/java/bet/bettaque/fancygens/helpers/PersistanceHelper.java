@@ -2,7 +2,6 @@ package bet.bettaque.fancygens.helpers;
 
 
 import bet.bettaque.fancygens.FancyGens;
-import bet.bettaque.fancygens.FancyResource;
 import bet.bettaque.fancygens.config.MineConfig;
 import bet.bettaque.fancygens.db.GeneratorPlayer;
 import bet.bettaque.fancygens.db.PlacedGenerator;
@@ -11,17 +10,13 @@ import bet.bettaque.fancygens.services.FancyEconomy;
 import com.j256.ormlite.dao.Dao;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
-import org.checkerframework.checker.units.qual.A;
 
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;

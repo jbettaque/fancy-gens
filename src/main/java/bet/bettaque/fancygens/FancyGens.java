@@ -11,26 +11,18 @@ import bet.bettaque.fancygens.db.PlacedAutosellChest;
 import bet.bettaque.fancygens.db.PlacedGenerator;
 import bet.bettaque.fancygens.db.PlacedUpgradableChest;
 import bet.bettaque.fancygens.helpers.PersistanceHelper;
-import bet.bettaque.fancygens.helpers.TextHelper;
 import bet.bettaque.fancygens.listeners.*;
-import bet.bettaque.fancygens.services.FancyEconomy;
+import bet.bettaque.fancygens.services.*;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
-import me.angeschossen.lands.api.flags.Flags;
 import me.angeschossen.lands.api.integration.LandsIntegration;
-import me.angeschossen.lands.api.land.Area;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -38,9 +30,7 @@ import redempt.redlib.commandmanager.ArgType;
 import redempt.redlib.commandmanager.CommandParser;
 import redempt.redlib.commandmanager.Messages;
 import redempt.redlib.config.ConfigManager;
-import redempt.redlib.misc.EventListener;
 
-import java.math.BigInteger;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -55,6 +45,7 @@ public final class FancyGens extends JavaPlugin {
     Dao<PlacedUpgradableChest, Integer> placedUpgradableChestDao;
     GeneratorHandler generatorHandler;
     AutosellChestHandler autosellChestHandler;
+    UpgradableChestHandler upgradableChestHandler;
     ScoreBoardHandler scoreBoardHandler;
     ConfigManager gensConfig;
     Economy econ = null;
@@ -194,6 +185,7 @@ public final class FancyGens extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new SpongeSoakListener(this), this);
         getServer().getPluginManager().registerEvents(new PlaceAutosellChestListener(this, placedAutosellChestDao), this);
         getServer().getPluginManager().registerEvents(new BreakAutosellChestListener(this, adminCommands, placedAutosellChestDao), this);
+        getServer().getPluginManager().registerEvents(new UpgradableChestListener(this, placedUpgradableChestDao, adminCommands), this);
         getServer().getPluginManager().registerEvents(new UpgradeWandListener(this, placedGeneratorDao, upgradeGeneratorListener, economy), this);
         getServer().getPluginManager().registerEvents(new MainMenuListener(this, uiCommands, generatorPlayerDao), this);
         getServer().getPluginManager().registerEvents(new MineListener(this, generatorPlayerDao, goblinCommands, economy), this);
@@ -213,6 +205,13 @@ public final class FancyGens extends JavaPlugin {
                 autosellChestHandler.handleAutosellChests();
             }
         }.runTaskTimer(this, 0L, 20L * 60);
+
+        upgradableChestHandler = new UpgradableChestHandler(placedUpgradableChestDao);
+        new BukkitRunnable() {
+            public void run() {
+                upgradableChestHandler.handleUpgradableChests();
+            }
+        }.runTaskTimer(this, 0L,  2L * 60);
 
         scoreBoardHandler = new ScoreBoardHandler(generatorPlayerDao, economy);
         new BukkitRunnable() {

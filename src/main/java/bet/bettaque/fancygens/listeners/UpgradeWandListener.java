@@ -1,21 +1,15 @@
 package bet.bettaque.fancygens.listeners;
 
-import bet.bettaque.fancygens.FancyResource;
-import bet.bettaque.fancygens.db.GeneratorPlayer;
-import bet.bettaque.fancygens.db.ItemHelper;
+import bet.bettaque.fancygens.services.FancyResource;
 import bet.bettaque.fancygens.db.PlacedGenerator;
 import bet.bettaque.fancygens.helpers.PersistanceHelper;
 import bet.bettaque.fancygens.helpers.TextHelper;
 import bet.bettaque.fancygens.services.FancyEconomy;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.QueryBuilder;
-import com.j256.ormlite.stmt.query.In;
-import com.jeff_media.customblockdata.CustomBlockData;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
-import org.bukkit.block.Block;
-import org.bukkit.block.Container;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -23,12 +17,10 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.Plugin;
-import redempt.redlib.itemutils.ItemUtils;
 
 import java.sql.SQLException;
 import java.util.Comparator;

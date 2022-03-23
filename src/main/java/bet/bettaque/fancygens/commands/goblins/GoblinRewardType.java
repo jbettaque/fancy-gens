@@ -1,6 +1,6 @@
 package bet.bettaque.fancygens.commands.goblins;
 
-import bet.bettaque.fancygens.FancyResource;
+import bet.bettaque.fancygens.services.FancyResource;
 import bet.bettaque.fancygens.helpers.TextHelper;
 import bet.bettaque.fancygens.services.FancyEconomy;
 import org.bukkit.entity.Player;

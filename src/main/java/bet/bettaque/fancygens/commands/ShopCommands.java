@@ -1,41 +1,28 @@
 package bet.bettaque.fancygens.commands;
 
-import bet.bettaque.fancygens.FancyResource;
+import bet.bettaque.fancygens.services.FancyResource;
 import bet.bettaque.fancygens.config.GenConfig;
 import bet.bettaque.fancygens.config.GensConfig;
 import bet.bettaque.fancygens.db.GeneratorPlayer;
 import bet.bettaque.fancygens.helpers.TextHelper;
 import bet.bettaque.fancygens.services.FancyEconomy;
 import com.j256.ormlite.dao.Dao;
-import de.themoep.minedown.MineDown;
 import io.th0rgal.oraxen.items.OraxenItems;
-import me.TechsCode.UltraEconomy.UltraEconomy;
 import me.clip.placeholderapi.PlaceholderAPI;
-import me.clip.placeholderapi.libs.kyori.adventure.text.format.TextFormat;
-import net.md_5.bungee.api.chat.BaseComponent;
-import net.milkbowl.vault.chat.Chat;
-import net.milkbowl.vault.economy.Economy;
 import org.bukkit.*;
-import org.bukkit.command.CommandSender;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.Plugin;
-import org.w3c.dom.Text;
 import redempt.redlib.commandmanager.CommandHook;
 import redempt.redlib.commandmanager.Messages;
-import redempt.redlib.inventorygui.InventoryGUI;
-import redempt.redlib.inventorygui.ItemButton;
 import redempt.redlib.itemutils.ItemBuilder;
 import redempt.redlib.itemutils.ItemUtils;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Map;
 
 public class ShopCommands {
     Plugin plugin;

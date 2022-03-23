@@ -1,23 +1,18 @@
 package bet.bettaque.fancygens.listeners;
 
-import bet.bettaque.fancygens.FancyResource;
+import bet.bettaque.fancygens.services.FancyResource;
 import bet.bettaque.fancygens.commands.goblins.GoblinCommands;
 import bet.bettaque.fancygens.commands.goblins.GoblinTier;
 import bet.bettaque.fancygens.config.GensConfig;
 import bet.bettaque.fancygens.config.MineConfig;
 import bet.bettaque.fancygens.db.GeneratorPlayer;
-import bet.bettaque.fancygens.db.ItemHelper;
 import bet.bettaque.fancygens.helpers.PersistanceHelper;
 import bet.bettaque.fancygens.helpers.TextHelper;
 import bet.bettaque.fancygens.services.FancyEconomy;
 import com.j256.ormlite.dao.Dao;
 import com.jeff_media.customblockdata.CustomBlockData;
 import de.themoep.minedown.MineDown;
-import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.BaseComponent;
-import net.md_5.bungee.api.chat.TextComponent;
-import net.milkbowl.vault.economy.Economy;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
@@ -28,12 +23,10 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.Plugin;
 
-import java.sql.SQLException;
 import java.util.Random;
 
 public class MineListener implements Listener {

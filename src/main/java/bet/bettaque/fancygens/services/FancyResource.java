@@ -1,6 +1,5 @@
-package bet.bettaque.fancygens;
+package bet.bettaque.fancygens.services;
 
-import bet.bettaque.fancygens.commands.goblins.GoblinTier;
 import bet.bettaque.fancygens.helpers.TextHelper;
 import org.bukkit.entity.Player;
 
