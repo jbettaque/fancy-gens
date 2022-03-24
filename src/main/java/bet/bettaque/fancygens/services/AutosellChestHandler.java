@@ -33,7 +33,7 @@ public class AutosellChestHandler {
                     Chest chest = (Chest) chestBlock.getState();
                     Player owner = Bukkit.getPlayer(placedAutosellChest.getOwner());
                     if (owner != null){
-                        placedAutosellChest.addSell(shopCommands.sellAllBackend(owner, chest.getInventory(), placedAutosellChest.getMultiplier()));
+                        placedAutosellChest.addSell(shopCommands.sellAllBackend(owner, chest.getInventory(), placedAutosellChest.getMultiplier(), true));
                         placedAutosellChestDao.update(placedAutosellChest);
                     }
                 }

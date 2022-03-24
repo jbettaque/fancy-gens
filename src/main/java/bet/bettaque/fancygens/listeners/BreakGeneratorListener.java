@@ -2,6 +2,9 @@ package bet.bettaque.fancygens.listeners;
 
 import bet.bettaque.fancygens.db.GeneratorPlayer;
 import bet.bettaque.fancygens.db.PlacedGenerator;
+import bet.bettaque.fancygens.helpers.TextHelper;
+import com.Zrips.CMI.CMI;
+import com.Zrips.CMI.Modules.Holograms.CMIHologram;
 import com.j256.ormlite.dao.Dao;
 import com.jeff_media.customblockdata.CustomBlockData;
 import me.angeschossen.lands.api.flags.Flags;
@@ -52,6 +55,7 @@ public class BreakGeneratorListener implements Listener {
 
         PersistentDataContainer container = new CustomBlockData(block, plugin);
         NamespacedKey key = new NamespacedKey(plugin, "generator");
+        NamespacedKey boostKey = new NamespacedKey(plugin, "generator_boost");
         if (container.has(key, PersistentDataType.INTEGER)){
             Integer genId = container.get(key, PersistentDataType.INTEGER);
             try {
@@ -71,14 +75,18 @@ public class BreakGeneratorListener implements Listener {
 
                             ItemStack gen = new ItemBuilder(brokenGen.getGenerator().block)
                                     .setName(brokenGen.getGenerator().name)
-                                    .setLore("Tier " + brokenGen.getGenerator().id)
-                                    .addPersistentTag(key, PersistentDataType.INTEGER, brokenGen.getGenerator().id);
+                                    .addLore(TextHelper.parseFancyString("&gray&Tier: &yellow&" + brokenGen.getGenerator().id))
+                                    .addLore(TextHelper.parseFancyString("&red&Boost: " + brokenGen.getBoost()))
+                                    .addPersistentTag(key, PersistentDataType.INTEGER, brokenGen.getGenerator().id)
+                                    .addPersistentTag(boostKey, PersistentDataType.INTEGER, brokenGen.getBoost());
                             ItemUtils.addEnchant(gen, Enchantment.DURABILITY, 1);
                             ItemUtils.addItemFlags(gen, ItemFlag.HIDE_ENCHANTS);
                             ItemUtils.give(player, gen);
 
                             player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 3);
                             player.spawnParticle(Particle.EXPLOSION_NORMAL, block.getLocation(), 7, 0, 0, 0, 0.25);
+                            CMIHologram hologram = CMI.getInstance().getHologramManager().getByName(String.valueOf(brokenGen.getId()));
+                            if (hologram != null) hologram.remove();
                         }
                         container.remove(key);
                     }

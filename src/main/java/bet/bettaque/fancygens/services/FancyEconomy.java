@@ -155,12 +155,21 @@ public class FancyEconomy {
         if (amount > Integer.MAX_VALUE || getCoinBalance(player).compareTo(BigDecimal.valueOf(Integer.MAX_VALUE)) > 0){
             try {
                 GeneratorPlayer generatorPlayer = generatorPlayerDao.queryForId(player.getUniqueId().toString());
-                generatorPlayer.addCoins(BigDecimal.valueOf(amount));
+
 //                generatorPlayer.incrementScore(amount);
                 if (cap >= generatorPlayer.getScore() + amount){
                     generatorPlayer.incrementScore(amount);
                 } else {
+                    if (cap > generatorPlayer.getScore()){
+                        generatorPlayer.setScore(cap);
+                    }
                     player.spigot().sendMessage(TextHelper.parseFancyComponents("&yellow&You have reached the point limit for this mine!"));
+                }
+
+                if (cap >= getBalance(player, FancyResource.COINS) + amount) {
+                    generatorPlayer.addCoins(BigDecimal.valueOf(amount));
+                } else {
+                    player.spigot().sendMessage(TextHelper.parseFancyComponents("&yellow&You have reached the coin limit for this mine!"));
                 }
                 generatorPlayerDao.update(generatorPlayer);
             } catch (SQLException throwables) {

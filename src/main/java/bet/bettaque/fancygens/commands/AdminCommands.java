@@ -85,6 +85,13 @@ public class AdminCommands {
 
     }
 
+    public void giveAnubisHeadBackend(Player player) {
+        NamespacedKey key = new NamespacedKey(plugin, "anubishead");
+        ItemStack hat = OraxenItems.getItemById("anubis_head").build();
+        ItemUtils.addPersistentTag(hat, key, PersistentDataType.INTEGER, 50);
+        ItemUtils.give(player, hat);
+    }
+
     @CommandHook("giveautosellchest")
     public void giveAutosellChest(CommandSender sender, Player player, int multiplier){
         giveAutosellChestBackend(player, multiplier);

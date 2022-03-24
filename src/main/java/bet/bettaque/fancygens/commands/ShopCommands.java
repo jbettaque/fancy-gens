@@ -9,6 +9,11 @@ import bet.bettaque.fancygens.services.FancyEconomy;
 import com.j256.ormlite.dao.Dao;
 import io.th0rgal.oraxen.items.OraxenItems;
 import me.clip.placeholderapi.PlaceholderAPI;
+import me.clip.placeholderapi.libs.kyori.adventure.text.format.TextFormat;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.BaseComponent;
+import net.milkbowl.vault.chat.Chat;
+import net.milkbowl.vault.economy.Economy;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -41,10 +46,10 @@ public class ShopCommands {
 
     @CommandHook("sellall")
     public void sellAll(Player player){
-        sellAllBackend(player, player.getInventory(), 1);
+        sellAllBackend(player, player.getInventory(), 1, false);
     }
 
-    public double sellAllBackend(Player player, Inventory inventory, double multiplier){
+    public double sellAllBackend(Player player, Inventory inventory, double multiplier, boolean auto){
         GeneratorPlayer generatorPlayer = null;
         try {
             generatorPlayer = this.generatorPlayerDao.queryForId(player.getUniqueId().toString());
@@ -101,17 +106,22 @@ public class ShopCommands {
 //                }
 //            }
 
-            if(sumCount > 0){
-                player.sendMessage(ChatColor.STRIKETHROUGH + "-------------------------------------------");
-                for (String soldString : soldStrings) {
-                    player.sendMessage(soldString);
-                }
-                player.sendMessage(ChatColor.STRIKETHROUGH + "-------------------------------------------");
-                player.sendMessage(ChatColor.GREEN + "Total Items sold: " + ChatColor.YELLOW + sumCount + ChatColor.GREEN + " for " + TextHelper.formatCurrency(sumMoney, player));
-                generatorPlayer.addSell(sumMoney);
+            if (sumCount > 0){
+                if (!auto) {
+                    player.sendMessage(ChatColor.STRIKETHROUGH + "-------------------------------------------");
+                    for (String soldString : soldStrings) {
+                        player.sendMessage(soldString);
+                    }
+                    player.sendMessage(ChatColor.STRIKETHROUGH + "-------------------------------------------");
+                    player.sendMessage(ChatColor.GREEN + "Total Items sold: " + ChatColor.YELLOW + sumCount + ChatColor.GREEN + " for " + TextHelper.formatCurrency(sumMoney, player));
+                    generatorPlayer.addSell(sumMoney);
 //                this.generatorPlayerDao.update(generatorPlayer);
-                return sumMoney;
+                    return sumMoney;
+                } else {
+                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextHelper.parseFancyComponents("&green&Sold: &yellow&" + sumCount + " Items &green&for " + TextHelper.formatCurrency(sumMoney, player)));
+                }
             }
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
             return 0;
@@ -148,6 +158,14 @@ public class ShopCommands {
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+        }
+    }
+
+    public void buyAnubisHead(Player player, double gems){
+        if (economy.getBalance(player, FancyResource.GEMS) >= gems ){
+            economy.remove(player, FancyResource.GEMS, gems);
+            this.adminCommands.giveAnubisHeadBackend(player);
+            player.spigot().sendMessage(TextHelper.parseFancyComponents("&green&You have purchased a Anubis Head"));
         }
     }
 

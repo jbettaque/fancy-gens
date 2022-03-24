@@ -173,6 +173,21 @@
             <version>4.9.2</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>com.Zrips</groupId>
+            <artifactId>CMI</artifactId>
+            <version>9.0.0.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/CMI9.0.0.0API.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>com.Zrips</groupId>
+            <artifactId>CMILib</artifactId>
+            <version>1.1.2.3</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/CMILib1.1.2.3.jar</systemPath>
+        </dependency>
 
 
 

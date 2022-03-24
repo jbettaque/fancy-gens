@@ -71,10 +71,11 @@ public class UpgradeGeneratorListener implements Listener {
 //            int genId = container.get(key, PersistentDataType.INTEGER);
 
             try {
-                GenConfig genConfig = placedGenerator.upgradeGenerator();
+
                 double balance = economy.getBalance(player, FancyResource.COINS);
                 double cost = placedGenerator.getUpgradeCost();
                 if (balance - cost >= 0){
+                    GenConfig genConfig = placedGenerator.upgradeGenerator();
                     if (genConfig == null) {
                         player.sendMessage(Messages.msg("maxUpgrade"));
                         return 0;

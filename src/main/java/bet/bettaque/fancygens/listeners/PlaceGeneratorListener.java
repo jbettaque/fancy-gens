@@ -2,6 +2,9 @@ package bet.bettaque.fancygens.listeners;
 
 import bet.bettaque.fancygens.db.GeneratorPlayer;
 import bet.bettaque.fancygens.db.PlacedGenerator;
+import bet.bettaque.fancygens.helpers.TextHelper;
+import com.Zrips.CMI.CMI;
+import com.Zrips.CMI.Modules.Holograms.CMIHologram;
 import com.j256.ormlite.dao.Dao;
 import com.jeff_media.customblockdata.CustomBlockData;
 import me.angeschossen.lands.api.flags.Flags;
@@ -77,6 +80,9 @@ public class PlaceGeneratorListener implements Listener {
 
                             player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 2);
                             player.spawnParticle(Particle.VILLAGER_HAPPY, block.getLocation(), 20, 0.5, 0.5, 0.5, 0.4);
+                            if (placedGenerator.getBoost() > 0){
+                                placedGenerator.placeHolo();
+                            }
 
 
                         } else {

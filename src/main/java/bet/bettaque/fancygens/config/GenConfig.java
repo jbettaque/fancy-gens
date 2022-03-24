@@ -20,7 +20,7 @@ public class GenConfig {
     }
 
     public double getCost(int boost) {
-        int id = this.id * (boost +1);
+        int id = this.id + boost * GensConfig.gens.size();
         if (id > 79) return Math.pow(2.5, id) * 150 * (1 + id);
         return Math.pow(2, id) * 150 * (1 + id);
     }
@@ -32,7 +32,7 @@ public class GenConfig {
     }
 
     public double getUpgradeCost(int boost){
-        int id = this.id * (boost +1) + 1;
+        int id = this.id + boost * GensConfig.gens.size() + 1;
         if (id > 79) return Math.pow(2.5, id) * 150 * (1 + id);
         return Math.pow(2, id) * 150 * (1 + id);
     }
@@ -43,8 +43,8 @@ public class GenConfig {
     }
 
     public double getProductPrice(int boost){
-        int id = this.id * (boost +1);
-        if (id > 79) return getCost() / (150 + id * 3);
+        int id = this.id + boost * GensConfig.gens.size();
+        if (id > 79) return getCost(boost) / (150 + id * 3);
         return getCost() / (150 + id * 2);
     }
 

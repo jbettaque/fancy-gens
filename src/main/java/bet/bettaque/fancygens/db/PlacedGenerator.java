@@ -2,6 +2,9 @@ package bet.bettaque.fancygens.db;
 
 import bet.bettaque.fancygens.config.GenConfig;
 import bet.bettaque.fancygens.config.GensConfig;
+import bet.bettaque.fancygens.helpers.TextHelper;
+import com.Zrips.CMI.CMI;
+import com.Zrips.CMI.Modules.Holograms.CMIHologram;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import org.bukkit.*;
@@ -64,25 +67,45 @@ public class PlacedGenerator extends PlacedCustomBlock {
         return this.getGenerator().product;
     }
 
+    public Material getBlock(){
+        return this.getGenerator().block;
+    }
+
     public GenConfig upgradeGenerator(){
         if (GensConfig.gens.get(generatorId + 1) != null){
             generatorId++;
         } else {
             generatorId = 1;
             boost += 1;
+            CMIHologram hologram = CMI.getInstance().getHologramManager().getByName(String.valueOf(getId()));
+            if (hologram != null) {
+                hologram.setLine(0, TextHelper.parseFancyString("&red&" + boost));
+                hologram.update();
+            } else {
+                placeHolo();
+            }
         }
         upgradeBlock();
+
         return this.getGenerator();
     }
 
     public void upgradeBlock(){
         Block block = getLocation().getBlock();
         Player owner = Bukkit.getPlayer(getOwner());
-        block.setType(getMaterial());
+        block.setType(getBlock());
         if (owner != null){
             owner.playSound(owner.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
             owner.spawnParticle(Particle.VILLAGER_HAPPY, block.getLocation(), 20, 0.5, 0.5, 0.5, 0.4);
         }
+    }
+
+    public void placeHolo(){
+        CMIHologram hologram = new CMIHologram(String.valueOf(getId()), getLocation().add(0.5, 1.5, 0.5));
+        CMI.getInstance().getHologramManager().addHologram(hologram);
+        hologram.setLine(0, TextHelper.parseFancyString("&red&" + boost));
+        hologram.update();
+        hologram.makePersistent();
     }
 
 }

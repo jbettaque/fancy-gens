@@ -27,6 +27,7 @@ public class GemShopGui extends FancyGui {
         ItemStack sellWand = OraxenItems.getItemById("sell_wand").build();
         ItemStack upgradeWand = OraxenItems.getItemById("upgrade_wand").build();
         ItemStack obsidianPickaxe = OraxenItems.getItemById("obsidian_pickaxe").build();
+        ItemStack anubisHead = OraxenItems.getItemById("anubis_head").build();
         ItemStack autosellChest = new ItemBuilder(Material.CHEST).setName(Messages.msg("autosellChestName"));
 
 
@@ -50,6 +51,12 @@ public class GemShopGui extends FancyGui {
         });
         this.setLore(autosellChest, Arrays.asList(TextHelper.parseFancyString("&gray&Price: " + TextHelper.formatGems(2000, player)),
                 TextHelper.parseFancyString("&gray&Multiplier: " + TextHelper.formatMultiplier(1, true, player))));
+
+        this.contents.add(anubisHead);
+        this.setCallback(anubisHead, e -> {
+            shopCommands.buyAnubisHead(player, 100);
+        });
+        this.setLore(anubisHead, Arrays.asList(TextHelper.parseFancyString("&gray&Price: " + TextHelper.formatGems(100, player))));
 
 
         for (int i = 0; i < 7; i++) {

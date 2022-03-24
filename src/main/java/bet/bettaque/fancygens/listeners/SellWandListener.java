@@ -61,7 +61,7 @@ public class SellWandListener implements Listener {
                     if (area.hasFlag(player.getUniqueId(), Flags.BLOCK_BREAK)) {
                         if (action == Action.RIGHT_CLICK_BLOCK && block.getState() instanceof Container && player.isSneaking() && event.getHand() == EquipmentSlot.HAND) {
                             Container state = (Container) block.getState();
-                            shopCommands.sellAllBackend(player, state.getInventory(), container.get(key, PersistentDataType.DOUBLE));
+                            shopCommands.sellAllBackend(player, state.getInventory(), container.get(key, PersistentDataType.DOUBLE), true);
                             ItemHelper.damageAndCheckRemove(sellwand, 1, player);
 
                         }
