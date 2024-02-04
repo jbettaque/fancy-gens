@@ -61,7 +61,6 @@ public class MainMenuGui extends FancyGui {
         contents.add(slotShopIcon);
         callbackMap.put(slotShopIcon, e -> uiCommands.slotShop(player));
 
-
         contents.add(sellAllIcon);
         callbackMap.put(sellAllIcon, e -> shopCommands.sellAll(player));
 

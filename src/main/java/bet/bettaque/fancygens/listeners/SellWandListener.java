@@ -1,22 +1,14 @@
 package bet.bettaque.fancygens.listeners;
 
 import bet.bettaque.fancygens.commands.ShopCommands;
-import bet.bettaque.fancygens.config.GensConfig;
-import bet.bettaque.fancygens.db.ItemHelper;
-import bet.bettaque.fancygens.services.FancyEconomy;
+import bet.bettaque.fancygens.helpers.ItemHelper;
 import me.angeschossen.lands.api.flags.Flags;
 import me.angeschossen.lands.api.integration.LandsIntegration;
 import me.angeschossen.lands.api.land.Area;
-import net.md_5.bungee.api.ChatMessageType;
-import net.md_5.bungee.api.chat.TextComponent;
-import net.milkbowl.vault.economy.Economy;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.Block;
 import org.bukkit.block.Container;
-import org.bukkit.block.TileState;
-import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -24,15 +16,10 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.Plugin;
-import redempt.redlib.itemutils.ItemUtils;
-
-import java.util.List;
-import java.util.Map;
 
 public class SellWandListener implements Listener {
     Plugin plugin;

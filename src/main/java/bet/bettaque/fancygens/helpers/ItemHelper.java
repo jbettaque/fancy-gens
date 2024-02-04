@@ -1,4 +1,4 @@
-package bet.bettaque.fancygens.db;
+package bet.bettaque.fancygens.helpers;
 
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;

@@ -87,25 +87,6 @@ public class ShopCommands {
                 }
             }
 
-//            for (Map.Entry<Material, Double> item: GensConfig.shopItems.entrySet()){
-//                NamespacedKey key = new NamespacedKey(plugin, "sellable");
-//                ItemStack material = new ItemBuilder(item.getKey());
-//                ItemUtils.addPersistentTag(material, key, PersistentDataType.INTEGER, 1);
-//                double price = GensConfig.shopItems.get(material.getType());
-//                ItemUtils.addLore(material,"Price: " + TextHelper.formatCurrency(price, player));
-//                int count = ItemUtils.countAndRemove(inventory, material);
-//                if (count > 0){
-//                    double total = count * item.getValue() * multiplier;
-//                    sumMoney += total;
-//                    sumCount += count;
-//                    generatorPlayer.incrementScore(total);
-//                    this.econ.depositPlayer(player, total);
-//                    player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 2);
-//                    soldStrings.add(ChatColor.GREEN + "Sold " + ChatColor.YELLOW + count + ChatColor.GREEN + " of " + item.getKey() +
-//                            " for " + TextHelper.formatCurrency(total, player) + ChatColor.LIGHT_PURPLE + " (x" + TextHelper.formatMultiplier(multiplier, false, player) +")");
-//                }
-//            }
-
             if (sumCount > 0){
                 if (!auto) {
                     player.sendMessage(ChatColor.STRIKETHROUGH + "-------------------------------------------");
